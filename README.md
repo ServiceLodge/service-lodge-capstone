@@ -1,4 +1,4 @@
-![Service Lodge Logo](src/main/resources/LOGO/cover.png)
+![Service Lodge Logo](src/main/resources/static/img/logo/cover.png)
 # Service Lodge App
 Service Lodge expedites communication between traveling service members, supervisors, and hotels. Users can view hotel reservation information on login, request/cancel reservations, and complete experience surveys after their stay. Administrators can add, edit, or delete reservations and hotels, view dashboards that track trends in hotel usage, and export monthly summary data into Excel. Email notifications are automated for cancellations and bookings.
 
