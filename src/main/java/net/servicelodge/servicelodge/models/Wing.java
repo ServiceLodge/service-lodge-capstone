@@ -3,7 +3,7 @@ package net.servicelodge.servicelodge.models;
 import javax.persistence.*;
 
 @Entity
-@Table(name="wing")
+@Table(name="wings")
 public class Wing {
 
     @Id

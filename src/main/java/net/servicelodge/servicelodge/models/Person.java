@@ -3,7 +3,7 @@ package net.servicelodge.servicelodge.models;
 import javax.persistence.*;
 
 @Entity
-@Table(name="person")
+@Table(name="persons")
 public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
