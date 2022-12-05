@@ -1,28 +1,29 @@
 package net.servicelodge.servicelodge.models;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="admin")
-public class admin {
+public class Admin {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(nullable = false, length = 100)
-    private String person_id;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "admin")
+    private Person person_id;
 
-    @Column(nullable = false)
-    private String wing_id;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "admin")
+    private List<Wing> wing_id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 200, unique = true)
     private String username;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 200)
     private String password;
 
-    public admin(long id, String person_id, String wing_id, String username, String password) {
+    public Admin(long id, Person person_id, List<Wing> wing_id, String username, String password) {
         this.id = id;
         this.person_id = person_id;
         this.wing_id = wing_id;
@@ -30,7 +31,7 @@ public class admin {
         this.password = password;
     }
 
-    public admin() {
+    public Admin() {
 
     }
 
@@ -42,19 +43,19 @@ public class admin {
         this.id = id;
     }
 
-    public String getPerson_id() {
+    public Person getPerson_id() {
         return person_id;
     }
 
-    public void setPerson_id(String person_id) {
+    public void setPerson_id(Person person_id) {
         this.person_id = person_id;
     }
 
-    public String getWing_id() {
+    public List<Wing> getWing_id() {
         return wing_id;
     }
 
-    public void setWing_id(String wing_id) {
+    public void setWing_id(List<Wing> wing_id) {
         this.wing_id = wing_id;
     }
 
