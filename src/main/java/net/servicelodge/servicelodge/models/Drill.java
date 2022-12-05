@@ -4,14 +4,15 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="drill")
-public class drill {
+public class Drill {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(nullable = false)
-    private long wing_id;
+    @ManyToOne
+    @JoinColumn(name = "wing_id")
+    private Wing wing_id;
 
     @Column (nullable = false, length = 20, unique = true)
     private String name;
@@ -22,7 +23,7 @@ public class drill {
     @Column(nullable = false)
     private long drillEndDate;
 
-    public drill(long id, long wing_id, String name, long drillStartDate, long drillEndDate) {
+    public Drill(long id, Wing wing_id, String name, long drillStartDate, long drillEndDate) {
         this.id = id;
         this.wing_id = wing_id;
         this.name = name;
@@ -30,7 +31,7 @@ public class drill {
         this.drillEndDate = drillEndDate;
     }
 
-    public drill() {
+    public Drill() {
 
     }
 
@@ -42,11 +43,11 @@ public class drill {
         this.id = id;
     }
 
-    public long getWing_id() {
+    public Wing getWing_id() {
         return wing_id;
     }
 
-    public void setWing_id(long wing_id) {
+    public void setWing_id(Wing wing_id) {
         this.wing_id = wing_id;
     }
 

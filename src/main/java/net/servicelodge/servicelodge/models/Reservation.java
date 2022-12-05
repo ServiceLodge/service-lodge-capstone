@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="reservation")
-public class reservation {
+public class Reservation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,11 +13,13 @@ public class reservation {
     @Column(nullable = false)
     private long member_id;
 
-    @Column(nullable = false)
-    private long drill_id;
+    @ManyToOne
+    @JoinColumn(name = "drill_id")
+    private Drill drill_id;
 
-    @Column(nullable = false)
-    private String hotel_id;
+    @ManyToOne
+    @JoinColumn(name = "hotel_id")
+    private Hotel hotel_id;
 
     @Column(nullable = false, length = 200, unique = true)
     private String res_num;
@@ -29,7 +31,7 @@ public class reservation {
     @Column(nullable = false)
     private String resEndDate;
 
-    public reservation(long id, long member_id, long drill_id, String hotel_id, String res_num) {
+    public Reservation(long id, long member_id, Drill drill_id, Hotel hotel_id, String res_num) {
         this.id = id;
         this.member_id = member_id;
         this.drill_id = drill_id;
@@ -37,7 +39,7 @@ public class reservation {
         this.res_num = res_num;
     }
 
-    public reservation() {
+    public Reservation() {
 
     }
 
@@ -57,19 +59,19 @@ public class reservation {
         this.member_id = member_id;
     }
 
-    public long getDrill_id() {
+    public Drill getDrill_id() {
         return drill_id;
     }
 
-    public void setDrill_id(long drill_id) {
+    public void setDrill_id(Drill drill_id) {
         this.drill_id = drill_id;
     }
 
-    public String getHotel_id() {
+    public Hotel getHotel_id() {
         return hotel_id;
     }
 
-    public void setHotel_id(String hotel_id) {
+    public void setHotel_id(Hotel hotel_id) {
         this.hotel_id = hotel_id;
     }
 

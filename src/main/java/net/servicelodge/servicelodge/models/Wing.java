@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="wing")
-public class wing {
+public class Wing {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,13 +16,13 @@ public class wing {
     @Column(nullable = false, length = 2)
     private String state;
 
-    public wing(long id, String wingName, String state) {
+    public Wing(long id, String wingName, String state) {
         this.id = id;
         this.wingName = wingName;
         this.state = state;
     }
 
-    public wing() {
+    public Wing() {
 
     }
 

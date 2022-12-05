@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="unit")
-public class unit {
+public class Unit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,13 +16,13 @@ public class unit {
     @Column(nullable = false, length = 200, unique = true)
     private String unitName;
 
-    public unit(long id, long wing_id, String unitName) {
+    public Unit(long id, long wing_id, String unitName) {
         this.id = id;
         this.wing_id = wing_id;
         this.unitName = unitName;
     }
 
-    public unit() {
+    public Unit() {
 
     }
 
