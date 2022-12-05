@@ -13,10 +13,11 @@ public class Member {
 
     @ManyToOne
     @JoinColumn(name = "person_id")
-    private Person person_id;
+    private Person person;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "member")
-    private List<Unit> unit_id;
+    @ManyToOne
+    @JoinColumn(name = "unit_id")
+    private Unit unit;
 
     @Column(nullable = false, length = 200, unique = true)
     private String username;
@@ -24,10 +25,10 @@ public class Member {
     @Column(nullable = false, length = 200)
     private String password;
 
-    public Member(long id, Person person_id, List<Unit> unit_id, String username, String password) {
+    public Member(long id, Person person, Unit unit, String username, String password) {
         this.id = id;
-        this.person_id = person_id;
-        this.unit_id = unit_id;
+        this.person = person;
+        this.unit = unit;
         this.username = username;
         this.password = password;
     }
@@ -45,19 +46,19 @@ public class Member {
     }
 
     public Person getPerson_id() {
-        return person_id;
+        return person;
     }
 
     public void setPerson_id(Person person_id) {
-        this.person_id = person_id;
+        this.person = person;
     }
 
-    public List<Unit> getUnit_id() {
-        return unit_id;
+    public Unit getUnit_id() {
+        return unit;
     }
 
-    public void setUnit_id(List<Unit> unit_id) {
-        this.unit_id = unit_id;
+    public void setUnit_id(Unit unit) {
+        this.unit = unit;
     }
 
     public String getUsername() {

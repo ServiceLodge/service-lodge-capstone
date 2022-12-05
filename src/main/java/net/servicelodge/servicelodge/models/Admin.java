@@ -11,11 +11,11 @@ public class Admin {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "admin")
-    private Person person_id;
+    @OneToOne
+    private Person person;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "admin")
-    private List<Wing> wing_id;
+    @OneToOne
+    private Wing wing;
 
     @Column(nullable = false, length = 200, unique = true)
     private String username;
@@ -23,10 +23,10 @@ public class Admin {
     @Column(nullable = false, length = 200)
     private String password;
 
-    public Admin(long id, Person person_id, List<Wing> wing_id, String username, String password) {
+    public Admin(long id, Person person, Wing wing, String username, String password) {
         this.id = id;
-        this.person_id = person_id;
-        this.wing_id = wing_id;
+        this.person = person;
+        this.wing = wing;
         this.username = username;
         this.password = password;
     }
@@ -44,19 +44,19 @@ public class Admin {
     }
 
     public Person getPerson_id() {
-        return person_id;
+        return person;
     }
 
     public void setPerson_id(Person person_id) {
-        this.person_id = person_id;
+        this.person = person_id;
     }
 
-    public List<Wing> getWing_id() {
-        return wing_id;
+    public Wing getWing_id() {
+        return wing;
     }
 
-    public void setWing_id(List<Wing> wing_id) {
-        this.wing_id = wing_id;
+    public void setWing_id(Wing wing) {
+        this.wing = wing;
     }
 
     public String getUsername() {

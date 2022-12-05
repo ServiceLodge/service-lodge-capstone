@@ -1,6 +1,7 @@
 package net.servicelodge.servicelodge.models;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="units")
@@ -15,6 +16,9 @@ public class Unit {
 
     @Column(nullable = false, length = 200, unique = true)
     private String unitName;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "unit")
+    private List<Member> members;
 
     public Unit(long id, long wing_id, String unitName) {
         this.id = id;
