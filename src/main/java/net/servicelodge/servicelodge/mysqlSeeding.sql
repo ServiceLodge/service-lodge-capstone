@@ -120,8 +120,6 @@ VALUES (4,1,'password');
 INSERT INTO drills (wing_id, name, drillStartDate, drillEndDate)
 VALUES (1, 'January 2023', '2023-01-07', '2023-01-08');
 
-ALTER TABLE hotels MODIFY email VARCHAR(200);
-
 INSERT INTO hotels (name, address, city, state, zip, phoneNumber, email)
 VALUES ('Crowne Plaza', '1015 Elm St', 'Dallas', 'TX', 75202, 2147425678, 'crown.plaza@gmail.com');
 
