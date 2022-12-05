@@ -3,7 +3,7 @@ package net.servicelodge.servicelodge.models;
 import javax.persistence.*;
 
 @Entity
-@Table(name="drill")
+@Table(name="drills")
 public class Drill {
 
     @Id
