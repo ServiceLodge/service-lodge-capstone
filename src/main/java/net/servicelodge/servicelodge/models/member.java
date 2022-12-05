@@ -3,8 +3,8 @@ package net.servicelodge.servicelodge.models;
 import javax.persistence.*;
 
 @Entity
-@Table(name="admin")
-public class admin {
+@Table(name="member")
+public class member {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,7 +14,7 @@ public class admin {
     private String person_id;
 
     @Column(nullable = false)
-    private String wing_id;
+    private String unit_id;
 
     @Column(nullable = false, length = 200, unique = true)
     private String username;
@@ -22,15 +22,15 @@ public class admin {
     @Column(nullable = false, length = 200)
     private String password;
 
-    public admin(long id, String person_id, String wing_id, String username, String password) {
+    public member(long id, String person_id, String unit_id, String username, String password) {
         this.id = id;
         this.person_id = person_id;
-        this.wing_id = wing_id;
+        this.unit_id = unit_id;
         this.username = username;
         this.password = password;
     }
 
-    public admin() {
+    public member() {
 
     }
 
@@ -50,12 +50,12 @@ public class admin {
         this.person_id = person_id;
     }
 
-    public String getWing_id() {
-        return wing_id;
+    public String getUnit_id() {
+        return unit_id;
     }
 
-    public void setWing_id(String wing_id) {
-        this.wing_id = wing_id;
+    public void setUnit_id(String unit_id) {
+        this.unit_id = unit_id;
     }
 
     public String getUsername() {
