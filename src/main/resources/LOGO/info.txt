@@ -1,0 +1,14 @@
+
+Hope you enjoy your new logo, here are the people that
+made your beautiful logo happen :)
+font name: uranialig
+font link: https://www.fontspring.com/fonts/hoftype/urania/urania-light
+font author: Hoftype
+font author site: http://www.hoftype.com/
+
+
+icon designer: Steven Lester
+icon designer link: /stevenlester
+        
+{"bg-gradient-0":"#122663","bg-gradient-1":"#5DD7AD","icon":"#ffffff","font":"#ffffff","slogan":"#ffffff"}
+      
