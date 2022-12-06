@@ -15,16 +15,16 @@ public class Unit {
     private String unitName;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "unit")
-    private List<Member> members;
+    private List<User> users;
 
     @ManyToOne
     @JoinColumn(name = "wing_id")
     private Wing wing;
 
-    public Unit(long id, String unitName, List<Member> members) {
+    public Unit(long id, String unitName, List<User> users) {
         this.id = id;
         this.unitName = unitName;
-        this.members = members;
+        this.users = users;
 
     }
 
@@ -56,11 +56,11 @@ public class Unit {
         this.unitName = unitName;
     }
 
-    public List<Member> getMembers() {
-        return members;
+    public List<User> getUsers() {
+        return users;
     }
 
-    public void setMembers(List<Member> members) {
-        this.members = members;
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
 }
