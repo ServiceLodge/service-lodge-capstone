@@ -12,8 +12,8 @@ public class Reservation {
     private long id;
 
     @ManyToOne
-    @JoinColumn(name = "member_id")
-    private Member member;
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @ManyToOne
     @JoinColumn(name = "drill_id")
@@ -52,12 +52,12 @@ public class Reservation {
         this.id = id;
     }
 
-    public Member getMember() {
-        return member;
+    public User getUser() {
+        return user;
     }
 
-    public void setMember(Member member) {
-        this.member = member;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Drill getDrill() {
@@ -82,5 +82,21 @@ public class Reservation {
 
     public void setRes_num(String res_num) {
         this.res_num = res_num;
+    }
+
+    public Date getResStartDate() {
+        return resStartDate;
+    }
+
+    public void setResStartDate(Date resStartDate) {
+        this.resStartDate = resStartDate;
+    }
+
+    public Date getResEndDate() {
+        return resEndDate;
+    }
+
+    public void setResEndDate(Date resEndDate) {
+        this.resEndDate = resEndDate;
     }
 }
