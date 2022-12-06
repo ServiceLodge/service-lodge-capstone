@@ -10,23 +10,23 @@ public class Person {
     private long id;
 
     @Column(nullable = false, length = 200)
-    private String firstName;
+    private String first_Name;
 
     @Column(nullable = false, length = 200)
-    private String lastName;
+    private String last_Name;
 
     @Column(nullable = false, length = 200, unique = true)
     private String email;
 
     @Column(nullable = false, length = 10, unique = true)
-    private String phoneNumber;
+    private int phone_Number;
 
-    public Person(long id, String firstName, String lastName, String email, String phoneNumber) {
+    public Person(long id, String first_Name, String last_Name, String email, int phone_Number) {
         this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.first_Name = first_Name;
+        this.last_Name = last_Name;
         this.email = email;
-        this.phoneNumber = phoneNumber;
+        this.phone_Number = phone_Number;
     }
 
     public Person() {
@@ -42,19 +42,19 @@ public class Person {
     }
 
     public String getFirstName() {
-        return firstName;
+        return first_Name;
     }
 
     public void setFirstName(String firstName) {
-        this.firstName = firstName;
+        this.first_Name = firstName;
     }
 
     public String getLastName() {
-        return lastName;
+        return last_Name;
     }
 
     public void setLastName(String lastName) {
-        this.lastName = lastName;
+        this.last_Name = lastName;
     }
 
     public String getEmail() {
@@ -65,11 +65,11 @@ public class Person {
         this.email = email;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public int getPhoneNumber() {
+        return phone_Number;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setPhoneNumber(int phoneNumber) {
+        this.phone_Number = phoneNumber;
     }
 }

@@ -1,6 +1,7 @@
 package net.servicelodge.servicelodge.models;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="wings")
@@ -16,10 +17,18 @@ public class Wing {
     @Column(nullable = false, length = 2)
     private String state;
 
-    public Wing(long id, String wingName, String state) {
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "wing")
+    private List<Drill> drills;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "wing")
+    private List<Unit> units;
+
+    public Wing(long id, String wingName, String state, List<Drill> drills, List<Unit> units) {
         this.id = id;
         this.wingName = wingName;
         this.state = state;
+        this.drills = drills;
+        this.units = units;
     }
 
     public Wing() {
@@ -48,5 +57,21 @@ public class Wing {
 
     public void setState(String state) {
         this.state = state;
+    }
+
+    public List<Drill> getDrills() {
+        return drills;
+    }
+
+    public void setDrills(List<Drill> drills) {
+        this.drills = drills;
+    }
+
+    public List<Unit> getUnits() {
+        return units;
+    }
+
+    public void setUnits(List<Unit> units) {
+        this.units = units;
     }
 }
