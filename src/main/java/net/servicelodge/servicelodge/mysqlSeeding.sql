@@ -1,4 +1,4 @@
-CREATE DATABASE IF NOT EXISTS lodging;
+CREATE DATABASE IF NOT EXISTS lodging_db;
 
 USE lodging;
 
