@@ -23,7 +23,7 @@ public class Reservation {
     @JoinColumn(name = "hotel_id")
     private Hotel hotel;
 
-    @Column(nullable = false, length = 200, unique = true)
+    @Column(nullable = false, length = 200)
     private String res_num;
 
     @Column(nullable = false)
