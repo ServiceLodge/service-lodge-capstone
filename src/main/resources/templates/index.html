@@ -1,33 +1,8 @@
-
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Service Lodge</title>
-    <link rel="shortcut icon" href="img/logo/favicon.png" type="image/x-icon">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <link rel="stylesheet" href="./css/style.css">
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
-            integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
-            crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
-            crossorigin="anonymous"></script>
-</head>
+<head th:replace="partials/partials.html :: head"></head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"
-     style="background-image: linear-gradient(170deg, #122663, #5DD7AD);">
-    <div class="container-fluid">
-        <a class="navbar-brand"><img src="img/logo/favicon.png" alt="Home" width="40px"></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
-                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <a class="nav-link" style="color: white" th:href="@{/login}">Login</a>
-    </div>
-</nav>
+<nav th:replace="partials/partials.html :: navbar-landing"></nav>
 <div class="w-100" style="background-color: #eee;">
     <img src="img/logo/cover.png" alt="cover" width="100%">
 </div>
@@ -40,7 +15,9 @@
     <div class="row text-center py-5">
         <div class="col-2"></div>
         <div class="col-8">
-            Quick, reliable, and comprehensive lodging management. Book and cancel hotels at the click of a button, communicate seamlessly with our built-in notification system, and simplify hotel reservation management with Service Lodge.
+            Quick, reliable, and comprehensive lodging management. Book and cancel hotels at the click of a button,
+            communicate seamlessly with our built-in notification system, and simplify hotel reservation management with
+            Service Lodge.
         </div>
         <div class="col-2 py-5"></div>
     </div>
