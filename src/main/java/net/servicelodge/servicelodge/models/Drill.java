@@ -1,6 +1,8 @@
 package net.servicelodge.servicelodge.models;
 
 import javax.persistence.*;
+import java.sql.Date;
+import java.util.List;
 
 @Entity
 @Table(name="drills")
@@ -12,23 +14,26 @@ public class Drill {
 
     @ManyToOne
     @JoinColumn(name = "wing_id")
-    private Wing wing_id;
+    private Wing wing;
 
     @Column (nullable = false, length = 20, unique = true)
     private String name;
 
     @Column(nullable = false)
-    private long drillStartDate;
+    private Date drillStartDate;
 
     @Column(nullable = false)
-    private long drillEndDate;
+    private Date drillEndDate;
 
-    public Drill(long id, Wing wing_id, String name, long drillStartDate, long drillEndDate) {
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "drill")
+    private List<Reservation> reservations;
+
+    public Drill(long id, String name, Date drillStartDate, Date drillEndDate, List <Reservation> reservations) {
         this.id = id;
-        this.wing_id = wing_id;
         this.name = name;
         this.drillStartDate = drillStartDate;
         this.drillEndDate = drillEndDate;
+        this.reservations = reservations;
     }
 
     public Drill() {
@@ -43,12 +48,12 @@ public class Drill {
         this.id = id;
     }
 
-    public Wing getWing_id() {
-        return wing_id;
+    public Wing getWing() {
+        return wing;
     }
 
-    public void setWing_id(Wing wing_id) {
-        this.wing_id = wing_id;
+    public void setWing(Wing wing) {
+        this.wing = wing;
     }
 
     public String getName() {
@@ -59,19 +64,27 @@ public class Drill {
         this.name = name;
     }
 
-    public long getDrillStartDate() {
+    public Date getDrillStartDate() {
         return drillStartDate;
     }
 
-    public void setDrillStartDate(long drillStartDate) {
+    public void setDrillStartDate(Date drillStartDate) {
         this.drillStartDate = drillStartDate;
     }
 
-    public long getDrillEndDate() {
+    public Date getDrillEndDate() {
         return drillEndDate;
     }
 
-    public void setDrillEndDate(long drillEndDate) {
+    public void setDrillEndDate(Date drillEndDate) {
         this.drillEndDate = drillEndDate;
+    }
+
+    public List<Reservation> getReservations() {
+        return reservations;
+    }
+
+    public void setReservations(List<Reservation> reservations) {
+        this.reservations = reservations;
     }
 }

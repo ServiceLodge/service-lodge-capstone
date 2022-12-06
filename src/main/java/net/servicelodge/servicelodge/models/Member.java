@@ -11,26 +11,26 @@ public class Member {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @ManyToOne
-    @JoinColumn(name = "person_id")
+    @OneToOne
     private Person person;
 
     @ManyToOne
     @JoinColumn(name = "unit_id")
     private Unit unit;
 
-    @Column(nullable = false, length = 200, unique = true)
-    private String username;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "member")
+    private List<Reservation> reservations;
+
 
     @Column(nullable = false, length = 200)
     private String password;
 
-    public Member(long id, Person person, Unit unit, String username, String password) {
+    public Member(long id, Person person, Unit unit, String password, List<Reservation> reservations) {
         this.id = id;
         this.person = person;
         this.unit = unit;
-        this.username = username;
         this.password = password;
+        this.reservations = reservations;
     }
 
     public Member() {
@@ -45,29 +45,22 @@ public class Member {
         this.id = id;
     }
 
-    public Person getPerson_id() {
+    public Person getPerson() {
         return person;
     }
 
-    public void setPerson_id(Person person_id) {
+    public void setPerson(Person person) {
         this.person = person;
     }
 
-    public Unit getUnit_id() {
+    public Unit getUnit() {
         return unit;
     }
 
-    public void setUnit_id(Unit unit) {
+    public void setUnit(Unit unit) {
         this.unit = unit;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
 
     public String getPassword() {
         return password;
@@ -76,4 +69,13 @@ public class Member {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public List<Reservation> getReservations() {
+        return reservations;
+    }
+
+    public void setReservations(List<Reservation> reservations) {
+        this.reservations = reservations;
+    }
+
 }

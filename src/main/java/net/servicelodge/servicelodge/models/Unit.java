@@ -11,19 +11,21 @@ public class Unit {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(nullable = false)
-    private long wing_id;
-
     @Column(nullable = false, length = 200, unique = true)
     private String unitName;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "unit")
     private List<Member> members;
 
-    public Unit(long id, long wing_id, String unitName) {
+    @ManyToOne
+    @JoinColumn(name = "wing_id")
+    private Wing wing;
+
+    public Unit(long id, String unitName, List<Member> members) {
         this.id = id;
-        this.wing_id = wing_id;
         this.unitName = unitName;
+        this.members = members;
+
     }
 
     public Unit() {
@@ -38,12 +40,12 @@ public class Unit {
         this.id = id;
     }
 
-    public long getWing_id() {
-        return wing_id;
+    public Wing getWing() {
+        return wing;
     }
 
-    public void setWing_id(long wing_id) {
-        this.wing_id = wing_id;
+    public void setWing(Wing wing) {
+        this.wing = wing;
     }
 
     public String getUnitName() {
@@ -52,5 +54,13 @@ public class Unit {
 
     public void setUnitName(String unitName) {
         this.unitName = unitName;
+    }
+
+    public List<Member> getMembers() {
+        return members;
+    }
+
+    public void setMembers(List<Member> members) {
+        this.members = members;
     }
 }

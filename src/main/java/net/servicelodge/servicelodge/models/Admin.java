@@ -17,17 +17,13 @@ public class Admin {
     @OneToOne
     private Wing wing;
 
-    @Column(nullable = false, length = 200, unique = true)
-    private String username;
-
     @Column(nullable = false, length = 200)
     private String password;
 
-    public Admin(long id, Person person, Wing wing, String username, String password) {
+    public Admin(long id, Person person, Wing wing, String password) {
         this.id = id;
         this.person = person;
         this.wing = wing;
-        this.username = username;
         this.password = password;
     }
 
@@ -43,28 +39,20 @@ public class Admin {
         this.id = id;
     }
 
-    public Person getPerson_id() {
+    public Person getPerson() {
         return person;
     }
 
-    public void setPerson_id(Person person_id) {
-        this.person = person_id;
+    public void setPerson(Person person) {
+        this.person = person;
     }
 
-    public Wing getWing_id() {
+    public Wing getWing() {
         return wing;
     }
 
-    public void setWing_id(Wing wing) {
+    public void setWing(Wing wing) {
         this.wing = wing;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public String getPassword() {
