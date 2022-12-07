@@ -22,7 +22,7 @@ public class UserDetailsLoader implements UserDetailsService {
         if (user == null) {
             throw new UsernameNotFoundException("No user found for " + username);
         }
-
+        System.out.println(new UserWithRoles(user).getFirst_Name());
         return new UserWithRoles(user);
     }
 }
