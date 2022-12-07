@@ -1,14 +1,14 @@
 CREATE DATABASE IF NOT EXISTS lodging_db;
 
-USE lodging;
+USE lodging_db;
 
 CREATE TABLE IF NOT EXISTS users(
     id INT UNSIGNED NOT NULL AUTO_INCREMENT,
     first_name VARCHAR(200) NOT NULL,
     last_name VARCHAR(200) NOT NULL,
-    email VARCHAR(200) NOT NULL UNIQUE,
-    password VARCHAR(8) NOT NULL,
-    phone_number INT(10) NOT NULL UNIQUE,
+    username VARCHAR(200) NOT NULL UNIQUE,
+    password VARCHAR(100) NOT NULL,
+    phone_number VARCHAR(10) NOT NULL UNIQUE,
     unit_id INT UNSIGNED,
     is_admin BOOLEAN NOT NULL,
     PRIMARY KEY (id),
@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS users(
 
 CREATE TABLE IF NOT EXISTS wings(
     id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    wing_name VARCHAR(200) NOT NULL UNIQUE,
+    wing_name VARCHAR(100) NOT NULL UNIQUE,
     state VARCHAR(2) NOT NULL,
     PRIMARY KEY (id)
 );
@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS wings(
 #     id INT UNSIGNED NOT NULL AUTO_INCREMENT,
 #     person_id INT UNSIGNED NOT NULL,
 #     wing_id INT UNSIGNED NOT NULL,
-#     password VARCHAR(200),
+#     password VARCHAR(100),
 #     PRIMARY KEY (id),
 #     FOREIGN KEY (person_id) REFERENCES persons (id),
 #     FOREIGN KEY (wing_id) REFERENCES wings(id)
@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS wings(
 CREATE TABLE IF NOT EXISTS units(
     id INT UNSIGNED NOT NULL AUTO_INCREMENT,
     wing_id INT UNSIGNED NOT NULL,
-    unit_name VARCHAR(200) NOT NULL UNIQUE,
+    unit_name VARCHAR(100) NOT NULL UNIQUE,
     PRIMARY KEY (id),
     FOREIGN KEY (wing_id) REFERENCES wings(id)
 );
@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS units(
 #     id INT UNSIGNED NOT NULL AUTO_INCREMENT,
 #     person_id INT UNSIGNED NOT NULL,
 #     unit_id INT UNSIGNED NOT NULL,
-#     password VARCHAR(200),
+#     password VARCHAR(100),
 #     PRIMARY KEY (id),
 #     FOREIGN KEY (person_id) REFERENCES persons(id),
 #     FOREIGN KEY (unit_id) REFERENCES wings(id)
@@ -62,13 +62,13 @@ CREATE TABLE IF NOT EXISTS drills(
 
 CREATE TABLE IF NOT EXISTS hotels(
     id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    name VARCHAR(200) NOT NULL UNIQUE,
-    address VARCHAR(200) NOT NULL UNIQUE,
-    city VARCHAR(200) NOT NULL UNIQUE,
+    name VARCHAR(100) NOT NULL UNIQUE,
+    address VARCHAR(100) NOT NULL UNIQUE,
+    city VARCHAR(100) NOT NULL UNIQUE,
     state VARCHAR(2) NOT NULL,
     zip INT(7) NOT NULL,
     phone_number INT(10) NOT NULL UNIQUE,
-    email VARCHAR(200) NOT NULL,
+    email VARCHAR(100) NOT NULL,
     PRIMARY KEY (id)
 );
 
@@ -77,7 +77,7 @@ CREATE TABLE IF NOT EXISTS reservations(
     user_id INT UNSIGNED NOT NULL,
     drill_id INT UNSIGNED NOT NULL,
     hotel_id INT UNSIGNED NOT NULL,
-    res_num VARCHAR(200) NOT NULL,
+    res_num VARCHAR(100) NOT NULL,
     res_start_date DATE,
     res_end_date Date,
     PRIMARY KEY (id),
@@ -91,20 +91,23 @@ INSERT INTO wings (wing_name, state) VALUES ('184th Wing', 'TX');
 INSERT INTO units (wing_id, unit_name)
 VALUES (1, '184 COG');
 
+INSERT INTO units (wing_id, unit_name)
+VALUES (1, '127 COS');
 
-INSERT INTO users (first_name, last_name, email, password, phone_number, unit_id, is_admin)
+
+INSERT INTO users (first_name, last_name, username, password, phone_number, unit_id, is_admin)
 VALUES (
-           'John', 'Doe', 'john.doe@codeup.com', 'password', 1234567890, 1, true
+           'John', 'Doe', 'john.doe@codeup.com', 'password', 1234567812, 1, true
        );
-INSERT INTO users (first_name, last_name, email, password, phone_number, unit_id, is_admin)
+INSERT INTO users (first_name, last_name, username, password, phone_number, unit_id, is_admin)
 VALUES (
            'Bob', 'White', 'bob.white@codeup.com', 'password', 1234567891, 1, false
        );
-INSERT INTO users (first_name, last_name, email, password, phone_number, unit_id, is_admin)
+INSERT INTO users (first_name, last_name, username, password, phone_number, unit_id, is_admin)
 VALUES (
            'Bob', 'Blue', 'bob.blue@codeup.com', 'password', 1234567892, 1, false
        );
-INSERT INTO users (first_name, last_name, email, password, phone_number, unit_id, is_admin)
+INSERT INTO users (first_name, last_name, username, password, phone_number, unit_id, is_admin)
 VALUES (
            'Bob', 'Green', 'bob.green@codeup.com', 'password', 1234567893, 1, false
        );
