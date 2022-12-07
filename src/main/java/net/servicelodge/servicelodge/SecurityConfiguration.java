@@ -45,14 +45,15 @@ public class SecurityConfiguration {
                 .logoutSuccessUrl("/login?logout") // append a query string value
                 /* Pages that can be viewed without having to log in */
                 .and()
-                .authorizeRequests()
+                .authorizeHttpRequests()
                 .antMatchers("/") // anyone can see the home and the ads pages
                 .permitAll()
                 /* Pages that require authentication */
                 .and()
-                .authorizeRequests()
+                .authorizeHttpRequests()
                 .antMatchers(
                         "/reservations" // only authenticated users can create ads
+                        // only authenticated users can edit ads
                 )
                 .authenticated()
         ;

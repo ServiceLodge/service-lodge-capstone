@@ -18,7 +18,7 @@ public class User {
     @Column(nullable = false, length = 200, unique = true)
     private String username;
 
-    @Column(nullable = false, length = 8)
+    @Column(nullable = false, length = 255)
     private String password;
 
     @Column(nullable = false, length = 10, unique = true)
@@ -41,17 +41,22 @@ public class User {
         this.is_admin = is_admin;
     }
 
-    public User() {
-
+    public User(String first_Name, String last_Name, String username, String password, String phone_Number, Unit unit, boolean is_admin) {
+        this.first_Name = first_Name;
+        this.last_Name = last_Name;
+        this.username = username;
+        this.password = password;
+        this.phone_Number = phone_Number;
+        this.unit = unit;
+        this.is_admin = is_admin;
     }
+
+    public User() {}
 
     public User(User copy) {
         id = copy.id;
-        first_Name = copy.first_Name;
-        last_Name = copy.last_Name;
         username = copy.username;
         password = copy.password;
-        phone_Number = copy.phone_Number;
         is_admin = copy.is_admin;
     }
 
