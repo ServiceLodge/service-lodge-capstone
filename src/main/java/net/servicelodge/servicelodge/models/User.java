@@ -16,13 +16,13 @@ public class User {
     private String last_Name;
 
     @Column(nullable = false, length = 200, unique = true)
-    private String email;
+    private String username;
 
     @Column(nullable = false, length = 8)
     private String password;
 
     @Column(nullable = false, length = 10, unique = true)
-    private int phone_Number;
+    private String phone_Number;
 
     @ManyToOne
     @JoinColumn(name = "unit_id")
@@ -31,11 +31,11 @@ public class User {
     @Column(nullable = false)
     boolean is_admin;
 
-    public User(long id, String first_Name, String last_Name, String email, String password, int phone_Number, boolean is_admin) {
+    public User(long id, String first_Name, String last_Name, String username, String password, String phone_Number, boolean is_admin) {
         this.id = id;
         this.first_Name = first_Name;
         this.last_Name = last_Name;
-        this.email = email;
+        this.username = username;
         this.password = password;
         this.phone_Number = phone_Number;
         this.is_admin = is_admin;
@@ -43,6 +43,16 @@ public class User {
 
     public User() {
 
+    }
+
+    public User(User copy) {
+        id = copy.id;
+        first_Name = copy.first_Name;
+        last_Name = copy.last_Name;
+        username = copy.username;
+        password = copy.password;
+        phone_Number = copy.phone_Number;
+        is_admin = copy.is_admin;
     }
 
     public long getId() {
@@ -69,12 +79,12 @@ public class User {
         this.last_Name = last_Name;
     }
 
-    public String getEmail() {
-        return email;
+    public String getUsername() {
+        return username;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -85,11 +95,11 @@ public class User {
         this.password = password;
     }
 
-    public int getPhone_Number() {
+    public String getPhone_Number() {
         return phone_Number;
     }
 
-    public void setPhone_Number(int phone_Number) {
+    public void setPhone_Number(String phone_Number) {
         this.phone_Number = phone_Number;
     }
 
