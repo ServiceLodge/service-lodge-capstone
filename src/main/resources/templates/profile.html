@@ -8,15 +8,15 @@
 
 <div class="container-md">
     <div class="position-absolute top-50 start-50 translate-middle d-flex flex-column align-items-center">
-        <h1>Welcome, Bobby!</h1>
+        <h1>Welcome <span th:text="${user.getFirst_Name()}"></span>!</h1>
         <!--    DYNAMIC VIEW: (active)    -->
         <div class="calendar-icon booked d-flex justify-content-center align-items-center">
             <img class="position-absolute" src="../img/icon-calendar.png" alt="Calendar" width="150px">
-            <h2 style="padding-top: 1em; color: white">JAN</h2>
+            <h2  th:text="${reservation.getDrill().getName().substring(0,3)}" style="padding-top: 1em; color: white"></h2>
         </div>
         <!--    DYNAMIC VIEW: HOTEL DATA   -->
-        <b><p id="date" class="fs-5">January 2023</p></b>
-        <p id="hotel" class="fs-5">Hilton Garden Inn Wichita</p>
+        <b><p class="fs-5" th:text="${reservation.getDrill().getName()}">January 2023</p></b>
+        <p class="fs-5" th:text="${reservation.getHotel().getName()}">Hilton Garden Inn Wichita</p>
         <p><a id="link" href="details.html">View Details</a></p>
     </div>
 </div>

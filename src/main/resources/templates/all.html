@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<header th:replace="partials/partials.html :: head"></header>
+<body>
+<nav th:replace="partials/partials.html :: navbar-member"></nav>
+
+<div class="container-md">
+    <div class="position-absolute top-50 start-50 translate-middle d-flex flex-column align-items-center">
+        <div class="container">
+            <div class="row">
+                <div class="col" th:each="reservation : ${reservations}">
+                    <a> <!--th:href="@{/posts/{id} (id = ${post.id}) }"--><h3 th:text="${reservation.res_num}"></h3></a>
+                </div>
+            </div>
+        </div>
+
+<!--            <h3 id="requestTitle">Book a Reservation</h3>-->
+<!--            <h3 id="requestYear" class="requestYear mt=5 my=5">2023</h3>-->
+<!--            <div class="position-absolute top-50 start-50 translate-middle d-flex flex-column align-items-center mt-5">-->
+<!--                <div class="btn-group btn-group-lg" role="group" aria-label="Large button group">-->
+<!--                    <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio1" autocomplete="off">-->
+<!--                    <label class="btn1 btn-outline" for="vbtn-radio1">Jan</label>-->
+<!--                    <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio2" autocomplete="off">-->
+<!--                    <label class="btn1 btn-outline" for="vbtn-radio2">Feb</label>-->
+<!--                    <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio3" autocomplete="off">-->
+<!--                    <label class="btn1 btn-outline" for="vbtn-radio3">Mar</label>-->
+<!--                </div>-->
+<!--                <div class="btn-group btn-group-lg" role="group" aria-label="Large button group">-->
+<!--                    <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio4" autocomplete="off">-->
+<!--                    <label class="btn1 btn-outline" for="vbtn-radio4">April</label>-->
+<!--                    <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio5" autocomplete="off">-->
+<!--                    <label class="btn1 btn-outline" for="vbtn-radio5">May</label>-->
+<!--                    <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio6" autocomplete="off">-->
+<!--                    <label class="btn1 btn-outline" for="vbtn-radio6">Jun</label>-->
+<!--                </div>-->
+<!--                <div class="btn-group btn-group-lg" role="group" aria-label="Large button group">-->
+<!--                    <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio7" autocomplete="off">-->
+<!--                    <label class="btn1 btn-outline" for="vbtn-radio7">July</label>-->
+<!--                    <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio8" autocomplete="off">-->
+<!--                    <label class="btn1 btn-outline" for="vbtn-radio8">Aug</label>-->
+<!--                    <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio9" autocomplete="off">-->
+<!--                    <label class="btn1 btn-outline" for="vbtn-radio9">Sep</label>-->
+<!--                </div>-->
+<!--                <div class="btn-group btn-group-lg" role="group" aria-label="Large button group">-->
+<!--                    <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio10" autocomplete="off">-->
+<!--                    <label class="btn1 btn-outline" for="vbtn-radio10">Oct</label>-->
+<!--                    <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio11" autocomplete="off">-->
+<!--                    <label class="btn1 btn-outline" for="vbtn-radio11">Nov</label>-->
+<!--                    <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio12" autocomplete="off">-->
+<!--                    <label class="btn1 btn-outline" for="vbtn-radio12">Dec</label>-->
+<!--                </div>-->
+
+<!--                <a href="" id="bookHotel">Book a Hotel</a>-->
+<!--                <button type="submit" id="resReq">View Reservation</button>-->
+
+    </div>
+</div>
+</body>
+</html>

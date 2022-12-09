@@ -56,8 +56,12 @@ public class User {
     public User(User copy) {
         id = copy.id;
         username = copy.username;
+        first_Name = copy.first_Name;
+        last_Name = copy.last_Name;
         password = copy.password;
         is_admin = copy.is_admin;
+        unit = copy.unit;
+        phone_Number = copy.phone_Number;
     }
 
     public long getId() {
