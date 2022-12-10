@@ -25,8 +25,10 @@ public class HotelService {
 
     public void createHotel(Hotel hotel){
         hotelsDao.save(hotel);
-//        emailService.prepareAndSend(ad, subject, description);
+        // emailService.prepareAndSend(ad, subject, description);
     }
+
+    public List<Hotel> findAllByState(String state) { return hotelsDao.findAllByState(state); }
 
     public Hotel findById(long id) {
         return hotelsDao.getReferenceById(id);

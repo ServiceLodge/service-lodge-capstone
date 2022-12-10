@@ -21,8 +21,9 @@ public class Unit {
     @JoinColumn(name = "wing_id")
     private Wing wing;
 
-    public Unit(long id, String unitName, List<User> users) {
+    public Unit(long id, Wing wing, String unitName, List<User> users) {
         this.id = id;
+        this.wing = wing;
         this.unitName = unitName;
         this.users = users;
     }

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<header th:replace="partials/partials.html :: head"></header>
+<body>
+<nav th:replace="partials/partials.html :: navbar-admin"></nav>
+
+<div class="container-md">
+    <div class="position-absolute top-50 start-50 translate-middle d-flex flex-column align-items-center">
+        <div class="container">
+            <div class="row">
+                <div class="col" th:each="reservation : ${reservations}">
+                    <a> <!--th:href="@{/posts/{id} (id = ${post.id}) }"--><h3 th:text="${reservation.resNum}"></h3></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

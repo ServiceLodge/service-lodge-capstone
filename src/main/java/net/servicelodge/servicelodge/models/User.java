@@ -31,7 +31,7 @@ public class User {
     @Column(nullable = false)
     boolean isAdmin;
 
-    public User(long id, String firstName, String lastName, String username, String password, String phoneNumber, boolean isAdmin) {
+    public User(long id, String firstName, String lastName, String username, String password, String phoneNumber, boolean isAdmin, Unit unit) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -39,16 +39,7 @@ public class User {
         this.password = password;
         this.phoneNumber = phoneNumber;
         this.isAdmin = isAdmin;
-    }
-
-    public User(String firstName, String lastName, String username, String password, String phoneNumber, Unit unit, boolean isAdmin) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.username = username;
-        this.password = password;
-        this.phoneNumber = phoneNumber;
         this.unit = unit;
-        this.isAdmin = isAdmin;
     }
 
     public User() {}
@@ -116,9 +107,7 @@ public class User {
         return unit;
     }
 
-    public void setUnit(Unit unit) {
-        this.unit = unit;
-    }
+    public void setUnit(Unit unit) { this.unit = unit; }
 
     public boolean isIsAdmin() {
         return isAdmin;

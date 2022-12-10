@@ -6,7 +6,7 @@
 <div class="container-md">
     <div class="mt-5 d-flex flex-column align-items-center">
         <h1>Create a user</h1>
-        <form class="d-flex flex-column" th:action="@{/users/create}" method="post" th:object="${user}">
+        <form class="d-flex flex-column" th:action="@{/u/create}" method="post" th:object="${user}">
             <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
                 <input type="email" class="form-control form-rounded" id="email" name="email" th:field="*{username}"/>
@@ -17,30 +17,30 @@
                        th:field="*{password}"/>
             </div>
             <div class="mb-3">
-                <label for="first_Name" class="form-label">First Name</label>
-                <input type="text" class="form-control form-rounded" id="first_Name" name="first_Name"
+                <label for="firstName" class="form-label">First Name</label>
+                <input type="text" class="form-control form-rounded" id="firstName" name="firstName"
                        th:field="*{firstName}"/>
             </div>
             <div class="mb-3">
-                <label for="last_Name" class="form-label">Last Name</label>
-                <input type="text" class="form-control form-rounded" id="last_Name" name="last_Name"
+                <label for="lastName" class="form-label">Last Name</label>
+                <input type="text" class="form-control form-rounded" id="lastName" name="lastName"
                        th:field="*{lastName}"/>
             </div>
             <div class="mb-3">
-                <label for="phone_Number" class="form-label">Phone Number</label>
-                <input type="text" class="form-control form-rounded" id="phone_Number" name="phone_Number"
+                <label for="phoneNumber" class="form-label">Phone Number <span style="color: lightslategray; font-size: 0.75em">(111) 111-1111</span></label>
+                <input type="text" class="form-control form-rounded" id="phoneNumber" name="phoneNumber"
                        th:field="*{phoneNumber}"/>
             </div>
             <div class="form-group mb-3">
                     <label for="unit" class="form-label">Unit</label>
-                    <select id="unit" class="form-control">
-                        <option selected>Choose...</option>
-                        <option th:each="unit : ${units}" th:text="${unit.unitName}" />
+                    <select id="unit" class="form-control form-rounded" th:field="*{unit}">
+                        <option disabled selected value="default">Choose...</option>
+                        <option th:each="unit : ${units}" th:value="${unit.id}" th:text="${unit.unitName}" />
                     </select>
             </div>
             <div class="mb-3 form-check">
-                <input type="checkbox" class="form-check-input" name="true" id="is_admin" th:field="*{isAdmin}"/>
-                <label for="is_admin" class="form-check-label">Administrator</label>
+                <input type="checkbox" class="form-check-input" name="true" id="isAdmin" th:field="*{isAdmin}"/>
+                <label for="isAdmin" class="form-check-label">Administrator</label>
             </div>
             <button type="submit" class="btn btn-primary">Create User</button>
         </form>
