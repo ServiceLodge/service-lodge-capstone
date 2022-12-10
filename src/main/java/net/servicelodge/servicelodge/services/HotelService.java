@@ -20,8 +20,7 @@ public class HotelService {
     }
 
     public List<Hotel> getHotels(){
-        List<Hotel> hotels = hotelsDao.findAll();
-        return hotels;
+        return hotelsDao.findAll();
     }
 
     public void createHotel(Hotel hotel){

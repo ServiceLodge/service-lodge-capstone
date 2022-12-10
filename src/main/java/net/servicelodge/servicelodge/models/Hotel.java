@@ -11,13 +11,13 @@ public class Hotel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(nullable = false, length = 200, unique = true)
+    @Column(nullable = false, length = 255, unique = true)
     private String name;
 
-    @Column(nullable = false, length = 200, unique = true)
+    @Column(nullable = false, length = 100, unique = true)
     private String address;
 
-    @Column(nullable = false, length = 200, unique = true)
+    @Column(nullable = false, length = 100, unique = true)
     private String city;
 
     @Column(nullable = false, length = 2)
@@ -26,16 +26,13 @@ public class Hotel {
     @Column(nullable = false, length = 7)
     private int zip;
 
-    @Column(nullable = false, length = 10, unique = true)
-    private int phoneNumber;
-
-    @Column(nullable = false, length = 200, unique = true)
-    private String email;
+    @Column(nullable = false, length = 20, unique = true)
+    private String phoneNumber;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "hotel")
     private List<Reservation> reservations;
 
-    public Hotel(long id, String name, String address, String city, String state, int zip, int phoneNumber, String email, List<Reservation> reservations) {
+    public Hotel(long id, String name, String address, String city, String state, int zip, String phoneNumber, List<Reservation> reservations) {
         this.id = id;
         this.name = name;
         this.address = address;
@@ -43,12 +40,22 @@ public class Hotel {
         this.state = state;
         this.zip = zip;
         this.phoneNumber = phoneNumber;
-        this.email = email;
         this.reservations = reservations;
     }
 
     public Hotel() {
 
+    }
+
+    public Hotel(Hotel copy) {
+        id = copy.id;
+        name = copy.name;
+        address = copy.address;
+        city = copy.city;
+        state = copy.state;
+        zip = copy.zip;
+        phoneNumber = copy.phoneNumber;
+        reservations = copy.reservations;
     }
 
     public long getId() {
@@ -99,20 +106,12 @@ public class Hotel {
         this.zip = zip;
     }
 
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public List<Reservation> getReservations() {
@@ -121,5 +120,9 @@ public class Hotel {
 
     public void setReservations(List<Reservation> reservations) {
         this.reservations = reservations;
+    }
+
+    public String getFullAddress(){
+        return this.getAddress() + ", " + this.getCity() + ", " + this.getState() + " " + this.getZip();
     }
 }

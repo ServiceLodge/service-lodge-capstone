@@ -25,11 +25,15 @@ public class Unit {
         this.id = id;
         this.unitName = unitName;
         this.users = users;
-
     }
 
-    public Unit() {
+    public Unit() {}
 
+    public Unit(Unit copy) {
+        id = copy.id;
+        wing = copy.wing;
+        unitName = copy.unitName;
+        users = copy.users;
     }
 
     public long getId() {

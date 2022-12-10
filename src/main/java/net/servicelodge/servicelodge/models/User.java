@@ -10,10 +10,10 @@ public class User {
     private long id;
 
     @Column(nullable = false, length = 200)
-    private String first_Name;
+    private String firstName;
 
     @Column(nullable = false, length = 200)
-    private String last_Name;
+    private String lastName;
 
     @Column(nullable = false, length = 200, unique = true)
     private String username;
@@ -22,33 +22,33 @@ public class User {
     private String password;
 
     @Column(nullable = false, length = 10, unique = true)
-    private String phone_Number;
+    private String phoneNumber;
 
     @ManyToOne
     @JoinColumn(name = "unit_id")
     private Unit unit;
 
     @Column(nullable = false)
-    boolean is_admin;
+    boolean isAdmin;
 
-    public User(long id, String first_Name, String last_Name, String username, String password, String phone_Number, boolean is_admin) {
+    public User(long id, String firstName, String lastName, String username, String password, String phoneNumber, boolean isAdmin) {
         this.id = id;
-        this.first_Name = first_Name;
-        this.last_Name = last_Name;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.username = username;
         this.password = password;
-        this.phone_Number = phone_Number;
-        this.is_admin = is_admin;
+        this.phoneNumber = phoneNumber;
+        this.isAdmin = isAdmin;
     }
 
-    public User(String first_Name, String last_Name, String username, String password, String phone_Number, Unit unit, boolean is_admin) {
-        this.first_Name = first_Name;
-        this.last_Name = last_Name;
+    public User(String firstName, String lastName, String username, String password, String phoneNumber, Unit unit, boolean isAdmin) {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.username = username;
         this.password = password;
-        this.phone_Number = phone_Number;
+        this.phoneNumber = phoneNumber;
         this.unit = unit;
-        this.is_admin = is_admin;
+        this.isAdmin = isAdmin;
     }
 
     public User() {}
@@ -56,12 +56,12 @@ public class User {
     public User(User copy) {
         id = copy.id;
         username = copy.username;
-        first_Name = copy.first_Name;
-        last_Name = copy.last_Name;
+        firstName = copy.firstName;
+        lastName = copy.lastName;
         password = copy.password;
-        is_admin = copy.is_admin;
+        isAdmin = copy.isAdmin;
         unit = copy.unit;
-        phone_Number = copy.phone_Number;
+        phoneNumber = copy.phoneNumber;
     }
 
     public long getId() {
@@ -72,20 +72,20 @@ public class User {
         this.id = id;
     }
 
-    public String getFirst_Name() {
-        return first_Name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFirst_Name(String first_Name) {
-        this.first_Name = first_Name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getLast_Name() {
-        return last_Name;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLast_Name(String last_Name) {
-        this.last_Name = last_Name;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getUsername() {
@@ -104,12 +104,12 @@ public class User {
         this.password = password;
     }
 
-    public String getPhone_Number() {
-        return phone_Number;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setPhone_Number(String phone_Number) {
-        this.phone_Number = phone_Number;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public Unit getUnit() {
@@ -120,11 +120,11 @@ public class User {
         this.unit = unit;
     }
 
-    public boolean isIs_admin() {
-        return is_admin;
+    public boolean isIsAdmin() {
+        return isAdmin;
     }
 
-    public void setIs_admin(boolean is_admin) {
-        this.is_admin = is_admin;
+    public void setIsAdmin(boolean isAdmin) {
+        this.isAdmin = isAdmin;
     }
 }

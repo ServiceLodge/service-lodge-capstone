@@ -46,14 +46,16 @@ public class SecurityConfiguration {
                 /* Pages that can be viewed without having to log in */
                 .and()
                 .authorizeHttpRequests()
-                .antMatchers("/") // anyone can see the home and the ads pages
+                .antMatchers("/", "/users/create") // anyone can see the home and the ads pages
                 .permitAll()
                 /* Pages that require authentication */
                 .and()
                 .authorizeHttpRequests()
                 .antMatchers(
-                        "/reservations" // only authenticated users can create ads
-                        // only authenticated users can edit ads
+                        "/hotels/*", // only authenticated admins can create ads, reservations, drills, & users
+                        "/users/*", // only authenticated admins can update ads, reservations, drills, & users
+                        "/drills/*", // only authenticated admins can create ads, reservations, drills, & users
+                        "/reservations/*" // only authenticated admins can edit ads, reservations, drills, & users
                 )
                 .authenticated()
         ;

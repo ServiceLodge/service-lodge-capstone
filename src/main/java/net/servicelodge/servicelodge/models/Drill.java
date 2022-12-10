@@ -16,7 +16,7 @@ public class Drill {
     @JoinColumn(name = "wing_id")
     private Wing wing;
 
-    @Column (nullable = false, length = 20, unique = true)
+    @Column (nullable = false, length = 100, unique = true)
     private String name;
 
     @Column(nullable = false)
@@ -38,6 +38,15 @@ public class Drill {
 
     public Drill() {
 
+    }
+
+    public Drill(Drill copy) {
+        id = copy.id;
+        wing = copy.wing;
+        name = copy.name;
+        drillStartDate = copy.drillStartDate;
+        drillEndDate = copy.drillEndDate;
+        reservations = copy.reservations;
     }
 
     public long getId() {

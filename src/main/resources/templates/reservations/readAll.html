@@ -9,7 +9,7 @@
         <div class="container">
             <div class="row">
                 <div class="col" th:each="reservation : ${reservations}">
-                    <a> <!--th:href="@{/posts/{id} (id = ${post.id}) }"--><h3 th:text="${reservation.res_num}"></h3></a>
+                    <a> <!--th:href="@{/posts/{id} (id = ${post.id}) }"--><h3 th:text="${reservation.resNum}"></h3></a>
                 </div>
             </div>
         </div>

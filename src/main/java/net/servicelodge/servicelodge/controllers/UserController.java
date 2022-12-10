@@ -1,10 +1,8 @@
 package net.servicelodge.servicelodge.controllers;
 
 import net.servicelodge.servicelodge.models.Reservation;
-import net.servicelodge.servicelodge.models.Unit;
 import net.servicelodge.servicelodge.models.User;
 import net.servicelodge.servicelodge.repositories.ReservationRepository;
-import net.servicelodge.servicelodge.repositories.UnitRepository;
 import net.servicelodge.servicelodge.repositories.UserRepository;
 import net.servicelodge.servicelodge.services.UnitService;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -12,30 +10,29 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
 @Controller
 public class UserController {
-    private UserRepository userDao;
-    private UnitService unitService;
-    private PasswordEncoder passwordEncoder;
     private ReservationRepository reservationDao;
 
-    public UserController(UserRepository userDao, ReservationRepository reservationDao, UnitService unitService, PasswordEncoder passwordEncoder) {
-        this.userDao = userDao;
+    public UserController(ReservationRepository reservationDao) {
         this.reservationDao = reservationDao;
-        this.unitService = unitService;
-        this.passwordEncoder = passwordEncoder;
-
     }
 
-    @GetMapping("/all")
+    @GetMapping("/reservations/all")
     public String all(Model model){
         List<Reservation> reservations = reservationDao.findAllByUser((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         model.addAttribute("reservations", reservations);
-        return "all";
+        return "/reservations/readAll";
+    }
+
+    @GetMapping("/reservations/{id}")
+    public String showReservation(@PathVariable long id, Model model) {
+        Reservation reservation = reservationDao.findById(id);
+        model.addAttribute("reservation", reservation);
+        return "/reservations/readOne";
     }
 }

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<header th:replace="partials/partials-level2.html :: head"></header>
+<body>
+<nav th:replace="partials/partials-level2.html :: navbar-member"></nav>
+
+<div class="container-md">
+    <div class="position-absolute top-50 start-50 translate-middle d-flex flex-column align-items-center mt-5">
+        <h1>Jan 5th - 7th</h1>
+        <p>
+            <b><span id="hotel">Hilton Garden Inn Wichita</span></b>
+            <br><br><b>Location: </b><span th:text="${reservation.hotel.getFullAddress()}"></span>
+            <br><br><b>Check-in time: </b><span id="checkin">3:00 PM</span>
+            <br><b>Check-out time: </b><span id="checkout">12:00 PM</span>
+            <br><br><a href="#"><img src="/img/icon-schedule.png" width="30px"> <span style="color: black">Add Calendar Event</span></a>
+        </p>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3155.9573069766398!2d-97.2460411715214!3d37.720679958347986!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x87bafd18e4ec23e5%3A0x4ae48ee87695875e!2sHilton%20Garden%20Inn%20Wichita!5e0!3m2!1sen!2sus!4v1670001183186!5m2!1sen!2sus" width="100%" height="350px" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <form action="#">
+            <button class="btn btn-danger">Cancel Reservation</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

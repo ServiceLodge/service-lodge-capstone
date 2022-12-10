@@ -31,8 +31,14 @@ public class Wing {
         this.units = units;
     }
 
-    public Wing() {
+    public Wing() {}
 
+    public Wing(Wing copy) {
+        id = copy.id;
+        wingName = copy.wingName;
+        state = copy.state;
+        drills = copy.drills;
+        units = copy.units;
     }
 
     public long getId() {

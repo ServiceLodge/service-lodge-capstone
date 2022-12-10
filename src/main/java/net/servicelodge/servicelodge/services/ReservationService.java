@@ -1,6 +1,7 @@
 package net.servicelodge.servicelodge.services;
 
 import net.servicelodge.servicelodge.models.Reservation;
+import net.servicelodge.servicelodge.models.User;
 import net.servicelodge.servicelodge.repositories.ReservationRepository;
 import org.springframework.stereotype.Service;
 
@@ -18,8 +19,7 @@ public class ReservationService {
         return reservationDao.findAll();
     }
 
-    public static List<Reservation> getReservationsByUserId(long user_id){
-        //return reservationDao.findByUserId(user_id);
-        return null;
+    public static List<Reservation> getReservationsByUserId(User user){
+        return reservationDao.findAllByUser(user);
     }
 }

@@ -37,7 +37,9 @@
                 <a class="nav-link active" aria-current="page" th:href="@{/profile}">Home</a>
                 <a class="nav-link" th:href="@{/all}">Reservations</a>
                 <a class="nav-link" th:href="@{/request}">Request a Hotel</a>
-                <a class="nav-link" th:href="@{/logout}">Logout</a>
+                <form th:action="@{/logout}" method="POST">
+                    <button class="nav-link logout" type="submit">Logout</button>
+                </form>
             </div>
         </div>
     </div>
@@ -57,7 +59,9 @@
                 <a class="nav-link" th:href="@{/management}">Reservation Management</a>
                 <a class="nav-link" th:href="@{/members}">Members</a>
                 <a class="nav-link" th:href="@{/hotels}">Hotels</a>
-                <a class="nav-link" th:href="@{/logout}">Logout</a>
+                <form th:action="@{/logout}" method="POST">
+                    <button class="nav-link logout" type="submit">Logout</button>
+                </form>
             </div>
         </div>
     </div>
