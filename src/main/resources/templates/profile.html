@@ -3,7 +3,7 @@
 <header th:replace="partials/partials.html :: head"></header>
 
 <!--    DYNAMIC BODY: MEMBER    -->
-<body th:if="user.isAdmin != true">
+<body th:if="${!user.isAdmin}">
 <nav th:replace="partials/partials.html :: navbar-member"></nav>
 <div class="container-md">
     <div class="position-absolute top-50 start-50 translate-middle d-flex flex-column align-items-center">
@@ -29,7 +29,7 @@
 </body>
 
 <!--    DYNAMIC BODY: ADMINISTRATIVE    -->
-<body th:if="user.isAdmin == true">
+<body th:if="${user.isAdmin}">
 <nav th:replace="partials/partials.html :: navbar-admin"></nav>
 <div class="container-md">
     <div class="position-absolute top-50 start-50 translate-middle d-flex flex-column align-items-center">
