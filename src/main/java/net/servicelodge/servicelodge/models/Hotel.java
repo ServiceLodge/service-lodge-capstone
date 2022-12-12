@@ -17,7 +17,7 @@ public class Hotel {
     @Column(nullable = false, length = 100, unique = true)
     private String address;
 
-    @Column(nullable = false, length = 100, unique = true)
+    @Column(nullable = false, length = 100)
     private String city;
 
     @Column(nullable = false, length = 2)

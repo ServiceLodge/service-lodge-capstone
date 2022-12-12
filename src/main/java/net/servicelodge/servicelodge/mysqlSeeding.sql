@@ -1,68 +1,68 @@
 CREATE DATABASE IF NOT EXISTS lodging_db;
 
 USE lodging_db;
-DROP TABLE IF EXISTS users, wings, units, drills, hotels, reservations;
-
-CREATE TABLE IF NOT EXISTS wings(
-    id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    wing_name VARCHAR(100) NOT NULL UNIQUE,
-    state VARCHAR(2) NOT NULL,
-    PRIMARY KEY (id)
-);
-
-CREATE TABLE IF NOT EXISTS units(
-    id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    wing_id INT UNSIGNED NOT NULL,
-    unit_name VARCHAR(100) NOT NULL UNIQUE,
-    PRIMARY KEY (id),
-    FOREIGN KEY (wing_id) REFERENCES wings(id)
-);
-
-CREATE TABLE IF NOT EXISTS users(
-    id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    first_name VARCHAR(100) NOT NULL,
-    last_name VARCHAR(100) NOT NULL,
-    username VARCHAR(100) NOT NULL UNIQUE,
-    password VARCHAR(100) NOT NULL,
-    phone_number VARCHAR(20) NOT NULL UNIQUE,
-    unit_id INT UNSIGNED,
-    is_admin BOOLEAN NOT NULL,
-    PRIMARY KEY (id),
-    FOREIGN KEY (unit_id) REFERENCES units(id)
-);
-
-CREATE TABLE IF NOT EXISTS drills(
-    id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    wing_id INT UNSIGNED NOT NULL,
-    name VARCHAR(100) NOT NULL UNIQUE,
-    drill_start_date DATE NOT NULL,
-    drill_end_date DATE NOT NULL,
-    PRIMARY KEY (id),
-    FOREIGN KEY (wing_id) REFERENCES wings(id)
-);
-
-CREATE TABLE IF NOT EXISTS hotels(
-    id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    name VARCHAR(255) NOT NULL UNIQUE,
-    address VARCHAR(100) NOT NULL UNIQUE,
-    city VARCHAR(100) NOT NULL,
-    state VARCHAR(2) NOT NULL,
-    zip INT(7) NOT NULL,
-    phone_number VARCHAR(20) NOT NULL UNIQUE,
-    PRIMARY KEY (id)
-);
-
-CREATE TABLE IF NOT EXISTS reservations(
-    id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    user_id INT UNSIGNED NOT NULL,
-    drill_id INT UNSIGNED NOT NULL,
-    hotel_id INT UNSIGNED NOT NULL,
-    res_num VARCHAR(100) NOT NULL,
-    PRIMARY KEY (id),
-    FOREIGN KEY (user_id) REFERENCES users(id),
-    FOREIGN KEY (drill_id) REFERENCES drills(id),
-    FOREIGN KEY (hotel_id) REFERENCES hotels(id)
-);
+# DROP TABLE IF EXISTS users, wings, units, drills, hotels, reservations;
+#
+# CREATE TABLE IF NOT EXISTS wings(
+#     id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+#     wing_name VARCHAR(100) NOT NULL UNIQUE,
+#     state VARCHAR(2) NOT NULL,
+#     PRIMARY KEY (id)
+# );
+#
+# CREATE TABLE IF NOT EXISTS units(
+#     id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+#     wing_id INT UNSIGNED NOT NULL,
+#     unit_name VARCHAR(100) NOT NULL UNIQUE,
+#     PRIMARY KEY (id),
+#     FOREIGN KEY (wing_id) REFERENCES wings(id)
+# );
+#
+# CREATE TABLE IF NOT EXISTS users(
+#     id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+#     first_name VARCHAR(100) NOT NULL,
+#     last_name VARCHAR(100) NOT NULL,
+#     username VARCHAR(100) NOT NULL UNIQUE,
+#     password VARCHAR(100) NOT NULL,
+#     phone_number VARCHAR(20) NOT NULL UNIQUE,
+#     unit_id INT UNSIGNED,
+#     is_admin BOOLEAN NOT NULL,
+#     PRIMARY KEY (id),
+#     FOREIGN KEY (unit_id) REFERENCES units(id)
+# );
+#
+# CREATE TABLE IF NOT EXISTS drills(
+#     id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+#     wing_id INT UNSIGNED NOT NULL,
+#     name VARCHAR(100) NOT NULL UNIQUE,
+#     drill_start_date DATE NOT NULL,
+#     drill_end_date DATE NOT NULL,
+#     PRIMARY KEY (id),
+#     FOREIGN KEY (wing_id) REFERENCES wings(id)
+# );
+#
+# CREATE TABLE IF NOT EXISTS hotels(
+#     id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+#     name VARCHAR(255) NOT NULL UNIQUE,
+#     address VARCHAR(100) NOT NULL UNIQUE,
+#     city VARCHAR(100) NOT NULL,
+#     state VARCHAR(2) NOT NULL,
+#     zip INT(7) NOT NULL,
+#     phone_number VARCHAR(20) NOT NULL UNIQUE,
+#     PRIMARY KEY (id)
+# );
+#
+# CREATE TABLE IF NOT EXISTS reservations(
+#     id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+#     user_id INT UNSIGNED NOT NULL,
+#     drill_id INT UNSIGNED NOT NULL,
+#     hotel_id INT UNSIGNED NOT NULL,
+#     res_num VARCHAR(100) NOT NULL,
+#     PRIMARY KEY (id),
+#     FOREIGN KEY (user_id) REFERENCES users(id),
+#     FOREIGN KEY (drill_id) REFERENCES drills(id),
+#     FOREIGN KEY (hotel_id) REFERENCES hotels(id)
+# );
 
 INSERT INTO wings (wing_name, state) VALUES ('184th Wing', 'KS');
 
@@ -74,10 +74,11 @@ VALUES (1, '184 COG'),
 
 
 INSERT INTO users (first_name, last_name, username, password, phone_number, unit_id, is_admin)
-VALUES ('John', 'Doe', 'john@codeup.com', 'password', '(123) 456-7812', 1, true),
-       ('Bobby', 'White', 'bob@codeup.com', 'password', '(123) 456-7891', 2, false),
-       ('Rob', 'Blue', 'rob@codeup.com', 'password', '(123) 456-7892', 3, false),
-       ('Tod', 'Green', 'tod@codeup.com', 'password', '(123) 456-7893', 4, false);
+VALUES ('Cody', 'Palmer', 'cody@codeup.com', '$2a$10$w5dkTf7EwDX4UMPtmere/uCWDKwgsQ/F9LGr0QemE2EYilb98BaZe', '(123) 456-7812', 1, false),
+       ('Cristian', 'Almendarez', 'cristian@codeup.com', '$2a$10$WqTVhtLRLjN3z4OkIfv0nO1BkaGXArBvAjQeN5aRr0u87tAYcQUfu', '(123) 456-7891', 2, false),
+       ('Julian', 'Gutierrez', 'julian@codeup.com', '$2a$10$fx4KEESJKk8T4K5r1sjmle/vCFhbLQ6U4qgq.owxfU4Y2QCZprkpq', '(123) 456-7892', 3, false),
+       ('Mia', 'Evans', 'mia@codeup.com', '$2a$10$8kcQjTfHozPtoOXSt8efXeD3jE5IOT3lkXuNkCKRaPl2kZt5wT7He', '(123) 456-7893', 4, false),
+       ('Jay', 'Arredondo', 'jay@codeup.com', '$2a$10$8kcQjTfHozPtoOXSt8efXeD3jE5IOT3lkXuNkCKRaPl2kZt5wT7He', '(123) 456-7803', 1, true);
 
 INSERT INTO drills (wing_id, name, drill_start_date, drill_end_date)
 VALUES (1, 'January 2023', '2023-01-07', '2023-01-08'),
@@ -99,7 +100,9 @@ VALUES ('Wichita Marriott', '9100 E Corporate Hills Dr', 'Wichita', 'KS', 67207,
        ('Aloft Wichita', '3642 Oliver', 'Wichita', 'KS', 67220, '(316) 744-1100');
 
 INSERT Into reservations(user_id, drill_id, hotel_id, res_num)
-VALUES (2, 1, 1, 'HD4KEIV892JC280'),
+VALUES (1, 1, 4, 'HD4KEIV892JC280'),
+       (1, 2, 3, 'HD4KEIV892JC280'),
+       (2, 1, 1, 'HD4KEIV892JC280'),
        (2, 2, 3, 'C3UO9367DJUGLS9'),
        (2, 3, 2, 'JD937FUSL837FTD'),
        (3, 1, 1, 'DSJFG89EIJWARD3'),
