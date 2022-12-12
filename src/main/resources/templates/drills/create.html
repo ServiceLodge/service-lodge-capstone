@@ -5,44 +5,32 @@
 <nav th:replace="partials/partials-level2 :: navbar-admin"></nav>
 <div class="container-md">
     <div class="mt-5 d-flex flex-column align-items-center">
-        <h1>Add a hotel</h1>
-        <form class="d-flex flex-column" th:action="@{/drills/create}" method="POST" th:object="${drill}">
+        <h1>Create a Drill</h1>
+        <form class="d-flex flex-column" th:action="@{/d/create}" method="POST" th:object="${drill}">
             <div class="mb-3">
-                <label for="name" class="form-label">Hotel Name</label>
+                <label for="name" class="form-label">Drill Name</label>
                 <input type="text" class="form-control form-rounded" id="name" name="name"
                        th:field="*{name}"/>
             </div>
-<!--            <div class="mb-3">-->
-<!--                <label for="address" class="form-label">Street Address</label>-->
-<!--                <input type="date" class="form-control form-rounded" id="address" name="address"-->
-<!--                       th:field="*{address}"/>-->
-<!--            </div>-->
-<!--            <div class="mb-3">-->
-<!--                <label for="city" class="form-label">City</label>-->
-<!--                <input type="text" class="form-control form-rounded" id="city" name="city"-->
-<!--                       th:field="*{city}"/>-->
-<!--            </div>-->
-<!--            <div class="mb-3">-->
-<!--                <label for="state" class="form-label">State</label>-->
-<!--                <input type="text" class="form-control form-rounded" id="state" name="state"-->
-<!--                       th:field="*{state}"/>-->
-<!--            </div>-->
-<!--            <div class="mb-3">-->
-<!--                <label for="zip" class="form-label">Zip</label>-->
-<!--                <input type="text" class="form-control form-rounded" id="zip" name="zip"-->
-<!--                       th:field="*{zip}"/>-->
-<!--            </div>-->
-<!--            <div class="mb-3">-->
-<!--                <label for="phone_number" class="form-label">Phone Number <span style="color: lightslategray; font-size: 0.75em">(Numbers Only)</span></label>-->
-<!--                <input type="text" class="form-control form-rounded" id="phone_number" name="phone_number"-->
-<!--                       th:field="*{phoneNumber}"/>-->
-<!--            </div>-->
-<!--            <div class="mb-3">-->
-<!--                <label for="email" class="form-label">Email</label>-->
-<!--                <input type="email" class="form-control form-rounded" id="email" name="email"-->
-<!--                       th:field="*{email}"/>-->
-<!--            </div>-->
-            <button type="submit" class="btn btn-primary">Add Hotel</button>
+            <div class="form-group mb-3">
+                <label for="wing" class="form-label">Wing</label>
+                <select id="wing" class="form-control form-rounded" th:field="*{wing}">
+                    <option disabled selected value="default">Choose...</option>
+                    <option th:each="wing : ${wings}" th:value="${wing.id}" th:text="${wing.wingName}" />
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="drillStartDate" class="form-label">Start Date</label>
+                <input type="date" class="form-control form-rounded" id="drillStartDate" name="drillStartDate"
+                       th:field="*{drillStartDate}"/>
+            </div>
+            <div class="mb-3">
+                <label for="drillEndDate" class="form-label">End Date</label>
+                <input type="date" class="form-control form-rounded" id="drillEndDate" name="drillEndDate"
+                       th:field="*{drillEndDate}"/>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Drill</button>
         </form>
     </div>
 </div>

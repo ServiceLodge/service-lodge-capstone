@@ -1,10 +1,7 @@
 package net.servicelodge.servicelodge.controllers;
 
 import net.servicelodge.servicelodge.models.*;
-import net.servicelodge.servicelodge.repositories.DrillRepository;
-import net.servicelodge.servicelodge.repositories.HotelRepository;
-import net.servicelodge.servicelodge.repositories.ReservationRepository;
-import net.servicelodge.servicelodge.repositories.UserRepository;
+import net.servicelodge.servicelodge.repositories.*;
 import net.servicelodge.servicelodge.services.UnitService;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.parameters.P;
@@ -20,14 +17,17 @@ public class AdminController {
     private final UserRepository userDao;
     private final HotelRepository hotelDao;
     private final DrillRepository drillDao;
+
+    private final WingRepository wingDao;
     private final ReservationRepository resDao;
     private final UnitService unitService;
     private final PasswordEncoder passwordEncoder;
 
-    public AdminController(UserRepository userDao, HotelRepository hotelDao,  DrillRepository drillDao, ReservationRepository resDao, UnitService unitService, PasswordEncoder passwordEncoder) {
+    public AdminController(UserRepository userDao, HotelRepository hotelDao,  DrillRepository drillDao, WingRepository wingDao, ReservationRepository resDao, UnitService unitService, PasswordEncoder passwordEncoder) {
         this.userDao = userDao;
         this.hotelDao = hotelDao;
         this.drillDao = drillDao;
+        this.wingDao = wingDao;
         this.resDao = resDao;
         this.unitService = unitService;
         this.passwordEncoder = passwordEncoder;
@@ -84,21 +84,36 @@ public class AdminController {
     @GetMapping("/d/create")
     public String ShowCreateDrillForm(Model model){
         model.addAttribute("drill", new Drill());
-        return "drills/create";
+        model.addAttribute("wings", wingDao.findAll());
+        return "/drills/create";
     }
 
     @PostMapping("/d/create")
     public String saveDrill(@ModelAttribute Drill drill){
-        drillDao.save(drill);
-        return "redirect:/d";
+
+
+        try
+        {
+            Drill newDrill = drillDao.findByName(drill.getName());
+
+            if(newDrill.getName().equals(drill.getName()))
+            {
+                return "redirect:/d/create";
+            }
+        }
+        catch (NullPointerException e)
+        {
+            drillDao.save(drill);
+        }
+
+        return "redirect:/profile";
     }
 
-    @PostMapping("/d")
-    public String displayDrills(Model model){
+    @GetMapping("/d")
+    public String displayDrills(){
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         List<Drill> drills = drillDao.findAllByWingId((int) loggedInUser.getUnit().getWing().getId());
-        model.addAttribute("drills", drills);
-        return "drills/read";
+        return "profile";
     }
 
     ////////// RESERVATION CRUD //////////
