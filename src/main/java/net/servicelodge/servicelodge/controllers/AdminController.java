@@ -106,11 +106,16 @@ public class AdminController {
     @GetMapping("/r/create")
     public String showCreateReservationForm(Model model){
         model.addAttribute("reservation", new Reservation());
+        model.addAttribute("members", userDao.findAll());
+        model.addAttribute("hotels", hotelDao.findAll());
+        model.addAttribute("drills", drillDao.findAll());
         return "reservations/create";
     }
 
     @PostMapping("/r/create")
-    public String saveReservation(@ModelAttribute Reservation reservation){
+    public String saveReservation(@ModelAttribute Reservation reservation, @ModelAttribute User user){
+//        Reservation resCheck = resDao.findByUserIdAndDrillId(reservation.getUser().getId(), reservation.getDrill().getId());
+//        System.out.println(resCheck == null);
         resDao.save(reservation);
         return "redirect:/r";
     }

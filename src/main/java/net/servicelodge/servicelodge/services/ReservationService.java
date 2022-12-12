@@ -1,5 +1,6 @@
 package net.servicelodge.servicelodge.services;
 
+import net.servicelodge.servicelodge.models.Drill;
 import net.servicelodge.servicelodge.models.Reservation;
 import net.servicelodge.servicelodge.models.User;
 import net.servicelodge.servicelodge.repositories.ReservationRepository;
@@ -22,4 +23,8 @@ public class ReservationService {
     public static List<Reservation> getReservationsByUserId(User user){
         return reservationDao.findAllByUser(user);
     }
+
+//    public static Reservation findByUserIdAndDrillId(long userId, long drillId){
+//        return reservationDao.findByUserIdAndDrillId(userId, drillId);
+//    }
 }
