@@ -1,23 +1,43 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <header th:replace="partials/partials.html :: head"></header>
-<body>
+
+<!--    DYNAMIC BODY: MEMBER    -->
+<body th:if="${!user.isAdmin}">
 <nav th:replace="partials/partials.html :: navbar-member"></nav>
-
-<!-- partial: member navbar end -->
-
 <div class="container-md">
     <div class="position-absolute top-50 start-50 translate-middle d-flex flex-column align-items-center">
-        <h1>Welcome, Bobby!</h1>
-        <!--    DYNAMIC VIEW: (active)    -->
+        <h1>Welcome, <span th:text="${user.firstName}"></span>!</h1>
+
         <div class="calendar-icon booked d-flex justify-content-center align-items-center">
             <img class="position-absolute" src="../img/icon-calendar.png" alt="Calendar" width="150px">
-            <h2 style="padding-top: 1em; color: white">JAN</h2>
+            <h2 th:if="${reservation != null}" th:text="${reservation.drill.name.substring(0,3)}"
+                style="padding-top: 1em; color: white"></h2>
         </div>
-        <!--    DYNAMIC VIEW: HOTEL DATA   -->
-        <b><p id="date" class="fs-5">January 2023</p></b>
-        <p id="hotel" class="fs-5">Hilton Garden Inn Wichita</p>
-        <p><a id="link" href="details.html">View Details</a></p>
+
+        <div th:if="${reservation == null}">
+            <p class="fs-5">No Reservations :(</p>
+            <a th:href="@{/reservations/request}">Book a Hotel</a>
+        </div>
+        <div th:if="${reservation != null}">
+            <p class="fs-5" th:text="${reservation.drill.name}"></p>
+            <p class="fs-5" th:text="${reservation.hotel.name}"></p>
+            <a th:href="@{/reservations/{id} (id = ${reservation.id})}">View Details</a>
+        </div>
+    </div>
+</div>
+</body>
+
+<!--    DYNAMIC BODY: ADMINISTRATIVE    -->
+<body th:if="${user.isAdmin}">
+<nav th:replace="partials/partials.html :: navbar-admin"></nav>
+<div class="container-md">
+    <div class="position-absolute top-50 start-50 translate-middle d-flex flex-column align-items-center">
+        <h1>Welcome, <span th:text="${user.firstName}"></span>!</h1>
+        <a class="btn btn-primary" href="@{/d}">View Dashboards</a>
+        <a class="btn btn-primary" href="@{/r}">Reservation Management</a>
+        <a class="btn btn-primary" href="@{/m}">Member List</a>
+        <a class="btn btn-primary" href="@{/h}">Hotel List</a>
     </div>
 </div>
 </body>

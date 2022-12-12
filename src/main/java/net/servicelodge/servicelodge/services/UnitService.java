@@ -17,4 +17,8 @@ public class UnitService {
     public List<Unit> getUnits(){
         return unitDao.findAll();
     }
+
+    public Unit findById(long id){
+        return unitDao.findById(id);
+    }
 }

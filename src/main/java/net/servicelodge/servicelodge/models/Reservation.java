@@ -23,25 +23,25 @@ public class Reservation {
     @JoinColumn(name = "hotel_id")
     private Hotel hotel;
 
-    @Column(nullable = false, length = 200)
-    private String res_num;
+    @Column(nullable = false, length = 100)
+    private String resNum;
 
-    @Column(nullable = false)
-    private Date resStartDate;
-
-
-    @Column(nullable = false)
-    private Date resEndDate;
-
-    public Reservation(long id, Date resStartDate, Date resEndDate, String res_num) {
+    public Reservation(long id, User user, Drill drill, Hotel hotel, String resNum) {
         this.id = id;
-        this.res_num = res_num;
-        this.resStartDate = resStartDate;
-        this.resEndDate = resEndDate;
+        this.user = user;
+        this.drill = drill;
+        this.hotel = hotel;
+        this.resNum = resNum;
     }
 
-    public Reservation() {
+    public Reservation() {}
 
+    public Reservation(Reservation copy) {
+        id = copy.id;
+        user = copy.user;
+        drill = copy.drill;
+        hotel = copy.hotel;
+        resNum = copy.resNum;
     }
 
     public long getId() {
@@ -76,27 +76,11 @@ public class Reservation {
         this.hotel = hotel;
     }
 
-    public String getRes_num() {
-        return res_num;
+    public String getResNum() {
+        return resNum;
     }
 
-    public void setRes_num(String res_num) {
-        this.res_num = res_num;
-    }
-
-    public Date getResStartDate() {
-        return resStartDate;
-    }
-
-    public void setResStartDate(Date resStartDate) {
-        this.resStartDate = resStartDate;
-    }
-
-    public Date getResEndDate() {
-        return resEndDate;
-    }
-
-    public void setResEndDate(Date resEndDate) {
-        this.resEndDate = resEndDate;
+    public void setResNum(String resNum) {
+        this.resNum = resNum;
     }
 }

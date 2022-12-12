@@ -89,3 +89,7 @@ a:hover {
     margin: 1em auto 2em auto;
 }
 
+.logout {
+    border: none;
+    background-color: transparent;
+}

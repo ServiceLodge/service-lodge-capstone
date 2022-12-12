@@ -35,9 +35,11 @@
         <div class="collapse navbar-collapse" id="navbarMember">
             <div class="navbar-nav">
                 <a class="nav-link active" aria-current="page" th:href="@{/profile}">Home</a>
-                <a class="nav-link" th:href="@{/all}">Reservations</a>
-                <a class="nav-link" th:href="@{/request}">Request a Hotel</a>
-                <a class="nav-link" th:href="@{/logout}">Logout</a>
+                <a class="nav-link" th:href="@{/reservations/all}">Reservations</a>
+                <a class="nav-link" th:href="@{/reservations/request}">Request a Hotel</a>
+                <form th:action="@{/logout}" method="POST">
+                    <button class="nav-link logout" type="submit">Logout</button>
+                </form>
             </div>
         </div>
     </div>
@@ -52,12 +54,14 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarAdmin">
             <div class="navbar-nav">
-                <a class="nav-link active" aria-current="page" th:href="@{/admin}">Home</a>
-                <a class="nav-link" th:href="@{/dashboard}">Dashboard</a>
-                <a class="nav-link" th:href="@{/management}">Reservation Management</a>
-                <a class="nav-link" th:href="@{/members}">Members</a>
-                <a class="nav-link" th:href="@{/hotels}">Hotels</a>
-                <a class="nav-link" th:href="@{/logout}">Logout</a>
+                <a class="nav-link active" aria-current="page" th:href="@{/profile}">Home</a>
+                <a class="nav-link" th:href="@{/d}">Dashboard</a>
+                <a class="nav-link" th:href="@{/r}">Reservation Management</a>
+                <a class="nav-link" th:href="@{/m}">Members</a>
+                <a class="nav-link" th:href="@{/h}">Hotels</a>
+                <form th:action="@{/logout}" method="POST">
+                    <button class="nav-link logout" type="submit">Logout</button>
+                </form>
             </div>
         </div>
     </div>
