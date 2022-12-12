@@ -79,6 +79,8 @@ public class User {
         this.lastName = lastName;
     }
 
+    public String getFullName() { return this.firstName + " " + this.lastName; }
+
     public String getUsername() {
         return username;
     }
@@ -116,4 +118,5 @@ public class User {
     public void setIsAdmin(boolean isAdmin) {
         this.isAdmin = isAdmin;
     }
+
 }

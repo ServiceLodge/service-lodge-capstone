@@ -41,4 +41,7 @@ public class HotelService {
     public void editHotel(Hotel hotel) {
         hotelsDao.save(hotel);
     }
+
+
+//    public List<Hotel>
 }
