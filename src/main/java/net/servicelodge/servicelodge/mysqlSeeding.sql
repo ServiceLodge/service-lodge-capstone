@@ -100,15 +100,15 @@ VALUES ('Wichita Marriott', '9100 E Corporate Hills Dr', 'Wichita', 'KS', 67207,
        ('Aloft Wichita', '3642 Oliver', 'Wichita', 'KS', 67220, '(316) 744-1100');
 
 INSERT Into reservations(user_id, drill_id, hotel_id, res_num)
-VALUES (1, 1, 4, 'HD4KEIV892JC280'),
-       (1, 2, 3, 'HD4KEIV892JC280'),
-       (2, 1, 1, 'HD4KEIV892JC280'),
+VALUES (1, 1, 4, '89DIEIV892JC280'),
+       (1, 2, 3, 'HD4KEIV892JC299'),
+       (2, 1, 1, '4IOFUSV892JS742'),
        (2, 2, 3, 'C3UO9367DJUGLS9'),
        (2, 3, 2, 'JD937FUSL837FTD'),
        (3, 1, 1, 'DSJFG89EIJWARD3'),
        (3, 2, 4, 'C3UO9367DJUGLS9'),
-       (4, 1, 2, '83985MV9SMAV4JU'),
-       (4, 2, 1, '83985MV9SMAV4JU'),
-       (4, 3, 1, '83985MV9SMAV4JU'),
-       (4, 4, 1, '83985MV9SMAV4JU');
+       (4, 1, 2, '83985MV9SMAV4BG'),
+       (4, 2, 1, '83KD0PEUSJAV4JU'),
+       (4, 3, 1, 'KOI9HWS9SMAV70O'),
+       (4, 4, 1, 'JIEURH35TSDF543');
 
