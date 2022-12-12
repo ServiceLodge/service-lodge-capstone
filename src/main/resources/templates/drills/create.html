@@ -6,7 +6,7 @@
 <div class="container-md">
     <div class="mt-5 d-flex flex-column align-items-center">
         <h1>Create a Drill</h1>
-        <form class="d-flex flex-column" th:action="@{/drills/create}" method="POST" th:object="${drill}">
+        <form class="d-flex flex-column" th:action="@{/d/create}" method="POST" th:object="${drill}">
             <div class="mb-3">
                 <label for="name" class="form-label">Drill Name</label>
                 <input type="text" class="form-control form-rounded" id="name" name="name"
@@ -19,11 +19,7 @@
                     <option th:each="wing : ${wings}" th:value="${wing.id}" th:text="${wing.wingName}" />
                 </select>
             </div>
-<!--            <div class="mb-3">-->
-<!--                <label for="wing" class="form-label">Wing</label>-->
-<!--                <input type="text" class="form-control form-rounded" id="wing" name="wing"-->
-<!--                       th:field="*{wing}"/>-->
-<!--            </div>-->
+
             <div class="mb-3">
                 <label for="drillStartDate" class="form-label">Start Date</label>
                 <input type="date" class="form-control form-rounded" id="drillStartDate" name="drillStartDate"
@@ -34,26 +30,6 @@
                 <input type="date" class="form-control form-rounded" id="drillEndDate" name="drillEndDate"
                        th:field="*{drillEndDate}"/>
             </div>
-<!--            <div class="mb-3">-->
-<!--                <label for="reservations" class="form-label">Reservation</label>-->
-<!--                <input type="text" class="form-control form-rounded" id="reservations" name="reservations"-->
-<!--                       th:field="*{reservations}"/>-->
-<!--            </div>-->
-<!--            <div class="mb-3">-->
-<!--                <label for="zip" class="form-label">Zip</label>-->
-<!--                <input type="text" class="form-control form-rounded" id="zip" name="zip"-->
-<!--                       th:field="*{zip}"/>-->
-<!--            </div>-->
-<!--            <div class="mb-3">-->
-<!--                <label for="phone_number" class="form-label">Phone Number <span style="color: lightslategray; font-size: 0.75em">(Numbers Only)</span></label>-->
-<!--                <input type="text" class="form-control form-rounded" id="phone_number" name="phone_number"-->
-<!--                       th:field="*{phoneNumber}"/>-->
-<!--            </div>-->
-<!--            <div class="mb-3">-->
-<!--                <label for="email" class="form-label">Email</label>-->
-<!--                <input type="email" class="form-control form-rounded" id="email" name="email"-->
-<!--                       th:field="*{email}"/>-->
-<!--            </div>-->
             <button type="submit" class="btn btn-primary">Add Drill</button>
         </form>
     </div>

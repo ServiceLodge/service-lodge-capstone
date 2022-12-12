@@ -10,4 +10,6 @@ import java.util.List;
 
 public interface DrillRepository extends JpaRepository<Drill, Long> {
     List<Drill> findAllByWingId(long wing_id);
+
+    Drill findByName(String name);
 }

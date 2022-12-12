@@ -85,21 +85,35 @@ public class AdminController {
     public String ShowCreateDrillForm(Model model){
         model.addAttribute("drill", new Drill());
         model.addAttribute("wings", wingDao.findAll());
-        return "drills/create";
+        return "/drills/create";
     }
 
     @PostMapping("/d/create")
     public String saveDrill(@ModelAttribute Drill drill){
-        drillDao.save(drill);
-        return "redirect:/d";
+
+
+        try
+        {
+            Drill newDrill = drillDao.findByName(drill.getName());
+
+            if(newDrill.getName().equals(drill.getName()))
+            {
+                return "redirect:/d/create";
+            }
+        }
+        catch (NullPointerException e)
+        {
+            drillDao.save(drill);
+        }
+
+        return "redirect:/profile";
     }
 
-    @PostMapping("/d")
-    public String displayDrills(Model model){
+    @GetMapping("/d")
+    public String displayDrills(){
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         List<Drill> drills = drillDao.findAllByWingId((int) loggedInUser.getUnit().getWing().getId());
-        model.addAttribute("drills", drills);
-        return "drills/read";
+        return "profile";
     }
 
     ////////// RESERVATION CRUD //////////
