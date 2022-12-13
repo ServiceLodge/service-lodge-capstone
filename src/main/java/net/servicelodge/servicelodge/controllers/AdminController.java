@@ -56,6 +56,9 @@ public class AdminController {
         return "users/read";
     }
 
+    // @GetMapping("u/update") {   }
+    // @PostMapping("u/update") {   }
+
     ////////// HOTEL CRUD //////////
 
     @GetMapping("/h/create")
