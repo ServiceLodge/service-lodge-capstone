@@ -10,4 +10,5 @@ import java.util.List;
 
 public interface HotelRepository extends JpaRepository<Hotel, Long> {
     List<Hotel> findAllByState(String state);
+    Hotel findById(long id);
 }

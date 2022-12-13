@@ -72,27 +72,43 @@ public class AdminController {
         }
     }
 
-    @GetMapping("u/update/{id}")
+    @GetMapping("/u/{id}")
+    public String displayUser(Model model, @PathVariable long id){
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (loggedInUser.isIsAdmin()) {
+            model.addAttribute("user", userDao.findById(id));
+            return "users/detail";
+        } else {
+            return "redirect:/profile";
+        }
+    }
+
+    @PostMapping("u/{id}/update")
     public String updateUser(@PathVariable long id, Model model){
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (loggedInUser.isIsAdmin()) {
-            User existingUser = userDao.findById(id);
-            model.addAttribute("existingUser", existingUser);
-            model.addAttribute("user", new User());
+            model.addAttribute("userToEdit", userDao.findById(id));
             return "users/update";
         } else {
             return "redirect:/profile";
         }
     }
 
-    @PostMapping("u/update/{id}")
+    @PostMapping("u/{id}/update")
     public String saveUserUpdates(@ModelAttribute User user){
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (loggedInUser.isIsAdmin()) {
-            return null;
+            userDao.save(user);
+            return "redirect:/u";
         } else {
-            return null;
+            return "redirect:/profile";
         }
+    }
+
+    @PostMapping("/u/{id}/delete")
+    public String deletePost(@PathVariable long id) {
+        userDao.delete(userDao.getReferenceById(id));
+        return "redirect:/u";
     }
 
     ////////// HOTEL CRUD //////////
@@ -132,6 +148,47 @@ public class AdminController {
             return "redirect:/profile";
         }
     }
+
+    @GetMapping("/h/{id}")
+    public String displayHotel(Model model, @PathVariable long id){
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (loggedInUser.isIsAdmin()) {
+            model.addAttribute("hotel", hotelDao.findById(id));
+            return "hotels/detail";
+        } else {
+            return "redirect:/profile";
+        }
+    }
+
+    @PostMapping("h/{id}/update")
+    public String updateHotel(@PathVariable long id, Model model){
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (loggedInUser.isIsAdmin()) {
+            model.addAttribute("hotelToEdit", hotelDao.findById(id));
+            return "hotels/update";
+        } else {
+            return "redirect:/profile";
+        }
+    }
+
+    @PostMapping("h/{id}/update")
+    public String saveUserUpdates(@ModelAttribute Hotel hotel){
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (loggedInUser.isIsAdmin()) {
+            hotelDao.save(hotel);
+            return "redirect:/h";
+        } else {
+            return "redirect:/profile";
+        }
+    }
+
+    @PostMapping("/h/{id}/delete")
+    public String deleteHotel(@PathVariable long id) {
+        hotelDao.delete(hotelDao.findById(id));
+        return "redirect:/h";
+    }
+
+
 
 
     ////////// DRILL CRUD //////////
