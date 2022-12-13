@@ -21,7 +21,10 @@
      style="background-image: linear-gradient(170deg, #122663, #5DD7AD);">
     <div class="container-fluid">
         <a class="navbar-brand"><img src="img/logo/favicon.png" alt="Home" width="40px"></a>
-        <a class="nav-link" style="color: white" th:href="@{/login}">Login</a>
+        <div class="d-flex">
+            <a class="nav-link me-5" style="color: white" th:href="@{/about}">About</a>
+            <a class="nav-link" style="color: white" th:href="@{/login}">Login</a>
+        </div>
     </div>
 </nav>
 <nav th:fragment="navbar-member" class="navbar navbar-expand-lg navbar-dark bg-dark"
@@ -35,8 +38,8 @@
         <div class="collapse navbar-collapse" id="navbarMember">
             <div class="navbar-nav">
                 <a class="nav-link active" aria-current="page" th:href="@{/profile}">Home</a>
-                <a class="nav-link" th:href="@{/reservations/all}">Reservations</a>
-                <a class="nav-link" th:href="@{/reservations/request}">Request a Hotel</a>
+                <a class="nav-link" th:href="@{/r}">Reservations</a>
+                <a class="nav-link" th:href="@{/r/request}">Request a Hotel</a>
                 <form th:action="@{/logout}" method="POST">
                     <button class="nav-link logout" type="submit">Logout</button>
                 </form>
@@ -55,10 +58,11 @@
         <div class="collapse navbar-collapse" id="navbarAdmin">
             <div class="navbar-nav">
                 <a class="nav-link active" aria-current="page" th:href="@{/profile}">Home</a>
-                <a class="nav-link" th:href="@{/d}">Dashboard</a>
-                <a class="nav-link" th:href="@{/r}">Reservation Management</a>
-                <a class="nav-link" th:href="@{/m}">Members</a>
+                <a class="nav-link" th:href="@{/dashboard}">Dashboard</a>
+                <a class="nav-link" th:href="@{/r}">Reservations</a>
+                <a class="nav-link" th:href="@{/u}">Members</a>
                 <a class="nav-link" th:href="@{/h}">Hotels</a>
+                <a class="nav-link" th:href="@{/d}">Drills</a>
                 <form th:action="@{/logout}" method="POST">
                     <button class="nav-link logout" type="submit">Logout</button>
                 </form>

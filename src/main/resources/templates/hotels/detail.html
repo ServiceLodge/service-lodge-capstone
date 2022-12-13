@@ -2,12 +2,9 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <header th:replace="partials/partials-level2.html :: head"></header>
 <body>
-<div th:if="${!user.isAdmin}">
-    <nav th:replace="partials/partials-level2.html :: navbar-member"></nav>
-</div>
-<div th:if="${user.isAdmin}">
-    <nav th:replace="partials/partials-level2.html :: navbar-admin"></nav>
-</div>
+
+<nav th:replace="partials/partials-level2.html :: navbar-member"></nav>
+
 <div class="container-md">
     <div class="position-absolute top-50 start-50 translate-middle d-flex flex-column align-items-center mt-5">
         <h1>Jan 5th - 7th</h1>

@@ -37,59 +37,100 @@ public class AdminController {
 
     @GetMapping("/u/create")
     public String showCreateUserForm(Model model){
-        model.addAttribute("user", new User());
-        model.addAttribute("units", unitService.getUnits());
-        return "users/create";
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (loggedInUser.isIsAdmin()) {
+            model.addAttribute("user", new User());
+            model.addAttribute("units", unitService.getUnits());
+            return "users/create";
+        } else {
+            return "redirect:/profile";
+        }
     }
 
     @PostMapping("/u/create")
     public String saveUser(@ModelAttribute User user){
-        String hash = passwordEncoder.encode(user.getPassword());
-        user.setPassword(hash);
-        userDao.save(user);
-        return "redirect:/login";
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (loggedInUser.isIsAdmin()) {
+            String hash = passwordEncoder.encode(user.getPassword());
+            user.setPassword(hash);
+            userDao.save(user);
+            return "redirect:/u";
+        } else {
+            return "redirect:/profile";
+        }
+
     }
 
     @GetMapping("/u")
     public String displayUsers(Model model){
-        model.addAttribute("users", userDao.findAll());
-        return "users/read";
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (loggedInUser.isIsAdmin()) {
+            model.addAttribute("users", userDao.findAll());
+            return "users/read";
+        } else {
+            return "redirect:/profile";
+        }
     }
 
     @GetMapping("u/update/{id}")
     public String updateUser(@PathVariable long id, Model model){
-        User existingUser = userDao.findById(id);
-        model.addAttribute("existingUser", existingUser);
-        model.addAttribute("user", new User());
-        return "users/update";
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (loggedInUser.isIsAdmin()) {
+            User existingUser = userDao.findById(id);
+            model.addAttribute("existingUser", existingUser);
+            model.addAttribute("user", new User());
+            return "users/update";
+        } else {
+            return "redirect:/profile";
+        }
     }
 
     @PostMapping("u/update/{id}")
-    public String saveUSerUpdates(@ModelAttribute User user){
-        return null;
+    public String saveUserUpdates(@ModelAttribute User user){
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (loggedInUser.isIsAdmin()) {
+            return null;
+        } else {
+            return null;
+        }
     }
 
     ////////// HOTEL CRUD //////////
 
     @GetMapping("/h/create")
     public String showCreateHotelForm(Model model){
-        model.addAttribute("hotel", new Hotel());
-        return "hotels/create";
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (loggedInUser.isIsAdmin()) {
+            model.addAttribute("hotel", new Hotel());
+            return "hotels/create";
+        } else {
+            return "redirect:/profile";
+        }
+
     }
 
     @PostMapping("/h/create")
     public String saveHotel(@ModelAttribute Hotel hotel){
-        hotelDao.save(hotel);
-        return "redirect:/h";
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (loggedInUser.isIsAdmin()) {
+            hotelDao.save(hotel);
+            return "redirect:/h";
+        } else {
+            return "redirect:/profile";
+        }
     }
 
     @GetMapping("/h")
     public String displayHotels(Model model){
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        List<Hotel> hotels = hotelDao.findAllByState(loggedInUser.getUnit().getWing().getState());
-        List<Hotel> hotels = hotelDao.findAll();
-        model.addAttribute("hotels", hotels);
-        return "hotels/read";
+        if (loggedInUser.isIsAdmin()) {
+            // List<Hotel> hotels = hotelDao.findAllByState(loggedInUser.getUnit().getWing().getState());
+            List<Hotel> hotels = hotelDao.findAll();
+            model.addAttribute("hotels", hotels);
+            return "hotels/read";
+        } else {
+            return "redirect:/profile";
+        }
     }
 
 
@@ -97,80 +138,115 @@ public class AdminController {
 
     @GetMapping("/d/create")
     public String ShowCreateDrillForm(Model model){
-        model.addAttribute("drill", new Drill());
-        model.addAttribute("wings", wingDao.findAll());
-        return "/drills/create";
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (loggedInUser.isIsAdmin()) {
+            model.addAttribute("drill", new Drill());
+            model.addAttribute("wings", wingDao.findAll());
+            return "/drills/create";
+        } else {
+            return "redirect:/profile";
+        }
     }
 
     @PostMapping("/d/create")
-    public String saveDrill(@ModelAttribute Drill drill, Model model){
-        try {
-            Drill newDrill = drillDao.findByName(drill.getName());
-            if(newDrill.getName().equals(drill.getName())) {
 
-                String message = drill.getName() + " drill is already used!";
-                model.addAttribute("message", message);
+     public String saveDrill(@ModelAttribute Drill drill) {
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (loggedInUser.isIsAdmin()) {
+            try {
+                Drill newDrill = drillDao.findByName(drill.getName());
+                if (newDrill.getName().equals(drill.getName())) {
 
-                model.addAttribute("drill", new Drill());
-                model.addAttribute("wings", wingDao.findAll());
-                return "/drills/create";
+                    String message = drill.getName() + " drill is already used!";
+                    model.addAttribute("message", message);
+
+                    model.addAttribute("drill", new Drill());
+                    model.addAttribute("wings", wingDao.findAll());
+                    return "/drills/create";
+                }
+            } catch (NullPointerException e) {
+                drillDao.save(drill);
             }
-        } catch (NullPointerException e) {
-            drillDao.save(drill);
-        }
+        } 
         return "redirect:/profile";
     }
+                        
 
     @GetMapping("/d")
     public String displayDrills(Model model){
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        List<Drill> drills = drillDao.findAllByWingId((int) loggedInUser.getUnit().getWing().getId());
-        model.addAttribute("drills", drills);
-        return "drills/read";
+        if (loggedInUser.isIsAdmin()) {
+            List<Drill> drills = drillDao.findAllByWingId((int) loggedInUser.getUnit().getWing().getId());
+            model.addAttribute("drills", drills);
+            return "drills/read";
+        } else {
+            return "redirect:/profile";
+        }
     }
 
     ////////// RESERVATION CRUD //////////
 
     @GetMapping("/r/create")
     public String showCreateReservationForm(Model model){
-        model.addAttribute("reservation", new Reservation());
-        model.addAttribute("members", userDao.findAll());
-        model.addAttribute("hotels", hotelDao.findAll());
-        model.addAttribute("drills", drillDao.findAll());
-        return "reservations/create";
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (loggedInUser.isIsAdmin()) {
+            model.addAttribute("reservation", new Reservation());
+            model.addAttribute("members", userDao.findAll());
+            model.addAttribute("hotels", hotelDao.findAll());
+            model.addAttribute("drills", drillDao.findAll());
+            return "reservations/create";
+        } else {
+            return "redirect:/profile";
+        }
     }
 
     @PostMapping("/r/create")
     public String saveReservation(@ModelAttribute Reservation reservation, @ModelAttribute User user, Model model){
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (loggedInUser.isIsAdmin()) {
+            List<Reservation> newReservation = resDao.findAll();
 
-        List<Reservation> newReservation = resDao.findAll();
+            for(Reservation r : newReservation) {
+                if(r.getDrill().getId() == reservation.getDrill().getId() && r.getUser().getId() == reservation.getUser().getId()) {
+                    String message = user.getFirstName() + " " + user.getLastName() +  " already has a drill in " + reservation.getDrill().getName() + "!";
+                    model.addAttribute("message", message);
 
-        for(Reservation r : newReservation)
-        {
-            if(r.getDrill().getId() == reservation.getDrill().getId() && r.getUser().getId() == reservation.getUser().getId())
-            {
-                String message = user.getFirstName() + " " + user.getLastName() +  " already has a drill in " + reservation.getDrill().getName() + "!";
-                model.addAttribute("message", message);
+                    model.addAttribute("reservation", new Reservation());
+                    model.addAttribute("members", userDao.findAll());
+                    model.addAttribute("hotels", hotelDao.findAll());
+                    model.addAttribute("drills", drillDao.findAll());
 
-                model.addAttribute("reservation", new Reservation());
-                model.addAttribute("members", userDao.findAll());
-                model.addAttribute("hotels", hotelDao.findAll());
-                model.addAttribute("drills", drillDao.findAll());
-
-                return "reservations/create";
+                    return "reservations/create";
+                } 
             }
+            resDao.save(reservation);
+            return "redirect:/r";
+        } else {
+            return "redirect:/profile";
         }
-        resDao.save(reservation);
-        return "redirect:/r";
     }
 
     @GetMapping("/r")
     public String displayReservations(Model model){
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        boolean isAdmin = loggedInUser.isIsAdmin();
-        // Dynamic reservations list based on isAdmin
-        List<Reservation> reservations = (isAdmin) ? resDao.findAll() : resDao.findAllByDrillWingId(loggedInUser.getUnit().getWing().getId());
+        List<Reservation> reservations = (loggedInUser.isIsAdmin()) ? resDao.findAll() : resDao.findAllByUser(loggedInUser);
+        model.addAttribute("user", loggedInUser);
         model.addAttribute("reservations", reservations);
         return "reservations/read";
+    }
+
+    @GetMapping("/r/{id}")
+    public String showReservation(@PathVariable long id, Model model) {
+        Reservation reservation = resDao.findById(id);
+
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (loggedInUser.isIsAdmin() || loggedInUser.getId() == reservation.getUser().getId()) {
+            System.out.println(loggedInUser.isIsAdmin());
+            model.addAttribute("user", loggedInUser);
+            model.addAttribute("reservation", reservation);
+            return "reservations/detail";
+        } else {
+            return "redirect:/profile";
+        }
     }
 }
