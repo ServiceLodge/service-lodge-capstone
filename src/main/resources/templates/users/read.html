@@ -12,6 +12,7 @@
                     <a th:href="@{/u/{id} (id = ${user.id}) }"><h3 th:text="${user.getFullName()}"></h3></a>
                 </div>
             </div>
+            <a class="btn btn-primary" th:href="@{/u/create}">Create User</a>
         </div>
     </div>
 </div>
