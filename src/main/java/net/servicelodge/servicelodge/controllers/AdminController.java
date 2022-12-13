@@ -150,7 +150,7 @@ public class AdminController {
 
     @PostMapping("/d/create")
 
-     public String saveDrill(@ModelAttribute Drill drill) {
+     public String saveDrill(@ModelAttribute Drill drill, Model model) {
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (loggedInUser.isIsAdmin()) {
             try {
@@ -167,7 +167,7 @@ public class AdminController {
             } catch (NullPointerException e) {
                 drillDao.save(drill);
             }
-        } 
+        }
         return "redirect:/profile";
     }
                         
