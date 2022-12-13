@@ -134,9 +134,19 @@ public class AdminController {
     }
 
     @PostMapping("/r/create")
-    public String saveReservation(@ModelAttribute Reservation reservation, @ModelAttribute User user){
-//        Reservation resCheck = resDao.findByUserIdAndDrillId(reservation.getUser().getId(), reservation.getDrill().getId());
-//        System.out.println(resCheck == null);
+    public String saveReservation(@ModelAttribute Reservation reservation, @ModelAttribute User user, Model model){
+
+        List<Reservation> newReservation = resDao.findAll();
+
+        for(Reservation r : newReservation)
+        {
+            if(r.getDrill().getId() == reservation.getDrill().getId() && r.getUser().getId() == reservation.getUser().getId())
+            {
+                String message = "This Member already has a drill with that " + reservation.getDrill().getName() + "!";
+                model.addAttribute("message", message);
+                return "redirect:/r/create";
+            }
+        }
         resDao.save(reservation);
         return "redirect:/r";
     }

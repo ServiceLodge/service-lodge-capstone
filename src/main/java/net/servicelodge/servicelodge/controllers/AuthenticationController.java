@@ -31,7 +31,6 @@ public class AuthenticationController {
         // logged-in user
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         model.addAttribute("user", loggedInUser);
-        System.out.println(loggedInUser.getFirstName());
 
         // upcoming reservation
         Reservation upcomingReservation = reservationDao.findFirstByDrillIdAndUser(1,loggedInUser );
