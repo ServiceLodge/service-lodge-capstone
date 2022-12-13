@@ -16,15 +16,12 @@ public class ReservationService {
         ReservationService.reservationDao = reservationDao;
     }
 
-    public static List<Reservation> getReservations(){
+    public static List<Reservation> findAll(){
         return reservationDao.findAll();
     }
 
-    public static List<Reservation> getReservationsByUserId(User user){
+    public static List<Reservation> findAllByUser(User user){
         return reservationDao.findAllByUser(user);
     }
 
-//    public static Reservation findByUserIdAndDrillId(long userId, long drillId){
-//        return reservationDao.findByUserIdAndDrillId(userId, drillId);
-//    }
 }

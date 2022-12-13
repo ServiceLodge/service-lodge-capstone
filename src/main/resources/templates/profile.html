@@ -17,12 +17,12 @@
 
         <div th:if="${reservation == null}">
             <p class="fs-5">No Reservations :(</p>
-            <a th:href="@{/reservations/request}">Book a Hotel</a>
+            <a th:href="@{/r/request}">Book a Hotel</a>
         </div>
         <div th:if="${reservation != null}">
             <p class="fs-5" th:text="${reservation.drill.name}"></p>
             <p class="fs-5" th:text="${reservation.hotel.name}"></p>
-            <a th:href="@{/reservations/{id} (id = ${reservation.id})}">View Details</a>
+            <a th:href="@{/r/{id} (id = ${reservation.id})}">View Details</a>
         </div>
     </div>
 </div>
