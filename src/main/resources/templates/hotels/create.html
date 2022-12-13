@@ -6,7 +6,7 @@
 <div class="container-md">
     <div class="mt-5 d-flex flex-column align-items-center">
         <h1>Add a hotel</h1>
-        <form class="d-flex flex-column" th:action="@{/hotels/create}" method="POST" th:object="${hotel}">
+        <form class="d-flex flex-column" th:action="@{/h/create}" method="POST" th:object="${hotel}">
             <div class="mb-3">
                 <label for="name" class="form-label">Hotel Name</label>
                 <input type="text" class="form-control form-rounded" id="name" name="name"

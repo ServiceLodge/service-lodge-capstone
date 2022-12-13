@@ -86,7 +86,8 @@ public class AdminController {
     @GetMapping("/h")
     public String displayHotels(Model model){
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        List<Hotel> hotels = hotelDao.findAllByState(loggedInUser.getUnit().getWing().getState());
+//        List<Hotel> hotels = hotelDao.findAllByState(loggedInUser.getUnit().getWing().getState());
+        List<Hotel> hotels = hotelDao.findAll();
         model.addAttribute("hotels", hotels);
         return "hotels/read";
     }
