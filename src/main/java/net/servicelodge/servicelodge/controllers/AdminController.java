@@ -149,21 +149,28 @@ public class AdminController {
     }
 
     @PostMapping("/d/create")
-    public String saveDrill(@ModelAttribute Drill drill){
+
+     public String saveDrill(@ModelAttribute Drill drill) {
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (loggedInUser.isIsAdmin()) {
             try {
                 Drill newDrill = drillDao.findByName(drill.getName());
-                if(newDrill.getName().equals(drill.getName())) {
-                    return "redirect:/d/create";
+                if (newDrill.getName().equals(drill.getName())) {
+
+                    String message = drill.getName() + " drill is already used!";
+                    model.addAttribute("message", message);
+
+                    model.addAttribute("drill", new Drill());
+                    model.addAttribute("wings", wingDao.findAll());
+                    return "/drills/create";
                 }
             } catch (NullPointerException e) {
                 drillDao.save(drill);
             }
-        }
+        } 
         return "redirect:/profile";
-
     }
+                        
 
     @GetMapping("/d")
     public String displayDrills(Model model){
@@ -198,12 +205,19 @@ public class AdminController {
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (loggedInUser.isIsAdmin()) {
             List<Reservation> newReservation = resDao.findAll();
+
             for(Reservation r : newReservation) {
                 if(r.getDrill().getId() == reservation.getDrill().getId() && r.getUser().getId() == reservation.getUser().getId()) {
-                    String message = "This Member already has a drill with that " + reservation.getDrill().getName() + "!";
+                    String message = user.getFirstName() + " " + user.getLastName() +  " already has a drill in " + reservation.getDrill().getName() + "!";
                     model.addAttribute("message", message);
-                    return "redirect:/r/create";
-                }
+
+                    model.addAttribute("reservation", new Reservation());
+                    model.addAttribute("members", userDao.findAll());
+                    model.addAttribute("hotels", hotelDao.findAll());
+                    model.addAttribute("drills", drillDao.findAll());
+
+                    return "reservations/create";
+                } 
             }
             resDao.save(reservation);
             return "redirect:/r";
