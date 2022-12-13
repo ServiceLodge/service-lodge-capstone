@@ -12,4 +12,5 @@ public interface DrillRepository extends JpaRepository<Drill, Long> {
     List<Drill> findAllByWingId(long wing_id);
 
     Drill findByName(String name);
+    Drill findById(long id);
 }
