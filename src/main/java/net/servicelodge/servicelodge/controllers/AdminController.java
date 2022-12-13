@@ -4,7 +4,6 @@ import net.servicelodge.servicelodge.models.*;
 import net.servicelodge.servicelodge.repositories.*;
 import net.servicelodge.servicelodge.services.UnitService;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.parameters.P;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -83,7 +82,7 @@ public class AdminController {
         }
     }
 
-    @PostMapping("u/{id}/update")
+    @GetMapping("u/{id}/update")
     public String updateUser(@PathVariable long id, Model model) {
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (loggedInUser.isIsAdmin()) {
@@ -106,7 +105,7 @@ public class AdminController {
     }
 
     @PostMapping("/u/{id}/delete")
-    public String deletePost(@PathVariable long id) {
+    public String deleteUser(@PathVariable long id) {
         userDao.delete(userDao.getReferenceById(id));
         return "redirect:/u";
     }
@@ -160,7 +159,7 @@ public class AdminController {
         }
     }
 
-    @PostMapping("h/{id}/update")
+    @GetMapping("h/{id}/update")
     public String updateHotel(@PathVariable long id, Model model) {
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (loggedInUser.isIsAdmin()) {
@@ -251,7 +250,7 @@ public class AdminController {
         }
     }
 
-    @PostMapping("d/{id}/update")
+    @GetMapping("d/{id}/update")
     public String updateDrill(@PathVariable long id, Model model) {
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (loggedInUser.isIsAdmin()) {
@@ -332,7 +331,7 @@ public class AdminController {
     }
 
     @GetMapping("/r/{id}")
-    public String showReservation(@PathVariable long id, Model model) {
+    public String displayReservation(@PathVariable long id, Model model) {
         Reservation reservation = resDao.findById(id);
 
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -346,12 +345,12 @@ public class AdminController {
         }
     }
 
-    @PostMapping("r/{id}/update")
+    @GetMapping("r/{id}/update")
     public String updateReservation(@PathVariable long id, Model model) {
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (loggedInUser.isIsAdmin()) {
             model.addAttribute("reservationToEdit", resDao.findById(id));
-            return "reservation/update";
+            return "reservations/update";
         } else {
             return "redirect:/profile";
         }
