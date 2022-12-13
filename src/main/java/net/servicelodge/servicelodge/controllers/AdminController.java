@@ -56,8 +56,18 @@ public class AdminController {
         return "users/read";
     }
 
-    // @GetMapping("u/update") {   }
-    // @PostMapping("u/update") {   }
+    @GetMapping("u/update/{id}")
+    public String updateUser(@PathVariable long id, Model model){
+        User existingUser = userDao.findById(id);
+        model.addAttribute("existingUser", existingUser);
+        model.addAttribute("user", new User());
+        return "users/update";
+    }
+
+    @PostMapping("u/update/{id}")
+    public String saveUSerUpdates(@ModelAttribute User user){
+        return null;
+    }
 
     ////////// HOTEL CRUD //////////
 
