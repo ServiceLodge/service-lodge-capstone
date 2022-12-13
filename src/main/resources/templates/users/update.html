@@ -6,7 +6,7 @@
 <div class="container-md">
     <div class="mt-5 d-flex flex-column align-items-center">
         <h1>Create a user</h1>
-        <form class="d-flex flex-column" th:action="@{/u/update}" method="post" th:object="${newUser}">
+        <form class="d-flex flex-column" th:action="@{/u/{id}/update (id = ${userToEdit.id})}" method="post" th:object="${userToEdit}">
             <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
                 <input type="email" class="form-control form-rounded" id="email" name="email" th:field="*{username}"/>
