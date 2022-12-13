@@ -50,7 +50,7 @@ public class AdminController {
         return "redirect:/login";
     }
 
-    @PostMapping("/u")
+    @GetMapping("/u")
     public String displayUsers(Model model){
         model.addAttribute("users", userDao.findAll());
         return "users/read";
@@ -83,12 +83,12 @@ public class AdminController {
         return "redirect:/h";
     }
 
-    @PostMapping("/h")
+    @GetMapping("/h")
     public String displayHotels(Model model){
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         List<Hotel> hotels = hotelDao.findAllByState(loggedInUser.getUnit().getWing().getState());
         model.addAttribute("hotels", hotels);
-        return "reservations/read";
+        return "hotels/read";
     }
 
 
@@ -103,30 +103,23 @@ public class AdminController {
 
     @PostMapping("/d/create")
     public String saveDrill(@ModelAttribute Drill drill){
-
-
-        try
-        {
+        try {
             Drill newDrill = drillDao.findByName(drill.getName());
-
-            if(newDrill.getName().equals(drill.getName()))
-            {
+            if(newDrill.getName().equals(drill.getName())) {
                 return "redirect:/d/create";
             }
-        }
-        catch (NullPointerException e)
-        {
+        } catch (NullPointerException e) {
             drillDao.save(drill);
         }
-
         return "redirect:/profile";
     }
 
     @GetMapping("/d")
-    public String displayDrills(){
+    public String displayDrills(Model model){
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         List<Drill> drills = drillDao.findAllByWingId((int) loggedInUser.getUnit().getWing().getId());
-        return "profile";
+        model.addAttribute("drills", drills);
+        return "drills/read";
     }
 
     ////////// RESERVATION CRUD //////////
@@ -151,8 +144,9 @@ public class AdminController {
     @GetMapping("/r")
     public String displayReservations(Model model){
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        System.out.println(loggedInUser.getUnit().getWing().getId());
-        List<Reservation> reservations = resDao.findAllByDrillWingId(loggedInUser.getUnit().getWing().getId());
+        boolean isAdmin = loggedInUser.isIsAdmin();
+        // Dynamic reservations list based on isAdmin
+        List<Reservation> reservations = (isAdmin) ? resDao.findAll() : resDao.findAllByDrillWingId(loggedInUser.getUnit().getWing().getId());
         model.addAttribute("reservations", reservations);
         return "reservations/read";
     }
