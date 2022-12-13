@@ -1,6 +1,6 @@
-CREATE DATABASE IF NOT EXISTS lodging_db;
+#CREATE DATABASE IF NOT EXISTS lodging_db;
 
-USE lodging_db;
+USE service_lodge;
 # DROP TABLE IF EXISTS users, wings, units, drills, hotels, reservations;
 #
 # CREATE TABLE IF NOT EXISTS wings(
