@@ -16,7 +16,6 @@ public class AdminController {
     private final UserRepository userDao;
     private final HotelRepository hotelDao;
     private final DrillRepository drillDao;
-
     private final WingRepository wingDao;
     private final ReservationRepository resDao;
     private final UnitService unitService;
@@ -57,7 +56,6 @@ public class AdminController {
         } else {
             return "redirect:/profile";
         }
-
     }
 
     @GetMapping("/u")
@@ -121,7 +119,6 @@ public class AdminController {
         } else {
             return "redirect:/profile";
         }
-
     }
 
     @PostMapping("/h/create")
@@ -187,7 +184,6 @@ public class AdminController {
         return "redirect:/h";
     }
 
-
     ////////// DRILL CRUD //////////
 
     @GetMapping("/d/create")
@@ -203,7 +199,6 @@ public class AdminController {
     }
 
     @PostMapping("/d/create")
-
     public String saveDrill(@ModelAttribute Drill drill, Model model) {
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (loggedInUser.isIsAdmin()) {
@@ -225,7 +220,6 @@ public class AdminController {
         return "redirect:/profile";
     }
 
-
     @GetMapping("/d")
     public String displayDrills(Model model) {
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -237,7 +231,6 @@ public class AdminController {
             return "redirect:/profile";
         }
     }
-
 
     @GetMapping("/d/{id}")
     public String displayDrill(Model model, @PathVariable long id) {
@@ -280,7 +273,6 @@ public class AdminController {
 
     ////////// RESERVATION CRUD //////////
 
-
     @GetMapping("/r/create")
     public String showCreateReservationForm(Model model) {
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -300,17 +292,14 @@ public class AdminController {
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (loggedInUser.isIsAdmin()) {
             List<Reservation> newReservation = resDao.findAll();
-
             for (Reservation r : newReservation) {
                 if (r.getDrill().getId() == reservation.getDrill().getId() && r.getUser().getId() == reservation.getUser().getId()) {
                     String message = user.getFirstName() + " " + user.getLastName() + " already has a drill in " + reservation.getDrill().getName() + "!";
                     model.addAttribute("message", message);
-
                     model.addAttribute("reservation", new Reservation());
                     model.addAttribute("members", userDao.findAll());
                     model.addAttribute("hotels", hotelDao.findAll());
                     model.addAttribute("drills", drillDao.findAll());
-
                     return "reservations/create";
                 }
             }
@@ -333,7 +322,6 @@ public class AdminController {
     @GetMapping("/r/{id}")
     public String displayReservation(@PathVariable long id, Model model) {
         Reservation reservation = resDao.findById(id);
-
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (loggedInUser.isIsAdmin() || loggedInUser.getId() == reservation.getUser().getId()) {
             System.out.println(loggedInUser.isIsAdmin());
