@@ -3,8 +3,15 @@
 <head th:replace="partials/partials-level2.html :: head"></head>
 <body>
 <nav th:replace="partials/partials-level2.html :: navbar-admin"></nav>
+
+
+
 <div class="container-md">
     <div class="mt-5 d-flex flex-column align-items-center">
+        <div th:if="${message != null}">
+            <p th:text="${message}"></p>
+        </div>
+        <br>
         <h1>Create a Drill</h1>
         <form class="d-flex flex-column" th:action="@{/d/create}" method="POST" th:object="${drill}">
             <div class="mb-3">
