@@ -314,6 +314,9 @@ public class AdminController {
     public String displayReservations(Model model) {
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         List<Reservation> reservations = (loggedInUser.isIsAdmin()) ? resDao.findAll() : resDao.findAllByUser(loggedInUser);
+        model.addAttribute("members", userDao.findAll());
+        model.addAttribute("hotels", hotelDao.findAll());
+        model.addAttribute("drills", drillDao.findAll());
         model.addAttribute("user", loggedInUser);
         model.addAttribute("reservations", reservations);
         return "reservations/read";
