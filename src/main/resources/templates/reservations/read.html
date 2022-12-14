@@ -20,8 +20,9 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="reservation : ${reservations}">
-                <th scope="row"><a th:href="@{/r/{id} (id = ${reservation.id}) }" class="p-2" th:text="${reservation.drill.name}"></a></th>
+            <tr th:each="reservation, iter : ${reservations}">
+                <th scope="row"><a style="cursor: pointer;"
+                                   th:data-drill="${reservation.drill.name}" th:data-member="${reservation.user.getFullName()}" th:data-hotel="${reservation.hotel.name}" th:data-id="${reservation.resNum}" data-bs-toggle="modal" data-bs-target="#movieModal" class="p-2 modalBtn" th:text="${reservation.drill.name}"></a></th>
                 <td th:text="${reservation.hotel.name}"></td>
                 <td th:text="${reservation.user.getFullName()}"></td>
             </tr>
@@ -29,6 +30,76 @@
         </table>
         <a class="btn btn-primary" th:href="@{/r/create}">Create Reservation</a>
     </div>
+    <!-- Modal -->
+    <div class="modal fade" id="movieModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <!--     MODALLLLLLLLLLLLL     -->
+            </div>
+        </div>
+    </div>
 </div>
+<!--<script th:inline="javascript" src="../../static/js/app.js"></script>-->
+<script th:inline="javascript">
+    const modalContent = document.querySelector('.modal-content');
+
+    const updateModal = (id, drill, member, hotel) =>{
+        modalContent.innerHTML = `
+            <div class="modal-header">
+                    <h5 class="modal-title" id="ModalLabel">Reservation Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p><b>Reservation ID: </b>${id}</p>
+                    <p><b>Drill: </b>${drill}</p>
+                    <p><b>Member: </b>${member}</p>
+                    <p><b>Hotel: </b>${hotel}</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="width: 100px">Close</button>
+                    <button type="button" style="width: 100px" class="btn btn-primary update ms-4" data-drill="${drill}" data-id="${id}" data-member="${member}" data-hotel="${hotel}" id=${id}>Edit</button>
+                </div>
+        `
+        addEditListener();
+    }
+
+    const addModalEffect = ()=> {
+        document.querySelectorAll('.modalBtn').forEach(a => {
+            a.addEventListener('click', (e)=>{
+                const id = a.getAttribute('data-id');
+                const drill = a.getAttribute('data-drill');
+                const member = a.getAttribute('data-member');
+                const hotel = a.getAttribute('data-hotel');
+                updateModal(id, drill, member, hotel);
+            })
+        })
+    }
+    addModalEffect();
+
+
+    // MODAL: EDIT BUTTON
+    const addEditListener =  () => {
+        let updateBtn = document.querySelector('.update')
+        updateBtn.addEventListener('click', (e) => {
+            console.log(updateBtn.getAttribute('data-id'));
+            const drill = updateBtn.getAttribute('data-drill');
+            const member = updateBtn.getAttribute('data-member');
+            const hotel = updateBtn.getAttribute('data-hotel');
+            editModal(id, drill, member, hotel);
+        })
+    }
+
+    const editModal = (id, drill, member, hotel)=> {
+        modalContent.innerHTML = `
+            <form>
+                ${id}
+                ${drill}
+                ${member}
+                ${hotel}
+            </form>
+        `
+    }
+
+</script>
 </body>
 </html>
