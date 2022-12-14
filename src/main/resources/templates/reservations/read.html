@@ -8,16 +8,26 @@
 <div th:if="${user.isAdmin}">
     <nav th:replace="partials/partials-level2.html :: navbar-admin"></nav>
 </div>
-<div class="container-md">
-    <div class="position-absolute top-50 start-50 translate-middle d-flex flex-column align-items-center">
-        <div class="container">
-            <div class="row">
-                <div class="col" th:each="reservation : ${reservations}">
-                    <a th:href="@{/r/{id} (id = ${reservation.id}) }"><h3 th:text="${reservation.resNum}"></h3></a>
-                </div>
-            </div>
-            <a class="btn btn-primary" th:href="@{/r/create}">Create Reservation</a>
-        </div>
+
+<div class="container-md d-flex justify-content-center align-items-center">
+    <div class="col-md-8 py-5">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">Drill</th>
+                <th scope="col">Hotel</th>
+                <th scope="col">Member</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="reservation : ${reservations}">
+                <th scope="row"><a th:href="@{/r/{id} (id = ${reservation.id}) }" class="p-2" th:text="${reservation.drill.name}"></a></th>
+                <td th:text="${reservation.hotel.name}"></td>
+                <td th:text="${reservation.user.getFullName()}"></td>
+            </tr>
+            </tbody>
+        </table>
+        <a class="btn btn-primary" th:href="@{/r/create}">Create Reservation</a>
     </div>
 </div>
 </body>
