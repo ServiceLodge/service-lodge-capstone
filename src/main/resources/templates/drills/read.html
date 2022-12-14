@@ -3,17 +3,25 @@
 <header th:replace="partials/partials.html :: head"></header>
 <body>
 <nav th:replace="partials/partials.html :: navbar-admin"></nav>
-
-<div class="container-md">
-    <div class="position-absolute top-50 start-50 translate-middle d-flex flex-column align-items-center">
-        <div class="container">
-            <div class="row">
-                <div class="col" th:each="drill : ${drills}">
-                    <a th:href="@{/d/{id} (id = ${drill.id}) }"><h3 th:text="${drill.name}"></h3></a>
-                </div>
-            </div>
-            <a class="btn btn-primary" th:href="@{/d/create}">Create Drill</a>
-        </div>
+<div class="container-md d-flex justify-content-center align-items-center">
+    <div class="col-md-8 py-5">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">Drill</th>
+                <th scope="col">Start Date</th>
+                <th scope="col">End Date</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="drill : ${drills}">
+                <th scope="row"><a th:href="@{/d/{id} (id = ${drill.id})}" class="p-2" th:text="${drill.name}"></a></th>
+                <td th:text="${drill.getDrillStartDate()}"></td>
+                <td th:text="${drill.getDrillEndDate()}"></td>
+            </tr>
+            </tbody>
+        </table>
+        <a class="btn btn-primary" th:href="@{/d/create}">Add a Drill</a>
     </div>
 </div>
 </body>

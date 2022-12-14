@@ -3,17 +3,23 @@
 <header th:replace="partials/partials.html :: head"></header>
 <body>
 <nav th:replace="partials/partials.html :: navbar-admin"></nav>
-
-<div class="container-md">
-    <div class="position-absolute top-50 start-50 translate-middle d-flex flex-column align-items-center">
-        <div class="container">
-            <div class="row">
-                <div class="col" th:each="hotel : ${hotels}">
-                    <a th:href="@{/h/{id} (id = ${hotel.id}) }"><h3 th:text="${hotel.name}"></h3></a>
-                </div>
-            </div>
-            <a class="btn btn-primary" th:href="@{/h/create}">Create Hotel</a>
-        </div>
+<div class="container-md d-flex justify-content-center align-items-center">
+    <div class="col-md-8 py-5">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Address</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="hotel : ${hotels}">
+                <th scope="row"><a th:href="@{/h/{id} (id = ${hotel.id})}" class="p-2" th:text="${hotel.name}"></a></th>
+                <td th:text="${hotel.address}"></td>
+            </tr>
+            </tbody>
+        </table>
+        <a class="btn btn-primary" th:href="@{/h/create}">Add a Hotel</a>
     </div>
 </div>
 </body>
