@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="partials/partials-level2.html :: head"></head>
+<body>
+<nav th:replace="partials/partials-level2.html :: navbar-admin"></nav>
+<div class="container-md">
+    <div class="mt-5 d-flex flex-column align-items-center">
+        <h1>Update a user</h1>
+
+        <form class="d-flex flex-column" th:action="@{/r/{id}/update (id = ${reservation.id}) }" method="post" th:object="${reservation}">
+            <div class="form-group mb-3">
+                    <label for="unit" class="form-label">Member</label>
+                    <select id="unit" class="form-control form-rounded" th:field="*{user}">
+                        <option value="0">Choose...</option>
+                        <option th:each="member : ${members}" th:value="${member.id}" th:text="${member.getFullName()}" />
+                    </select>
+            </div>
+            <div class="form-group mb-3">
+                <label for="hotel" class="form-label">Hotel</label>
+                <select id="hotel" class="form-control form-rounded" th:field="*{hotel}">
+                    <option value="0">Choose...</option>
+                    <option th:each="hotel : ${hotels}" th:value="${hotel.id}" th:text="${hotel.name}" />
+                </select>
+            </div>
+            <div class="form-group mb-3">
+                    <label for="drill" class="form-label">Drill Period</label>
+                    <select id="drill" class="form-control form-rounded" th:field="*{drill}">
+                        <option value="0">Choose...</option>
+                        <option th:each="drill : ${drills}" th:value="${drill.id}" th:text="${drill.name}" />
+                    </select>
+            </div>
+            <div class="mb-3">
+                <label for="resNum" class="form-label">Reservation Number</label>
+                <input type="text" class="form-control form-rounded" id="resNum" name="resNum" th:text="reservation.resNum"
+                       th:field="*{resNum}"/>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

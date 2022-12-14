@@ -69,17 +69,6 @@ public class AdminController {
         }
     }
 
-    @GetMapping("/u/{id}")
-    public String displayUser(Model model, @PathVariable long id) {
-        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if (loggedInUser.isIsAdmin()) {
-            model.addAttribute("user", userDao.findById(id));
-            return "users/detail";
-        } else {
-            return "redirect:/profile";
-        }
-    }
-
     @GetMapping("u/{id}/update")
     public String updateUser(@PathVariable long id, Model model) {
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -140,17 +129,6 @@ public class AdminController {
             List<Hotel> hotels = hotelDao.findAll();
             model.addAttribute("hotels", hotels);
             return "hotels/read";
-        } else {
-            return "redirect:/profile";
-        }
-    }
-
-    @GetMapping("/h/{id}")
-    public String displayHotel(Model model, @PathVariable long id) {
-        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if (loggedInUser.isIsAdmin()) {
-            model.addAttribute("hotel", hotelDao.findById(id));
-            return "hotels/detail";
         } else {
             return "redirect:/profile";
         }
@@ -227,17 +205,6 @@ public class AdminController {
             List<Drill> drills = drillDao.findAllByWingId((int) loggedInUser.getUnit().getWing().getId());
             model.addAttribute("drills", drills);
             return "drills/read";
-        } else {
-            return "redirect:/profile";
-        }
-    }
-
-    @GetMapping("/d/{id}")
-    public String displayDrill(Model model, @PathVariable long id) {
-        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if (loggedInUser.isIsAdmin()) {
-            model.addAttribute("drill", drillDao.findById(id));
-            return "drills/detail";
         } else {
             return "redirect:/profile";
         }
@@ -322,25 +289,15 @@ public class AdminController {
         return "reservations/read";
     }
 
-    @GetMapping("/r/{id}")
-    public String displayReservation(@PathVariable long id, Model model) {
-        Reservation reservation = resDao.findById(id);
-        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if (loggedInUser.isIsAdmin() || loggedInUser.getId() == reservation.getUser().getId()) {
-            System.out.println(loggedInUser.isIsAdmin());
-            model.addAttribute("user", loggedInUser);
-            model.addAttribute("reservation", reservation);
-            return "reservations/detail";
-        } else {
-            return "redirect:/profile";
-        }
-    }
-
     @GetMapping("r/{id}/update")
     public String updateReservation(@PathVariable long id, Model model) {
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (loggedInUser.isIsAdmin()) {
-            model.addAttribute("reservationToEdit", resDao.findById(id));
+            model.addAttribute("members", userDao.findAll());
+            model.addAttribute("hotels", hotelDao.findAll());
+            model.addAttribute("drills", drillDao.findAll());
+            model.addAttribute("user", loggedInUser);
+            model.addAttribute("reservation", resDao.findById(id));
             return "reservations/update";
         } else {
             return "redirect:/profile";
