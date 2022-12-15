@@ -73,7 +73,8 @@ public class AdminController {
     public String updateUser(@PathVariable long id, Model model) {
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (loggedInUser.isIsAdmin()) {
-            model.addAttribute("userToEdit", userDao.findById(id));
+            model.addAttribute("user", userDao.getReferenceById(id));
+            model.addAttribute("units", unitService.getUnits());
             return "users/update";
         } else {
             return "redirect:/profile";
@@ -84,6 +85,8 @@ public class AdminController {
     public String saveUserUpdates(@ModelAttribute User user) {
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (loggedInUser.isIsAdmin()) {
+            String hash = passwordEncoder.encode(user.getPassword());
+            user.setPassword(hash);
             userDao.save(user);
             return "redirect:/u";
         } else {

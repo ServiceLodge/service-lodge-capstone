@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head th:replace="partials/partials-level2.html :: head"></head>
+<head th:replace="partials/partials-level3.html :: head"></head>
 <body>
-<nav th:replace="partials/partials-level2.html :: navbar-admin"></nav>
+<nav th:replace="partials/partials-level3.html :: navbar-admin"></nav>
 <div class="container-md">
     <div class="mt-5 d-flex flex-column align-items-center">
         <h1>Create a user</h1>
-        <form class="d-flex flex-column" th:action="@{/u/{id}/update (id = ${userToEdit.id})}" method="post" th:object="${userToEdit}">
+        <form class="d-flex flex-column" th:action="@{/u/{id}/update (id=${user.id})}" method="post" th:object="${user}">
             <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
                 <input type="email" class="form-control form-rounded" id="email" name="email" th:field="*{username}"/>
@@ -32,17 +32,17 @@
                        th:field="*{phoneNumber}"/>
             </div>
             <div class="form-group mb-3">
-                    <label for="unit" class="form-label">Unit</label>
-                    <select id="unit" class="form-control form-rounded" th:field="*{unit}">
-                        <option disabled selected value="default">Choose...</option>
-                        <option th:each="unit : ${units}" th:value="${unit.id}" th:text="${unit.unitName}" />
-                    </select>
+                <label for="unit" class="form-label">Unit</label>
+                <select id="unit" class="form-control form-rounded" th:field="*{unit}">
+                    <option value="0">Choose...</option>
+                    <option th:each="unit : ${units}" th:value="${unit.id}" th:text="${unit.unitName}" />
+                </select>
             </div>
             <div class="mb-3 form-check">
                 <input type="checkbox" class="form-check-input" name="true" id="isAdmin" th:field="*{isAdmin}"/>
                 <label for="isAdmin" class="form-check-label">Administrator</label>
             </div>
-            <button type="submit" class="btn btn-primary">Create User</button>
+            <button type="submit" class="btn btn-primary">Edit User</button>
         </form>
     </div>
 </div>
