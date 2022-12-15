@@ -74,7 +74,7 @@ a:hover {
 }
 
 #splashPage {
-    background-image: url('../img/login.png');
+    background-image: url('../img/login.jpeg');
     height: 100vh; background-size: cover;
     background-position: bottom;
     background-repeat: no-repeat;
@@ -92,4 +92,20 @@ a:hover {
 .logout {
     border: none;
     background-color: transparent;
+}
+
+.aboutUsCards{
+    text-align: center;
+    margin: 25px
+}
+
+.nameCard{
+    font-size: 25px;
+    font-weight: bold;
+    color: var(--secondary);
+}
+
+.card-img-top{
+    max-width: 100%;
+    max-height: 100%;
 }

@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head th:replace="partials/partials-level2.html :: head"></head>
+<head th:replace="partials/partials-level3.html :: head"></head>
 <body>
-<nav th:replace="partials/partials-level2.html :: navbar-admin"></nav>
+<nav th:replace="partials/partials-level3.html :: navbar-admin"></nav>
 <div class="container-md">
     <div class="mt-5 d-flex flex-column align-items-center">
-        <h1>Update a user</h1>
+        <h1>Update Reservation</h1>
 
         <form class="d-flex flex-column" th:action="@{/r/{id}/update (id = ${reservation.id}) }" method="post" th:object="${reservation}">
             <div class="form-group mb-3">
@@ -31,7 +31,11 @@
             </div>
             <div class="mb-3">
                 <label for="resNum" class="form-label">Reservation Number</label>
+<<<<<<< HEAD
                 <input type="text" class="form-control form-rounded" id="resNum" name="resNum" th:text="reservation.resNum"
+=======
+                <input type="text" class="form-control form-rounded" id="resNum" name="resNum"
+>>>>>>> 66bb40cb01f31c8e13ed4a7b14b38648b8ce49c2
                        th:field="*{resNum}"/>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
