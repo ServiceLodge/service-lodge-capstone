@@ -289,7 +289,7 @@ public class AdminController {
         return "reservations/read";
     }
 
-    @GetMapping("r/{id}/update")
+    @GetMapping("/r/{id}/update")
     public String updateReservation(@PathVariable long id, Model model) {
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (loggedInUser.isIsAdmin()) {
@@ -304,7 +304,7 @@ public class AdminController {
         }
     }
 
-    @PostMapping("r/{id}/update")
+    @PostMapping("/r/{id}/update")
     public String saveReservationUpdates(@ModelAttribute Reservation reservation) {
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (loggedInUser.isIsAdmin()) {
@@ -317,7 +317,9 @@ public class AdminController {
 
     @PostMapping("/r/{id}/delete")
     public String deleteReservation(@PathVariable long id) {
-        resDao.delete(resDao.findById(id));
+        System.out.println("Help");
+        Reservation res = resDao.getReferenceById(id);
+        resDao.delete(res);
         return "redirect:/r";
     }
 }

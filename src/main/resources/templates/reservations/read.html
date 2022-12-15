@@ -11,6 +11,7 @@
 
 <div class="container-md d-flex justify-content-center align-items-center">
     <div class="col-md-8 py-5">
+        <a class="btn btn-primary" th:href="@{/r/create}">Create Reservation</a>
         <table class="table table-striped">
             <thead>
             <tr>
@@ -28,13 +29,12 @@
             </tr>
             </tbody>
         </table>
-        <a class="btn btn-primary" th:href="@{/r/create}">Create Reservation</a>
     </div>
     <!-- Modal -->
     <div class="modal fade" id="movieModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-            <!--     MODALLLLLLLLLLLLL     -->
+            <!--       Dynamic Modal Content             -->
             </div>
         </div>
     </div>
@@ -57,8 +57,11 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="width: 100px">Close</button>
-                    <form action="/r/${id}/update" method="post">
-                        <button type="submit" style="width: 100px" class="btn btn-primary update ms-4">Edit</button>
+                    <form action="/r/${id}/delete" method="POST" >
+                        <button type="submit" style="width: 100px" class="btn btn-danger update ms-2">Delete</button>
+                    </form>
+                    <form action="/r/${id}/update" method="GET">
+                        <button type="submit" style="width: 100px" class="btn btn-primary update ms-2">Edit</button>
                     </form>
                 </div>
         `
