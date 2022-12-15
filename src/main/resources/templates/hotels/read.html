@@ -5,22 +5,76 @@
 <nav th:replace="partials/partials.html :: navbar-admin"></nav>
 <div class="container-md d-flex justify-content-center align-items-center">
     <div class="col-md-8 py-5">
+        <div class="d-flex justify-content-around mb-4">
+            <a class="btn btn-primary" th:href="@{/h/create}">Add a Hotel</a>
+        </div>
         <table class="table table-striped">
             <thead>
             <tr>
                 <th scope="col">Name</th>
                 <th scope="col">Address</th>
+                <th scope="col"></th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="hotel : ${hotels}">
-                <th scope="row"><a th:href="@{/h/{id} (id = ${hotel.id})}" class="p-2" th:text="${hotel.name}"></a></th>
+                <th scope="row"><a style="cursor: pointer;" th:data-name="${hotel.name}" th:data-id="${hotel.id}" th:data-address="${hotel.getAddress()}" th:data-phone="${hotel.phoneNumber}" data-bs-toggle="modal" data-bs-target="#modal" class="p-2 modalBtn" th:text="${hotel.name}"></a></th>
                 <td th:text="${hotel.address}"></td>
+                <td>
+                    <form th:action="@{/h/{id}/delete (id = ${hotel.id})}" method="POST">
+                        <button type="submit" style="width: 25px; font-weight: normal" class="btn btn-danger update m-0 p-0" onclick="return confirm('Are you sure you want to delete this hotel?')">X</button>
+                    </form>
+                </td>
             </tr>
             </tbody>
         </table>
-        <a class="btn btn-primary" th:href="@{/h/create}">Add a Hotel</a>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!--       Dynamic Modal Content             -->
+            </div>
+        </div>
     </div>
 </div>
+
+<script th:inline="javascript">
+    const modalContent = document.querySelector('.modal-content');
+    const updateModal = (id, name, address,phone) =>{
+        modalContent.innerHTML = `
+            <div class="modal-header">
+                    <h5 class="modal-title" id="ModalLabel">Reservation Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p><b>Name: </b>${name}</p>
+                    <p><b>Address: </b>${address}</p>
+                    <p><b>Phone Number: </b>${phone}</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="width: 100px">Close</button>
+                    <form action="/h/${id}/update" method="GET">
+                        <button type="submit" style="width: 100px" class="btn btn-primary update ms-2">Edit</button>
+                    </form>
+                </div>
+        `
+    }
+
+    const addModalEffect = ()=> {
+        document.querySelectorAll('.modalBtn').forEach(a => {
+            a.addEventListener('click', (e)=>{
+                const id = a.getAttribute('data-id');
+                const name = a.getAttribute('data-name');
+                const address = a.getAttribute('data-address');
+                const phone = a.getAttribute('data-phone');
+                updateModal(id, name, address, phone);
+            })
+        })
+    }
+    addModalEffect();
+
+</script>
+
 </body>
 </html>
