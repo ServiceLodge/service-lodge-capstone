@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="partials/partials-level3.html :: head"></head>
+<body>
+<nav th:replace="partials/partials-level3.html :: navbar-admin"></nav>
+<div class="container-md">
+    <div class="mt-5 d-flex flex-column align-items-center">
+        <h1>Add a hotel</h1>
+        <form class="d-flex flex-column" th:action="@{/h/{id}/update (id = ${hotel.id})}" method="POST" th:object="${hotel}">
+            <div class="mb-3">
+                <label for="name" class="form-label">Hotel Name</label>
+                <input type="text" class="form-control form-rounded" id="name" name="name"
+                       th:field="*{name}"/>
+            </div>
+            <div class="mb-3">
+                <label for="address" class="form-label">Street Address</label>
+                <input type="text" class="form-control form-rounded" id="address" name="address"
+                       th:field="*{address}"/>
+            </div>
+            <div class="mb-3">
+                <label for="city" class="form-label">City</label>
+                <input type="text" class="form-control form-rounded" id="city" name="city"
+                       th:field="*{city}"/>
+            </div>
+            <div class="mb-3">
+                <label for="state" class="form-label">State</label>
+                <input type="text" class="form-control form-rounded" id="state" name="state"
+                       th:field="*{state}"/>
+            </div>
+            <div class="mb-3">
+                <label for="zip" class="form-label">Zip</label>
+                <input type="text" class="form-control form-rounded" id="zip" name="zip"
+                       th:field="*{zip}"/>
+            </div>
+            <div class="mb-3">
+                <label for="phoneNumber" class="form-label">Phone Number <span style="color: lightslategray; font-size: 0.75em">(111) 111-1111</span></label>
+                <input type="text" class="form-control form-rounded" id="phoneNumber" name="phoneNumber"
+                       th:field="*{phoneNumber}"/>
+            </div>
+            <button type="submit" class="btn btn-primary">Update Hotel</button>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>
