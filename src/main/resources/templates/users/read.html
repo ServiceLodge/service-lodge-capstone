@@ -4,25 +4,90 @@
 <body>
 <nav th:replace="partials/partials-level2.html :: navbar-admin"></nav>
 <div class="container-md d-flex justify-content-center align-items-center">
-<div class="col-md-8 py-5">
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th scope="col">Last Name</th>
-            <th scope="col">First Name</th>
-            <th scope="col">Unit</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="user : ${users}">
-            <th scope="row"><a th:href="@{/u/{id} (id = ${user.id}) }" class="p-2" th:text="${user.lastName}"></a></th>
-            <td th:text="${user.firstName}"></td>
-            <td th:text="${user.unit.unitName}"></td>
-        </tr>
-        </tbody>
-    </table>
-    <a class="btn btn-primary" th:href="@{/u/create}">Create New User</a>
+    <div class="col-md-8 py-5">
+        <div class="d-flex justify-content-around mb-4">
+            <a class="btn btn-primary" th:href="@{/u/create}">Create New User</a>
+        </div>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">Last Name</th>
+                <th scope="col">First Name</th>
+                <th scope="col">Unit</th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user : ${users}">
+                <th scope="row"><a style="cursor: pointer;"
+                                   th:data-id="${user.id}"
+                                   th:data-name="${user.getFullName()}"
+                                   th:data-phone="${user.phoneNumber}"
+                                   th:data-unit="${user.unit.unitName}"
+                                   th:data-email="${user.username}"
+                                   data-bs-toggle="modal" data-bs-target="#modal" class="p-2 modalBtn"
+                                   th:text="${user.lastName}"></a></th>
+                <td th:text="${user.firstName}"></td>
+                <td th:text="${user.unit.unitName}"></td>
+                <td>
+                    <form th:action="@{/u/{id}/delete (id = ${user.id})}" method="POST">
+                        <button type="submit" style="width: 25px; font-weight: normal"
+                                class="btn btn-danger update m-0 p-0"
+                                onclick="return confirm('Are you sure you want to delete this user?')">X
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!--       Dynamic Modal Content             -->
+            </div>
+        </div>
+    </div>
 </div>
-</div>
+<script th:inline="javascript">
+    const modalContent = document.querySelector('.modal-content');
+
+    const updateModal = (id, name, unit, phone, email) =>{
+        modalContent.innerHTML = `
+            <div class="modal-header">
+                    <h5 class="modal-title" id="ModalLabel">Reservation Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p><b>Name: </b>${name}</p>
+                    <p><b>Unit: </b>${unit}</p>
+                    <p><b>Email: </b>${email}</p>
+                    <p><b>Phone: </b>${phone}</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="width: 100px">Close</button>
+                    <form action="/u/${id}/update" method="GET">
+                        <button type="submit" style="width: 100px" class="btn btn-primary update ms-2">Edit</button>
+                    </form>
+                </div>
+        `
+    }
+
+    const addModalEffect = ()=> {
+        document.querySelectorAll('.modalBtn').forEach(a => {
+            a.addEventListener('click', (e)=>{
+                const name = a.getAttribute('data-name');
+                const id = a.getAttribute('data-id');
+                const unit = a.getAttribute('data-unit');
+                const phone = a.getAttribute('data-phone');
+                const email = a.getAttribute('data-email');
+                updateModal(id, name, unit, phone, email);
+            })
+        })
+    }
+    addModalEffect();
+
+</script>
 </body>
 </html>
