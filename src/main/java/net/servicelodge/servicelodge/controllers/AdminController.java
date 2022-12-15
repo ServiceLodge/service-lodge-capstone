@@ -138,7 +138,7 @@ public class AdminController {
     public String updateHotel(@PathVariable long id, Model model) {
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (loggedInUser.isIsAdmin()) {
-            model.addAttribute("hotelToEdit", hotelDao.findById(id));
+            model.addAttribute("hotel", hotelDao.findById(id));
             return "hotels/update";
         } else {
             return "redirect:/profile";
