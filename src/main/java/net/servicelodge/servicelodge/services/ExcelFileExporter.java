@@ -65,7 +65,7 @@ public class ExcelFileExporter
             cell.setCellStyle(headerCellStyle);
 
             cell = row.createCell(8);
-            cell.setCellValue("Drill Check Out Date");
+            cell.setCellValue("Hotel Check Out Date");
             cell.setCellStyle(headerCellStyle);
 
             // Creating data row for each of user object
