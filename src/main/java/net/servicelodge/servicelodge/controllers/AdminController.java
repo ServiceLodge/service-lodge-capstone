@@ -217,7 +217,8 @@ public class AdminController {
     public String updateDrill(@PathVariable long id, Model model) {
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (loggedInUser.isIsAdmin()) {
-            model.addAttribute("drillToEdit", drillDao.findById(id));
+            model.addAttribute("drill", drillDao.findById(id));
+            model.addAttribute("wings", wingDao.findAll());
             return "drills/update";
         } else {
             return "redirect:/profile";
@@ -234,6 +235,7 @@ public class AdminController {
             return "redirect:/profile";
         }
     }
+
 
     @PostMapping("/d/{id}/delete")
     public String deleteDrill(@PathVariable long id) {
