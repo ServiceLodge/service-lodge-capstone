@@ -5,7 +5,7 @@
 <nav th:replace="partials/partials-level3.html :: navbar-admin"></nav>
 <div class="container-md">
     <div class="mt-5 d-flex flex-column align-items-center">
-        <h1>Add a hotel</h1>
+        <h1>Edit Hotel</h1>
         <form class="d-flex flex-column" th:action="@{/h/{id}/update (id = ${hotel.id})}" method="POST" th:object="${hotel}">
             <div class="mb-3">
                 <label for="name" class="form-label">Hotel Name</label>
@@ -37,7 +37,7 @@
                 <input type="text" class="form-control form-rounded" id="phoneNumber" name="phoneNumber"
                        th:field="*{phoneNumber}"/>
             </div>
-            <button type="submit" class="btn btn-primary">Update Hotel</button>
+            <button type="submit" class="btn btn-primary">USubmit</button>
         </form>
     </div>
 </div>

@@ -4,52 +4,68 @@
 <body>
 <div th:if="${!user.isAdmin}">
     <nav th:replace="partials/partials-level2.html :: navbar-member"></nav>
+    <div class="container-md d-flex justify-content-center align-items-center">
+        <div class="col-md-8 py-5">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">Drill</th>
+                    <th scope="col">Hotel</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="reservation : ${reservations}">
+                    <th class="p-2 modalBtn"><a th:href="@{/r/{id} (id=${reservation.id})}" th:text="${reservation.drill.name}"></a></th>
+                    <td th:text="${reservation.hotel.name}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 <div th:if="${user.isAdmin}">
     <nav th:replace="partials/partials-level2.html :: navbar-admin"></nav>
-</div>
-
-<div class="container-md d-flex justify-content-center align-items-center">
-    <div class="col-md-8 py-5">
-        <div class="d-flex justify-content-around mb-4">
-            <a class="btn btn-primary" th:href="@{/r/create}">Create Reservation</a>
-            <a class="btn btn-primary" th:href="@{/download/reservation.xlsx}">Export Reservations</a>
-        </div>
-          <table class="table table-striped">
-            <thead>
-            <tr>
-                <th scope="col">Drill</th>
-                <th scope="col">Hotel</th>
-                <th scope="col">Member</th>
-                <th scope="col"></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="reservation : ${reservations}">
-                <th scope="row"><a style="cursor: pointer;" th:data-resId="${reservation.resNum}" th:data-drill="${reservation.drill.name}" th:data-member="${reservation.user.getFullName()}" th:data-hotel="${reservation.hotel.name}" th:data-id="${reservation.id}" data-bs-toggle="modal" data-bs-target="#modal" class="p-2 modalBtn" th:text="${reservation.drill.name}"></a></th>
-                <td th:text="${reservation.hotel.name}"></td>
-                <td th:text="${reservation.user.getFullName()}"></td>
-                <td>
-                    <form th:action="@{/r/{id}/delete (id = ${reservation.id})}" method="POST">
-                        <button type="submit" style="width: 25px; font-weight: normal" class="btn btn-danger update m-0 p-0" onclick="return confirm('Are you sure you want to delete this reservation?')">X</button>
-                    </form>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-    <!-- Modal -->
-    <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-            <!--       Dynamic Modal Content             -->
+    <div class="container-md d-flex justify-content-center align-items-center">
+        <div class="col-md-8 py-5">
+            <div class="col-md-12">
+                <a class="btn btn-primary" th:href="@{/r/create}">New Reservation</a>
+                <a class="btn btn-primary" th:href="@{/download/reservation.xlsx}">Export to Excel</a>
             </div>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">Drill</th>
+                    <th scope="col">Member</th>
+                    <th scope="col">Hotel</th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="reservation : ${reservations}">
+                    <th scope="row"><a style="cursor: pointer;" th:data-resId="${reservation.resNum}" th:data-drill="${reservation.drill.name}" th:data-member="${reservation.user.getFullName()}" th:data-hotel="${reservation.hotel.name}" th:data-id="${reservation.id}" data-bs-toggle="modal" data-bs-target="#modal" class="p-2 modalBtn" th:text="${reservation.drill.name}"></a></th>
+                    <td th:text="${reservation.user.getFullName()}"></td>
+                    <td th:text="${reservation.hotel.name}"></td>
+                    <td>
+                        <form th:action="@{/r/{id}/delete (id = ${reservation.id})}" method="POST">
+                            <button type="submit" style="width: 25px; font-weight: normal" class="btn btn-danger update m-0 p-0" onclick="return confirm('Are you sure you want to delete this reservation?')">X</button>
+                        </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!--       Dynamic Modal Content             -->
         </div>
     </div>
 </div>
 <script th:inline="javascript">
     const modalContent = document.querySelector('.modal-content');
-
     const updateModal = (id, resId, drill, member, hotel) =>{
         modalContent.innerHTML = `
             <div class="modal-header">
@@ -70,7 +86,6 @@
                 </div>
         `
     }
-
     const addModalEffect = ()=> {
         document.querySelectorAll('.modalBtn').forEach(a => {
             a.addEventListener('click', (e)=>{
@@ -84,7 +99,6 @@
         })
     }
     addModalEffect();
-
 </script>
 </body>
 </html>

@@ -6,7 +6,7 @@
 <div class="container-md d-flex justify-content-center align-items-center">
     <div class="col-md-8 py-5">
         <div class="d-flex justify-content-around mb-4">
-            <a class="btn btn-primary" th:href="@{/u/create}">Create New User</a>
+            <a class="btn btn-primary" th:href="@{/u/create}">New Member</a>
         </div>
         <table class="table table-striped">
             <thead>
@@ -52,11 +52,10 @@
 </div>
 <script th:inline="javascript">
     const modalContent = document.querySelector('.modal-content');
-
     const updateModal = (id, name, unit, phone, email) =>{
         modalContent.innerHTML = `
             <div class="modal-header">
-                    <h5 class="modal-title" id="ModalLabel">Reservation Details</h5>
+                    <h5 class="modal-title" id="ModalLabel">Member Details</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -73,7 +72,6 @@
                 </div>
         `
     }
-
     const addModalEffect = ()=> {
         document.querySelectorAll('.modalBtn').forEach(a => {
             a.addEventListener('click', (e)=>{
@@ -87,7 +85,6 @@
         })
     }
     addModalEffect();
-
 </script>
 </body>
 </html>
