@@ -5,7 +5,7 @@
 <nav th:replace="partials/partials-level3.html :: navbar-admin"></nav>
 <div class="container-md">
     <div class="mt-5 d-flex flex-column align-items-center">
-        <h1>Create a user</h1>
+        <h1>Edit Member</h1>
         <form class="d-flex flex-column" th:action="@{/u/{id}/update (id=${user.id})}" method="post" th:object="${user}">
             <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
@@ -42,7 +42,7 @@
                 <input type="checkbox" class="form-check-input" name="true" id="isAdmin" th:field="*{isAdmin}"/>
                 <label for="isAdmin" class="form-check-label">Administrator</label>
             </div>
-            <button type="submit" class="btn btn-primary">Edit User</button>
+            <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
 </div>

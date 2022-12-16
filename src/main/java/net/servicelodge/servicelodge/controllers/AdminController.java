@@ -294,7 +294,21 @@ public class AdminController {
         return "reservations/read";
     }
 
-    @GetMapping("/r/{id}/update")
+    @GetMapping("/r/{id}")
+    public String displayReservationDetails(@PathVariable long id, Model model) {
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Reservation res = resDao.findById(id);
+        if (loggedInUser.isIsAdmin() || res.getUser().getId() == loggedInUser.getId()) {
+            model.addAttribute("user", loggedInUser);
+            model.addAttribute("reservation", res);
+            return "reservations/detail";
+        }else {
+            return "redirect:/profile";
+        }
+    }
+
+
+        @GetMapping("/r/{id}/update")
     public String updateReservation(@PathVariable long id, Model model) {
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (loggedInUser.isIsAdmin()) {

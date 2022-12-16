@@ -12,7 +12,7 @@
             <p th:text="${message}"></p>
         </div>
         <br>
-        <h1>Create a Drill</h1>
+        <h1>New Drill</h1>
         <form class="d-flex flex-column" th:action="@{/d/create}" method="POST" th:object="${drill}">
             <div class="mb-3">
                 <label for="name" class="form-label">Drill Name</label>
@@ -37,7 +37,7 @@
                 <input type="date" class="form-control form-rounded" id="drillEndDate" name="drillEndDate"
                        th:field="*{drillEndDate}"/>
             </div>
-            <button type="submit" class="btn btn-primary">Add Drill</button>
+            <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
 </div>
