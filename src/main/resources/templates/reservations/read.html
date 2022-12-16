@@ -15,7 +15,7 @@
                 </thead>
                 <tbody>
                 <tr th:each="reservation : ${reservations}">
-                    <th scope="row"><a style="cursor: pointer;" th:data-resId="${reservation.resNum}" th:data-drill="${reservation.drill.name}" th:data-member="${reservation.user.getFullName()}" th:data-hotel="${reservation.hotel.name}" th:data-id="${reservation.id}" data-bs-toggle="modal" data-bs-target="#modal" class="p-2 modalBtn" th:text="${reservation.drill.name}"></a></th>
+                    <th class="p-2 modalBtn"><a th:href="@{/r/{id} (id=${reservation.id})}" th:text="${reservation.drill.name}"></a></th>
                     <td th:text="${reservation.hotel.name}"></td>
                 </tr>
                 </tbody>
