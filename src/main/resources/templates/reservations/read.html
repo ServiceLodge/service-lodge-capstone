@@ -6,16 +6,31 @@
     <nav th:replace="partials/partials-level2.html :: navbar-member"></nav>
     <div class="container-md d-flex justify-content-center align-items-center">
         <div class="col-md-8 py-5">
-            <table class="table table-striped">
+            <table id="myTable" class="table table-striped">
                 <thead>
                 <tr>
-                    <th scope="col">Drill</th>
-                    <th scope="col">Hotel</th>
+                    <th scope="col">
+                        <p style="margin-bottom: 0">
+                            Drill
+                            <button id="0" class="noStyle sort" style="font-weight: bold">
+                                <img src="img/icon-sort.png" alt="sort" width="20px">
+                            </button>
+                        </p>
+                    </th>
+                    <th scope="col">
+                        <p style="margin-bottom: 0">
+                            Hotel
+                            <button id="1" class="noStyle sort" style="font-weight: bold">
+                                <img src="img/icon-sort.png" alt="sort" width="20px">
+                            </button>
+                        </p>
+                    </th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="reservation : ${reservations}">
-                    <th class="p-2 modalBtn"><a th:href="@{/r/{id} (id=${reservation.id})}" th:text="${reservation.drill.name}"></a></th>
+                    <td class="p-2 modalBtn"><span th:data-date="${reservation.drill.drillStartDate}"></span><a th:href="@{/r/{id} (id=${reservation.id})}"
+                                                th:text="${reservation.drill.name}"></a></td>
                     <td th:text="${reservation.hotel.name}"></td>
                 </tr>
                 </tbody>
@@ -31,23 +46,51 @@
                 <a class="btn btn-primary" th:href="@{/r/create}">New Reservation</a>
                 <a class="btn btn-primary" th:href="@{/download/reservation.xlsx}">Export to Excel</a>
             </div>
-            <table class="table table-striped">
+            <table id="myTable" class="table table-striped">
                 <thead>
                 <tr>
-                    <th scope="col">Drill</th>
-                    <th scope="col">Member</th>
-                    <th scope="col">Hotel</th>
+                    <th scope="col">
+                        <p style="margin-bottom: 0">
+                            Reservation ID
+                            <button id="0" class="noStyle sort" style="font-weight: bold">
+                                <img src="img/icon-sort.png" alt="sort" width="20px">
+                            </button>
+                        </p>
+                    </th>
+                    <th scope="col">
+                        <p style="margin-bottom: 0">
+                            Drill
+                            <button id="1" class="noStyle sort" style="font-weight: bold">
+                                <img src="img/icon-sort.png" alt="sort" width="20px">
+                            </button>
+                        </p>
+                    </th>
+                    <th scope="col">
+                        <p style="margin-bottom: 0">
+                            Member
+                            <button id="2" class="noStyle sort" style="font-weight: bold">
+                                <img src="img/icon-sort.png" alt="sort" width="20px">
+                            </button>
+                        </p>
+                    </th>
                     <th scope="col"></th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="reservation : ${reservations}">
-                    <th scope="row"><a style="cursor: pointer;" th:data-resId="${reservation.resNum}" th:data-drill="${reservation.drill.name}" th:data-member="${reservation.user.getFullName()}" th:data-hotel="${reservation.hotel.name}" th:data-id="${reservation.id}" data-bs-toggle="modal" data-bs-target="#modal" class="p-2 modalBtn" th:text="${reservation.drill.name}"></a></th>
+                    <td><a style="cursor: pointer; font-weight: bold" th:data-resId="${reservation.resNum}"
+                           th:data-drill="${reservation.drill.name}" th:data-member="${reservation.user.getFullName()}"
+                           th:data-hotel="${reservation.hotel.name}" th:data-id="${reservation.id}"
+                           data-bs-toggle="modal" data-bs-target="#modal" class="p-2 modalBtn"
+                           th:text="${reservation.resNum}"></a></td>
+                    <td><span th:data="${reservation.drill.drillStartDate}" th:text="${reservation.drill.name}"></span></td>
                     <td th:text="${reservation.user.getFullName()}"></td>
-                    <td th:text="${reservation.hotel.name}"></td>
                     <td>
                         <form th:action="@{/r/{id}/delete (id = ${reservation.id})}" method="POST">
-                            <button type="submit" style="width: 25px; font-weight: normal" class="btn btn-danger update m-0 p-0" onclick="return confirm('Are you sure you want to delete this reservation?')">X</button>
+                            <button type="submit" style="width: 25px; font-weight: normal"
+                                    class="btn btn-danger update m-0 p-0"
+                                    onclick="return confirm('Are you sure you want to delete this reservation?')">X
+                            </button>
                         </form>
                     </td>
                 </tr>
@@ -64,9 +107,10 @@
         </div>
     </div>
 </div>
-<script th:inline="javascript">
+<script src="js/app.js"></script>
+<script>
     const modalContent = document.querySelector('.modal-content');
-    const updateModal = (id, resId, drill, member, hotel) =>{
+    const updateModal = (id, resId, drill, member, hotel) => {
         modalContent.innerHTML = `
             <div class="modal-header">
                     <h5 class="modal-title" id="ModalLabel">Reservation Details</h5>
@@ -86,9 +130,9 @@
                 </div>
         `
     }
-    const addModalEffect = ()=> {
+    const addModalEffect = () => {
         document.querySelectorAll('.modalBtn').forEach(a => {
-            a.addEventListener('click', (e)=>{
+            a.addEventListener('click', (e) => {
                 const resId = a.getAttribute('data-resId');
                 const id = a.getAttribute('data-id');
                 const drill = a.getAttribute('data-drill');
@@ -98,7 +142,7 @@
             })
         })
     }
-    addModalEffect();
-</script>
+
+    addModalEffect();</script>
 </body>
 </html>

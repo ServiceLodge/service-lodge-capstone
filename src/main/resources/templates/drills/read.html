@@ -8,10 +8,17 @@
         <div class="d-flex justify-content-around mb-4">
             <a class="btn btn-primary" th:href="@{/d/create}">New Drill</a>
         </div>
-        <table class="table table-striped">
+        <table id="myTable" class="table table-striped">
             <thead>
             <tr>
-                <th scope="col">Drill</th>
+                <th scope="col">
+                    <p style="margin-bottom: 0">
+                        Drill
+                        <button id="0" class="noStyle sort" style="font-weight: bold">
+                            <img src="img/icon-sort.png" alt="sort" width="20px">
+                        </button>
+                    </p>
+                </th>
                 <th scope="col">Start Date</th>
                 <th scope="col">End Date</th>
                 <th scope="col"></th>
@@ -19,12 +26,19 @@
             </thead>
             <tbody>
             <tr th:each="drill : ${drills}">
-                <th scope="row"><a style="cursor: pointer;" th:data-id="${drill.id}"  th:data-wing="${drill.wing.wingName}" th:data-name="${drill.name}" th:data-start="${drill.drillStartDate}" th:data-end="${drill.drillEndDate}" data-bs-toggle="modal"  data-bs-target="#modal" class="p-2 modalBtn" th:text="${drill.name}"></a></th>
+                <td><a style="cursor: pointer; font-weight: bold;" th:data="${drill.drillStartDate}"
+                       th:data-id="${drill.id}" th:data-wing="${drill.wing.wingName}" th:data-name="${drill.name}"
+                       th:data-start="${drill.drillStartDate}" th:data-end="${drill.drillEndDate}"
+                       data-bs-toggle="modal" data-bs-target="#modal" class="p-2 modalBtn" th:text="${drill.name}"></a>
+                </td>
                 <td th:text="${drill.getDrillStartDate()}"></td>
                 <td th:text="${drill.getDrillEndDate()}"></td>
                 <td>
                     <form th:action="@{/d/{id}/delete (id = ${drill.id})}" method="POST">
-                        <button type="submit" style="width: 25px; font-weight: normal" class="btn btn-danger update m-0 p-0" onclick="return confirm('Are you sure you want to delete this drill?')">X</button>
+                        <button type="submit" style="width: 25px; font-weight: normal"
+                                class="btn btn-danger update m-0 p-0"
+                                onclick="return confirm('Are you sure you want to delete this drill?')">X
+                        </button>
                     </form>
                 </td>
             </tr>
@@ -40,10 +54,10 @@
         </div>
     </div>
 </div>
-
+<script src="js/app.js"></script>
 <script th:inline="javascript">
     const modalContent = document.querySelector('.modal-content');
-    const updateModal = (id, name, start, end, wing) =>{
+    const updateModal = (id, name, start, end, wing) => {
         modalContent.innerHTML = `
             <div class="modal-header">
                     <h5 class="modal-title" id="ModalLabel">Drill Details</h5>
@@ -63,9 +77,9 @@
                 </div>
         `
     }
-    const addModalEffect = ()=> {
+    const addModalEffect = () => {
         document.querySelectorAll('.modalBtn').forEach(a => {
-            a.addEventListener('click', (e)=>{
+            a.addEventListener('click', (e) => {
                 const id = a.getAttribute('data-id');
                 const name = a.getAttribute('data-name');
                 const start = a.getAttribute('data-start');
