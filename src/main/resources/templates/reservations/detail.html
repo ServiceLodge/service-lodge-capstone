@@ -35,9 +35,8 @@
 </div>
 <script src='https://api.mapbox.com/mapbox-gl-js/v2.10.0/mapbox-gl.js'></script>
 <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.min.js"></script>
-<script src='../../static/js/keys.js'></script>
+<script src="js/keychain.js"></script>
 <script>
-    // Mapbox API - Exercise 2
     mapboxgl.accessToken = "pk.eyJ1IjoibWlhbWlqYTciLCJhIjoiY2w3ejBmazd2MTFqMTNycDdpanFxb2RycCJ9.vdXYFQybqjp0FrkRw5Zfkw";
     const map = new mapboxgl.Map({
         container: 'map', // container ID
@@ -51,7 +50,6 @@
         map.setFog({}); // Set the default atmosphere style
     });
 
-    // Mapbox API - Exercise 3
     map.addControl(
         new MapboxGeocoder({
             accessToken: mapboxgl.accessToken,
