@@ -116,4 +116,7 @@ a:hover {
     height: 100%;
 }
 
+.mapboxgl-ctrl-geocoder, .mapboxgl-ctrl-attrib {
+    display: none;
+}
 
