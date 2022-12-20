@@ -336,9 +336,13 @@ public class AdminController {
 
     @PostMapping("/r/{id}/delete")
     public String deleteReservation(@PathVariable long id) {
-        System.out.println("Help");
-        Reservation res = resDao.getReferenceById(id);
-        resDao.delete(res);
-        return "redirect:/r";
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Reservation res = resDao.findById(id);
+        if (loggedInUser.isIsAdmin() || res.getUser().getId() == loggedInUser.getId()) {
+            resDao.delete(res);
+            return "redirect:/r";
+        } else {
+            return "redirect:/profile";
+        }
     }
 }
