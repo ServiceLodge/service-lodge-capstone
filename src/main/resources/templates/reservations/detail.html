@@ -16,15 +16,13 @@
             <b>Member: </b><span th:text="${reservation.user.getFullName()}"></span>
             <br><br><b>Hotel: </b><span th:text="${reservation.hotel.name}"></span>
             <br><b>Address: </b><span id="adr" th:text="${reservation.hotel.getFullAddress()}"></span>
-            <br><br><b>Check-in: </b><span th:text="${reservation.drill.drillStartDate.day - 1}"></span> <span th:text="${reservation.drill.name}"></span> 3:00 PM
-            <br><b>Check-out: </b><span th:text="${reservation.drill.drillEndDate.toString().substring(8)}"></span> <span th:text="${reservation.drill.name}"></span> 12:00 PM
-            <!--            <br><br><a href="#"><img src="/img/icon-schedule.png" width="30px"> <span style="color: black">Add Calendar Event</span></a>-->
-        </p>
-        <!--        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3155.9573069766398!2d-97.2460411715214!3d37.720679958347986!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x87bafd18e4ec23e5%3A0x4ae48ee87695875e!2sHilton%20Garden%20Inn%20Wichita!5e0!3m2!1sen!2sus!4v1670001183186!5m2!1sen!2sus" width="100%" height="350px" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>-->
+            <br><br><b>Check-in: </b><span th:text="${reservation.drill.drillStartDate.toLocalDate().minusDays(1)}"></span> 16:00
+            <br><b>Check-out: </b><span th:text="${reservation.drill.drillEndDate}"></span> 11:00
+            <br><br><img th:data-hotel="${reservation.hotel.name}" th:data-address="${reservation.hotel.getFullAddress()}" th:data-start="${reservation.drill.drillStartDate.toLocalDate().minusDays(1)}" th:data-end="${reservation.drill.drillEndDate}" style="cursor: pointer;" id="scheduler" src="/img/icon-schedule.png" width="30px"> <span style="color: black">Add Calendar Event</span>
         <div class="container p-0">
             <div id='map' style='width: 100%; height: 300px; overflow: hidden'></div>
         </div>
-        <form th:action="@{r/{id}/delete (id = ${reservation.id})}" method="POST" class="mx-auto">
+        <form th:action="@{/r/{id}/delete (id = ${reservation.id})}" method="POST" class="mx-auto">
             <button type="submit" class="btn btn-danger"
                     onclick="return confirm('Are you sure you want to cancel this reservation?')">Cancel Reservation</button>
         </form>
@@ -33,7 +31,9 @@
 </div>
 <script src='https://api.mapbox.com/mapbox-gl-js/v2.10.0/mapbox-gl.js'></script>
 <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/add-to-calendar-button@1" async defer></script>
 <script src="/js/keychain.js"></script>
 <script src="/js/map.js"></script>
+<script  src="/js/calendar.js"></script>
 </body>
 </html>
