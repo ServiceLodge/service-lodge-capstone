@@ -56,7 +56,8 @@ public class SecurityConfiguration {
                         "/u/*", // only authenticated admins can update ads, reservations, drills, & users
                         "/d/*", // only authenticated admins can create ads, reservations, drills, & users
                         "/r/*", // only authenticated admins can edit ads, reservations, drills, & users
-                        "/r/{id}/delete" // only authenticated admins can edit ads, reservations, drills, & users
+                        "/r/{id}/delete", // only authenticated admins can edit ads, reservations, drills, & users
+                        "/dashboard" // only authenticated admins can see dashboard
                 )
                 .authenticated()
         ;

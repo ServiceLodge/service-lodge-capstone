@@ -345,4 +345,21 @@ public class AdminController {
             return "redirect:/profile";
         }
     }
+
+
+    ////////// DASHBOARD //////////
+    @GetMapping("/dashboard")
+    public String dashboards(Model model) {
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (loggedInUser.isIsAdmin()) {
+            List<Reservation> reservations =  resDao.findAll();
+            model.addAttribute("reservations", reservations);
+            return "dashboard";
+        } else {
+            return "redirect:/profile";
+        }
+
+    }
 }
+
+
