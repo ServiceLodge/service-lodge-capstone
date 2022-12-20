@@ -73,6 +73,10 @@ a:hover {
     background-color: var(--primary);
 }
 
+.notBooked {
+    background-color: darkgray;
+}
+
 #splashPage {
     background-image: url('../img/login.jpeg');
     height: 100vh; background-size: cover;

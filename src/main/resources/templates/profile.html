@@ -9,21 +9,25 @@
     <div class="position-absolute top-50 start-50 translate-middle d-flex flex-column align-items-center">
         <h1>Welcome, <span th:text="${user.firstName}"></span>!</h1>
 
-        <a th:href="@{/r/{id} (id = ${reservation.id})}" th:if="${reservation != null}"><div class="calendar-icon booked d-flex justify-content-center align-items-center">
-            <img class="position-absolute" src="../img/icon-calendar.png" alt="Calendar" width="150px">
-            <h2 th:if="${reservation != null}" th:text="${reservation.drill.name.substring(0,3)}"
-                style="padding-top: 1em; color: white"></h2>
-        </div></a>
-
         <div th:if="${reservation == null}">
-            <p class="fs-5">No Reservations :(</p>
-            <a th:href="@{/r/request}">Book a Hotel</a>
+                <div class="calendar-icon notBooked d-flex justify-content-center align-items-center">
+                    <img class="position-absolute" src="../img/icon-calendar.png" alt="Calendar" width="150px">
+                    <h2 style="padding-top: 1em; color: white">:(</h2>
+                </div>
+            <p class="fs-5" style="text-align: center;">No Upcoming Reservations<br><a th:href="@{/r/request}">Request a Hotel</a></p>
         </div>
         <div th:if="${reservation != null}">
+            <a th:href="@{/r/{id} (id = ${reservation.id})}">
+                <div class="calendar-icon booked d-flex justify-content-center align-items-center">
+                    <img class="position-absolute" src="../img/icon-calendar.png" alt="Calendar" width="150px">
+                    <h2 th:text="${reservation.drill.name.substring(0,3)}"
+                        style="padding-top: 1em; color: white"></h2>
+                </div>
+            </a>
             <h4>Upcoming Reservation:</h4>
             <p class="fs-5" style="text-align: center">
                 <span th:text="${reservation.hotel.name}"></span>
-                <br><span th:text="${reservation.drill.name}"></span>
+                <br><a th:href="@{/r/{id} (id = ${reservation.id})}">View Details</a>
             </p>
         </div>
     </div>
@@ -36,7 +40,7 @@
 <div class="container-md">
     <div class="position-absolute top-50 start-50 translate-middle d-flex flex-column align-items-center">
         <h1>Welcome, <span th:text="${user.firstName}"></span>!</h1>
-<!--        <a class="btn btn-primary" th:href="@{/d}">View Dashboards</a>-->
+        <!--        <a class="btn btn-primary" th:href="@{/d}">View Dashboards</a>-->
         <a class="btn btn-primary" th:href="@{/r}">Reservation Manager</a>
         <a class="btn btn-primary" th:href="@{/u}">Members</a>
         <a class="btn btn-primary" th:href="@{/h}">Hotels</a>
