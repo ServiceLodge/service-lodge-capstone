@@ -33,6 +33,8 @@ public class AuthenticationController {
 
     @GetMapping("/profile")
     public String profile(Model model){
+        model.addAttribute("notifications", reservationDao.findAllByHotelIsNull().size());
+
         // logged-in user
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         model.addAttribute("user", loggedInUser);

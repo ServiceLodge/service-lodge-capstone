@@ -2,42 +2,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head th:replace="partials/partials.html :: head"></head>
-<head th:replace="partials/partials-level2.html :: head"></head>
-<head th:replace="partials/partials-level3.html :: head"></head>
 <body style="background-color: #efefef">
-<!-- partial: header end -->
-<!-- partial: member navbar start -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark"
-     style="background-image: linear-gradient(to right, #122663, #5DD7AD);">
-    <!--    <div class="container-fluid">-->
-    <!--        <a class="navbar-brand" href="#"><img src="../img/LOGO/logo.png" alt="Home" width="40px"></a>-->
-    <!--        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"-->
-    <!--                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">-->
-    <!--            <span class="navbar-toggler-icon"></span>-->
-    <!--        </button>-->
-    <!--        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">-->
-    <!--            <div class="navbar-nav">-->
-    <!--                <a class="nav-link" aria-current="page" href="member_profile.html">Home</a>-->
-    <!--                <a class="nav-link active" href="../all.html">Reservations</a>-->
-    <!--                <a class="nav-link" href="request.html">Request a Hotel</a>-->
-    <!--                <a class="nav-link" href="login.html">Logout</a>-->
-    <!--            </div>-->
-    <!--        </div>-->
-    <!--    </div>-->
-</nav>
-<!-- partial: member navbar end -->
+<nav th:replace="partials/partials.html :: navbar-error"></nav>
+
 <div class="container-md">
     <div class="position-absolute top-50 start-50 translate-middle d-flex flex-column align-items-center">
         <div class="d-flex justify-content-center align-items-center" id="error">
-<!--            <img src="../static/img/404.jpeg" alt="success" id="failImage" width="80%">-->
+            <img src="/img/404.jpeg" alt="success" id="failImage" width="80%">
         </div>
-        <h1>What you looking for is not here.</h1>
-        <form action="member_profile.html">
-            <input id="button3" action="action" type="button" value="Return to last page" onclick="window.history.go(-1); return false;"/>
+        <h1>What you're looking for is not here.</h1>
+        <form action="#">
+            <input class="btn btn-primary" type="button" value="Return to Previous Page" onclick="window.history.go(-1); return false;"/>
         </form>
     </div>
 </div>
-<!-- partial: footer start -->
 </body>
 </html>
-<!-- partial: footer end -->
