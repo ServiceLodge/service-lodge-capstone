@@ -38,7 +38,7 @@
         <div class="collapse navbar-collapse" id="navbarMember">
             <div class="navbar-nav">
                 <a class="nav-link" th:href="@{/r}">Reservations</a>
-<!--                <a class="nav-link" th:href="@{/r/request}">Request a Hotel</a>-->
+                <a class="nav-link" th:href="@{/r/request}">Request</a>
                 <form th:action="@{/logout}" method="POST">
                     <button class="nav-link noStyle" type="submit">Logout</button>
                 </form>
@@ -57,7 +57,7 @@
         <div class="collapse navbar-collapse" id="navbarAdmin">
             <div class="navbar-nav">
                 <a class="nav-link" th:href="@{/dashboard}">Dashboard</a>
-                <a class="nav-link" th:href="@{/r}">Reservations</a>
+                <a class="nav-link" th:href="@{/r}">Reservations <span th:if="${notifications != 0}" class="badge badge-pill" th:text="${notifications}"></span></a>
                 <a class="nav-link" th:href="@{/u}">Members</a>
                 <a class="nav-link" th:href="@{/h}">Hotels</a>
                 <a class="nav-link" th:href="@{/d}">Drills</a>

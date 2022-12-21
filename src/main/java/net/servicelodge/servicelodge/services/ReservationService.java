@@ -20,8 +20,4 @@ public class ReservationService {
         return reservationDao.findAll();
     }
 
-    public static List<Reservation> findAllByUser(User user){
-        return reservationDao.findAllByUser(user);
-    }
-
 }
