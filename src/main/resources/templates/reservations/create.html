@@ -6,13 +6,10 @@
 <div class="container-md">
     <div class="mt-5 d-flex flex-column align-items-center">
         <h1>New Reservation</h1>
-
         <div th:if="${message != null}">
             <p th:text="${message}"></p>
         </div>
-
         <br>
-
         <form class="d-flex flex-column" th:action="@{/r/create}" method="post" th:object="${newReservation}">
             <div class="form-group mb-3">
                     <label for="unit" class="form-label">Member</label>
