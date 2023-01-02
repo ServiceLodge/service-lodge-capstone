@@ -8,9 +8,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Controller
 public class AdminController {
@@ -344,9 +343,19 @@ public class AdminController {
     }
 
     @PostMapping("/r/{id}/update")
-    public String saveReservationUpdates(@ModelAttribute Reservation reservation) {
+    public String saveReservationUpdates(@PathVariable long id, @ModelAttribute Reservation reservation, Model model) {
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (loggedInUser.isIsAdmin()) {
+            if (reservation.getHotel() == null || Objects.equals(reservation.getResNum(), "")) {
+                String message = (reservation.getHotel() == null) ? "Please select a hotel." : "Please provide reservation number.";
+                model.addAttribute("message", message);
+                model.addAttribute("members", userDao.findAll());
+                model.addAttribute("hotels", hotelDao.findAll());
+                model.addAttribute("drills", drillDao.findAll());
+                model.addAttribute("user", loggedInUser);
+                model.addAttribute("reservation", resDao.findById(id));
+                return "/reservations/update";
+            }
             resDao.save(reservation);
             return "redirect:/r";
         } else {

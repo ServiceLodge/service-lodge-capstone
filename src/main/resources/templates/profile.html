@@ -14,9 +14,17 @@
                     <img class="position-absolute" src="../img/icon-calendar.png" alt="Calendar" width="150px">
                     <h2 style="padding-top: 1em; color: white">:(</h2>
                 </div>
-            <p class="fs-5" style="text-align: center;">No Upcoming Reservations<br><a th:href="@{/r/request}">Request a Hotel</a></p>
+            <p class="fs-5" style="text-align: center;">No upcoming reservations<br><a th:href="@{/r/request}">Make a Request</a></p>
         </div>
-        <div th:if="${reservation != null}">
+        <div th:if="${reservation != null && reservation.hotel == null}">
+            <div class="calendar-icon notBooked d-flex justify-content-center align-items-center">
+                <img class="position-absolute" src="../img/icon-calendar.png" alt="Calendar" width="150px">
+                <h2 th:text="${reservation.drill.name.substring(0,3)}"
+                    style="padding-top: 1em; color: white"></h2>
+            </div>
+            <p class="fs-5" style="text-align: center;">Reservation pending<br><a th:href="@{/r}">View Requests</a></p>
+        </div>
+        <div th:if="${reservation != null && reservation.hotel != null}">
             <a th:href="@{/r/{id} (id = ${reservation.id})}">
                 <div class="calendar-icon booked d-flex justify-content-center align-items-center">
                     <img class="position-absolute" src="../img/icon-calendar.png" alt="Calendar" width="150px">
