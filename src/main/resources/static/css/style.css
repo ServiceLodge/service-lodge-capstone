@@ -61,6 +61,15 @@ a:hover {
     cursor: default;
 }
 
+.user-icon{
+    background-color: var(--primary);
+    height: 2em;
+    width:  2em;
+    border-radius: 100%;
+    font-size: 4em;
+    color:white
+}
+
 .calendar-icon {
     background-color: lightgrey;
     height: 200px;

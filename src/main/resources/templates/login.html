@@ -4,7 +4,7 @@
 <body id="splashPage">
 <div class="container-md">
     <div class="position-absolute top-50 start-50 translate-middle d-flex flex-column align-items-center">
-        <img src="img/logo/vector/default-monochrome-white.svg" alt="Service Lodge Logo" width="100%" class="mb-5">
+        <a href="/index"><img src="img/logo/vector/default-monochrome-white.svg" alt="Service Lodge Logo" width="100%" class="mb-5"></a>
 
         <div th:if="${param.error}">
             Invalid Username and Password.
@@ -12,6 +12,7 @@
         <div th:if="${param.logout}">
             You have been logged out.
         </div>
+        <br>
         <form class="d-flex flex-column" th:action="@{/login}" method="post">
             <div class="mb-3">
                 <label for="username" class="form-label">Email</label>
@@ -21,7 +22,7 @@
                 <label for="password" class="form-label">Password</label>
                 <input type="password" class="form-control form-rounded" id="password" name="password">
             </div>
-            <button type="submit" class="btn btn-primary">Login</button>
+            <button type="submit" class="btn btn-primary border-bottom">Login</button>
 <!--            <p style="font-size: 0.75em; margin-bottom: 0.5em; align-self: center"><a class="login">Need An Account?</a></p>-->
 <!--            <p class="instruction" style="font-size: 0.75em; align-self: center">-->
 <!--                <span title="Contact your lodging representative to create an account.">Forgot Password?</span>-->
