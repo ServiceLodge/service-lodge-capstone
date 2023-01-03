@@ -7,6 +7,10 @@ nav {
     z-index: 1000;
 }
 
+form {
+    min-width: 50%;
+}
+
 .form-rounded {
     border-radius: 2em;
 }
@@ -130,6 +134,23 @@ a:hover {
 
 .badge {
     background-color: red;
+}
+
+hr {
+visibility: hidden}
+
+/* Medium devices (tablets, 768px and down) */
+@media screen and (max-width:768px) {
+    .user-icon{
+        height: 2em;
+        width:  2em;
+        font-size: 3.5em;
+        margin-top: 10%;
+    }
+    hr {
+        visibility: visible;
+    }
+
 }
 
 
