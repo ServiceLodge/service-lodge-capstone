@@ -6,9 +6,12 @@
     <nav th:replace="partials/partials.html :: navbar-member"></nav>
     <div class="container-md d-flex justify-content-center align-items-center">
         <div class="col-md-8">
+            <div class="col-md-12 my-4" style="text-align: center;">
+                <a class="btn btn-primary" th:href="@{/r/request}">Make a Request</a>
+            </div>
             <div th:if="${notifications != 0}">
                 <h4 class="m-4" style="text-align: center">Pending Requests</h4>
-                <table class="table table-striped mx-auto" style="width: 70%">
+                <table class="table table-striped mx-auto">
                     <thead>
                     <tr>
                         <th scope="col">Dates</th>
@@ -29,9 +32,6 @@
                     </tbody>
                 </table>
                 <hr class="my-5">
-            </div>
-            <div class="col-md-12 my-4" style="text-align: center;">
-                <a class="btn btn-primary" th:href="@{/r/request}">Make a Request</a>
             </div>
             <h4 style="text-align: center">Reservations</h4>
             <table id="myTable" class="table table-striped">
@@ -69,9 +69,12 @@
     <nav th:replace="partials/partials.html :: navbar-admin"></nav>
     <div class="container-md d-flex justify-content-center align-items-center">
         <div class="col-md-8">
+            <div class="col-md-12 my-4" style="text-align: center;">
+                <a class="btn btn-primary" th:href="@{/r/create}">+ New Reservation</a>
+            </div>
             <div th:if="${notifications != 0}" class="my-4">
                 <h4 style="text-align: center;" class="m-4">Awaiting Approval</h4>
-                <table th:if="${notifications != 0}" class="table table-striped mx-auto" style="width: 70%">
+                <table th:if="${notifications != 0}" class="table table-striped mx-auto">
                     <thead>
                     <tr>
                         <th scope="col">Drill</th>
@@ -99,10 +102,6 @@
                     </tbody>
                 </table>
                 <hr class="my-5">
-            </div>
-            <div class="col-md-12 my-4" style="text-align: center;">
-                <a class="btn btn-primary" th:href="@{/r/create}">New Reservation</a>
-                <a class="btn btn-primary" th:href="@{/download/reservation.xlsx}">Export to Excel</a>
             </div>
             <h4 style="text-align: center" class="m-4">Reservations</h4>
             <table id="myTable" class="table table-striped">
@@ -147,6 +146,9 @@
                 </tr>
                 </tbody>
             </table>
+            <div class="col-md-12 my-4" style="text-align: center;">
+                <a class="btn btn-primary" th:href="@{/download/reservation.xlsx}">Export to Excel</a>
+            </div>
         </div>
     </div>
 </div>

@@ -45,15 +45,50 @@
 <!--    DYNAMIC BODY: ADMINISTRATIVE    -->
 <body th:if="${user.isAdmin}">
 <nav th:replace="partials/partials.html :: navbar-admin"></nav>
-<div class="container-md">
-    <div class="position-absolute top-50 start-50 translate-middle d-flex flex-column align-items-center">
-        <h1>Welcome, <span th:text="${user.firstName}"></span>!</h1>
-                <a class="btn btn-primary" th:href="@{/dashboard}">View Dashboard</a>
-        <a class="btn btn-primary" th:href="@{/r}">Reservation Manager</a>
-        <a class="btn btn-primary" th:href="@{/u}">Members</a>
-        <a class="btn btn-primary" th:href="@{/h}">Hotels</a>
-        <a class="btn btn-primary" th:href="@{/d}">Drills</a>
+
+<div class="container-md mt-5">
+    <div class="row">
+        <div class="col-lg-3 mb-2">
+            <div class="row">
+                <div class="col-4 col-md-12 mb-3">
+                    <div class="user-icon d-flex justify-content-center align-items-center">
+                        <span th:text="${user.firstName.substring(0, 1) + user.lastName.substring(0,1)}"></span>
+                    </div>
+                </div>
+                <div class="col-8 col-md-12">
+                        <h3 class="mb-0" th:text="${user.getFullName()}"></h3>
+                        <p class="text-secondary" th:text="${user.username}"></p>
+                        <p th:text="${user.getUnit().getWing().wingName + ' Administrator'}"></p>
+                        <a th:href="@{u/{id}/update (id = ${user.getId()})}">Edit Profile</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-9">
+            <hr style="width: 95%; margin-left: auto; margin-right: auto">
+            <div class="row">
+                <h2><a th:href="@{/dashboard}">Dashboard <img src="/img/icon-dashboard.png" alt="trends" height="25px"></a></h2>
+                <p>View hotel usage trends for your wing.</p>
+            </div>
+            <div class="row">
+                <h2><a th:href="@{/r}">Reservations <img src="/img/icon-reservation.png" alt="reservations" height="25px"></a></h2>
+                <p>Create, edit, and cancel reservations. Manage reservation requests from members.  </p>
+            </div>
+            <div class="row">
+                <h2><a th:href="@{/u}">Members <img src="/img/icon-member.png" alt="members" height="25px"></a></h2>
+                <p>Create new accounts. Manage accesses.</p>
+            </div>
+            <div class="row">
+                <h2><a th:href="@{/h}">Hotels <img src="/img/icon-hotel.png" alt="hotels" height="25px"></a></h2>
+                <p>Manage hotels as contracts change.</p>
+            </div>
+            <div class="row">
+                <h2><a th:href="@{/d}">Drills <img src="/img/icon-drill.png" alt="hotels" height="25px"></a></h2>
+                <p>Manage your wing's drill dates.</p>
+            </div>
+            <a class="btn btn-primary" th:href="@{/r/create}">+ New Reservation</a>
+        </div>
     </div>
+
 </div>
 </body>
 </html>
