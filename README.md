@@ -3,7 +3,8 @@
 Service Lodge expedites communication between traveling service members, supervisors, and hotels. Users can view hotel reservation information on login, and request/cancel reservations. Administrators can add, edit, or delete reservations and hotels, view dashboards that track trends in hotel usage, and export summary data to Excel. Notifications are automated bookings.
 
 Technologies:  HTML, CSS, JavaScript, Java, Spring Boot, MySQL 8, Thymeleaf, Bootstrap 4, Tomcat, Microsoft Excel
-<br>Domain Name: [servicelodge.net](servicelodge.net:8080)
+<br>Domain Name: [servicelodge.net](https://servicelodge.net:8080)
+<br>Contact Us: servicelodge.net@gmail.com
 
 ## Setup Instructions
 1. Fork this repository to make a copy on your own GitHub account.
