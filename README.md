@@ -1,6 +1,6 @@
 ![Service Lodge Logo](src/main/resources/static/img/logo/cover.png)
 # Service Lodge App
-Service Lodge expedites communication between traveling service members, supervisors, and hotels. Users can view hotel reservation information on login, and request/cancel reservations. Administrators can add, edit, or delete reservations and hotels, view dashboards that track trends in hotel usage, and export summary data to Excel. Notifications are automated bookings.
+Service Lodge is an application solves the delayed communications between traveling service members and supervisors when it comes to service-related hotel reservations. Members can quickly view their upcoming reservations, create calendar events, and request/cancel future reservations. Administrators are notified of reservation requests, can track hotel usage trends, maintain contracted hotel lists, add/remove members, and manage reservations across their unit and wing.
 
 Technologies:  HTML, CSS, JavaScript, Java, Spring Boot, MySQL 8, Thymeleaf, Bootstrap 4, Tomcat, Microsoft Excel
 <br>Domain Name: [servicelodge.net](https://servicelodge.net:8080)
