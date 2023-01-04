@@ -7,6 +7,21 @@
     <div class="mt-5">
         <div id="chartContainer"></div>
     </div>
+    <div id="data" th:data-jan="${monthlyData[0]}"
+                   th:data-feb="${monthlyData[1]}"
+                   th:data-mar="${monthlyData[2]}"
+                   th:data-apr="${monthlyData[3]}"
+                   th:data-may="${monthlyData[4]}"
+                   th:data-jun="${monthlyData[5]}"
+                   th:data-jul="${monthlyData[6]}"
+                   th:data-aug="${monthlyData[7]}"
+                   th:data-sep="${monthlyData[8]}"
+                   th:data-oct="${monthlyData[9]}"
+                   th:data-nov="${monthlyData[10]}"
+                   th:data-dec="${monthlyData[11]}"
+    style="display: none">
+
+    </div>
 </div>
 <script src="js/dashboard.js"></script>
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>

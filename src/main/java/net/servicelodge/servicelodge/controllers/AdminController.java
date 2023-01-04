@@ -8,6 +8,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.lang.reflect.Array;
 import java.util.List;
 import java.util.Objects;
 
@@ -421,7 +423,25 @@ public class AdminController {
         if (loggedInUser.isIsAdmin()) {
             model.addAttribute("notifications", resDao.findAllByHotelIsNull().size());
             List<Reservation> reservations =  resDao.findAllByHotelIsNotNull();
-            model.addAttribute("reservations", reservations);
+            int[] monthlyData = new int[12];
+            for (Reservation res : reservations){
+                String month = res.getDrill().getName();
+                switch (month){
+                    case "January 2023": { monthlyData[0]++; break; }
+                    case "February 2023": { monthlyData[1]++; break; }
+                    case "March 2023": { monthlyData[2]++; break; }
+                    case "April 2023": { monthlyData[3]++; break; }
+                    case "May 2023": { monthlyData[4]++; break; }
+                    case "June 2023": { monthlyData[5]++; break; }
+                    case "July 2023": { monthlyData[6]++; break; }
+                    case "August 2023": { monthlyData[7]++; break; }
+                    case "September 2023": { monthlyData[8]++; break; }
+                    case "October 2023": { monthlyData[9]++; break; }
+                    case "November 2023": { monthlyData[10]++; break; }
+                    case "December 2023": { monthlyData[11]++; break; }
+                }
+            }
+            model.addAttribute("monthlyData", monthlyData);
             return "dashboard";
         } else {
             return "redirect:/profile";
