@@ -24,12 +24,50 @@
     <div class="row">
         <div class="col text-center d-flex align-items-center justify-content-center">
             <p><span class="fs-1">Ready to get started?</span><br>
-                Request an account with your local lodging representative.<br>For further questions contact us at servicelodge.net@gmail.com.</p>
+                Request an account with your local lodging representative.<br>For further questions or concerns <a href="#" id="contact-us" class="js-modal-trigger" data-target="email-modal">Contact Us</a>.</p>
         </div>
         <div class="col">
             <img src="img/availability.png" alt="availability" width="100%">
         </div>
     </div>
 </div>
+<!--    Modal       -->
+<div id="email-modal" class="modal">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+        <header class="modal-card-head">
+            <p class="modal-card-title">Contact Us</p>
+            <button class="delete" aria-label="close"></button>
+        </header>
+        <section class="modal-card-body">
+            <div class="field">
+                <label class="label">Subject</label>
+                <div class="control">
+                    <div class="select">
+                        <select id="subject">
+                            <option>Question</option>
+                            <option>Concern</option>
+                            <option>Request an Account</option>
+                            <option>Request Wing-Level App Integration</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Message</label>
+                <div class="control">
+                    <textarea class="textarea" placeholder="Type Your Message..."></textarea>
+                </div>
+            </div>
+        </section>
+        <footer class="modal-card-foot">
+            <button id="build-email" class="button is-info">Build Email</button>
+            <button class="button">Cancel</button>
+        </footer>
+    </div>
+</div>
+<script src="js/contactUs.js"></script>
+
 </body>
 </html>
