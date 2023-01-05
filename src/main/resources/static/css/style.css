@@ -144,6 +144,10 @@ a:hover {
 hr {
 visibility: hidden}
 
+#contact-us {
+    font-weight: bold;
+}
+
 /* Medium devices (tablets, 768px and down) */
 @media screen and (max-width:768px) {
     .user-icon{
@@ -156,6 +160,9 @@ visibility: hidden}
         visibility: visible;
     }
 
+    form {
+        width: 100%;
+    }
 }
 
 
