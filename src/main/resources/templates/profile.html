@@ -7,7 +7,10 @@
 <nav th:replace="partials/partials.html :: navbar-member"></nav>
 <div class="container-md">
     <div class="position-absolute top-50 start-50 translate-middle d-flex flex-column align-items-center">
-        <h1>Welcome, <span th:text="${user.firstName}"></span>!</h1>
+        <h1 class="text-center">Welcome, <span th:text="${user.firstName}"></span>!
+        <br><span class="fs-6"><a th:href="@{u/{id}/update (id = ${user.getId()})}">Edit Profile</a></span>
+        </h1>
+
 
         <div th:if="${reservation == null}">
                 <div class="calendar-icon notBooked d-flex justify-content-center align-items-center">
