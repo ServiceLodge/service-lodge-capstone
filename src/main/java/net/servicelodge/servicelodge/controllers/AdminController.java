@@ -49,8 +49,22 @@ public class AdminController {
     }
 
     @PostMapping("/u/create")
-    public String saveUser(@ModelAttribute User user) {
+    public String saveUser(@ModelAttribute User user, Model model) {
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        boolean validPassword = isValidPassword(user.getPassword());
+
+
+        if(!validPassword)
+        {
+            String message = "The password must be 8 to 15 characters, at least one uppercase, at least one lower case, numbers, and special characters";
+            model.addAttribute("message", message);
+            model.addAttribute("notifications", resDao.findAllByHotelIsNull().size());
+            model.addAttribute("user", new User());
+            model.addAttribute("units", unitService.getUnits());
+            return "users/create";
+        }
+
         if (loggedInUser.isIsAdmin()) {
             String hash = passwordEncoder.encode(user.getPassword());
             user.setPassword(hash);
@@ -87,8 +101,22 @@ public class AdminController {
     }
 
     @PostMapping("u/{id}/update")
-    public String saveUserUpdates(@ModelAttribute User user) {
+    public String saveUserUpdates(@ModelAttribute User user, Model model, @PathVariable long id) {
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        boolean validPassword = isValidPassword(user.getPassword());
+
+
+        if(!validPassword)
+        {
+            String message = "The password must be 8 to 15 characters, at least one uppercase, at least one lower case, numbers, and special characters";
+            model.addAttribute("message", message);
+            model.addAttribute("notifications", resDao.findAllByHotelIsNull().size());
+            model.addAttribute("user", userDao.getReferenceById(id));
+            model.addAttribute("units", unitService.getUnits());
+            return "users/update";
+        }
+
         if (loggedInUser.isIsAdmin()) {
             String hash = passwordEncoder.encode(user.getPassword());
             user.setPassword(hash);
@@ -446,6 +474,42 @@ public class AdminController {
         } else {
             return "redirect:/profile";
         }
+    }
+
+    //validate password
+    public boolean isValidPassword(String password)
+    {
+        boolean isValid = true;
+        if (password.length() > 15 || password.length() < 8)
+        {
+            System.out.println("Password must be less than 20 and more than 8 characters in length.");
+            isValid = false;
+        }
+        String upperCaseChars = "(.*[A-Z].*)";
+        if (!password.matches(upperCaseChars ))
+        {
+            System.out.println("Password must have at least one uppercase character");
+            isValid = false;
+        }
+        String lowerCaseChars = "(.*[a-z].*)";
+        if (!password.matches(lowerCaseChars ))
+        {
+            System.out.println("Password must have at least one lowercase character");
+            isValid = false;
+        }
+        String numbers = "(.*[0-9].*)";
+        if (!password.matches(numbers ))
+        {
+            System.out.println("Password must have at least one number");
+            isValid = false;
+        }
+        String specialChars = "(.*[@,#,$,%].*$)";
+        if (!password.matches(specialChars ))
+        {
+            System.out.println("Password must have at least one special character among @#$%");
+            isValid = false;
+        }
+        return isValid;
     }
 }
 

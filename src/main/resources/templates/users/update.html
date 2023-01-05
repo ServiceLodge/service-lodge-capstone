@@ -6,6 +6,11 @@
 <div class="container-md">
     <div class="mt-5 d-flex flex-column align-items-center">
         <h1>Edit Member</h1>
+
+        <div th:if="${message != null}">
+            <p th:text="${message}"></p>
+        </div>
+        <br>
         <form class="d-flex flex-column" th:action="@{/u/{id}/update (id=${user.id})}" method="post" th:object="${user}">
             <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
