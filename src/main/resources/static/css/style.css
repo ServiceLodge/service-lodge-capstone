@@ -114,13 +114,18 @@ a:hover {
 
 .aboutUsCards{
     text-align: center;
-    margin: 25px
+    margin: 25px;
+    height: 450px;
+    width: 250px;
 }
 
 .nameCard{
-    font-size: 25px;
     font-weight: bold;
-    color: var(--secondary);
+}
+
+.nameCard img {
+    width: 35px;
+    margin: 0 0.2em 0 0.2em;
 }
 
 .card-img-top{
