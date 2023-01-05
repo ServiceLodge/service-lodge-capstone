@@ -90,7 +90,7 @@ public class AdminController {
     @GetMapping("u/{id}/update")
     public String updateUser(@PathVariable long id, Model model) {
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if (loggedInUser.isIsAdmin()) {
+        if (loggedInUser.isIsAdmin() || id == loggedInUser.getId()) {
             model.addAttribute("notifications", resDao.findAllByHotelIsNull().size());
             model.addAttribute("user", userDao.getReferenceById(id));
             model.addAttribute("units", unitService.getUnits());
@@ -104,7 +104,7 @@ public class AdminController {
     public String saveUserUpdates(@ModelAttribute User user, Model model, @PathVariable long id) {
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        boolean validPassword = isValidPassword(user.getPassword());
+        boolean validPassword = isValidPassword(user.getPassword()) || user.getPassword().equals("");
 
 
         if(!validPassword)
@@ -117,8 +117,8 @@ public class AdminController {
             return "users/update";
         }
 
-        if (loggedInUser.isIsAdmin()) {
-            String hash = passwordEncoder.encode(user.getPassword());
+        if (loggedInUser.isIsAdmin() || id == loggedInUser.getId()) {
+            String hash = (user.getPassword().equals("")) ? userDao.getReferenceById(id).getPassword() : passwordEncoder.encode(user.getPassword());
             user.setPassword(hash);
             userDao.save(user);
             return "redirect:/u";
