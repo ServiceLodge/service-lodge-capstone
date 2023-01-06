@@ -53,7 +53,7 @@ a.login {
 }
 
 a {
-    color: var(--primary);
+    color: var(--secondary);
     text-decoration: none;
 }
 
