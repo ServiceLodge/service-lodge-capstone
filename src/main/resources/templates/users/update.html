@@ -17,7 +17,7 @@
                 <input type="email" class="form-control form-rounded" id="email" name="email" th:field="*{username}"/>
             </div>
             <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
+                <label for="password" class="form-label">Enter New Password (Optional)</label>
                 <input type="password" class="form-control form-rounded" id="password" name="password"
                        th:field="*{password}"/>
             </div>
@@ -43,7 +43,7 @@
                     <option th:each="unit : ${units}" th:value="${unit.id}" th:text="${unit.unitName}" />
                 </select>
             </div>
-            <div class="mb-3 form-check">
+            <div style="display: none" class="mb-3 form-check">
                 <input type="checkbox" class="form-check-input" name="true" id="isAdmin" th:field="*{isAdmin}"/>
                 <label for="isAdmin" class="form-check-label">Administrator</label>
             </div>
