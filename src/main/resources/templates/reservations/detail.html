@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<header th:replace="partials/partials.html :: head"></header>
+<header th:replace="partials/partials.html :: head ('Service Lodge | Reservation Details')"></header>
 <body>
 <div th:if="${!user.isAdmin}">
     <nav th:replace="partials/partials.html :: navbar-member"></nav>
